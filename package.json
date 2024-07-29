@@ -11,6 +11,8 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.0",
+    "@angular/cli": "^16.2.14",
+    "@angular/compiler-cli": "^16.0.0",
     "@angular/common": "^16.0.0",
     "@angular/compiler": "^16.0.0",
     "@angular/core": "^16.0.0",
@@ -25,8 +27,6 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.2",
-    "@angular/cli": "^16.2.14",
-    "@angular/compiler-cli": "^16.0.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
