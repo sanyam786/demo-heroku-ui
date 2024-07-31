@@ -3,21 +3,20 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 8081",
-    "build": "npm install -g @angular/cli && ng build",
-    "heroku-postbuild": "npm install -g @angular/cli && ng build",
+    "start": "ng serve",
+    "build": "npm install && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.0.2",
+    "@angular/animations": "^16.0.0",
     "@angular/common": "^16.0.0",
     "@angular/compiler": "^16.0.0",
-    "@angular/core": "^17.3.12",
+    "@angular/core": "^16.0.0",
     "@angular/forms": "^16.0.0",
-    "@angular/platform-browser": "^16.0.2",
-    "@angular/platform-browser-dynamic": "^16.0.2",
+    "@angular/platform-browser": "^16.0.0",
+    "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "bootstrap": "^4.6.2",
     "rxjs": "~7.8.0",
@@ -25,7 +24,8 @@
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
-    "@angular/cli": "^17.3.8",
+    "@angular-devkit/build-angular": "^16.0.2",
+    "@angular/cli": "^16.2.14",
     "@angular/compiler-cli": "^16.0.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
