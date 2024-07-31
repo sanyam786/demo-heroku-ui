@@ -2,6 +2,7 @@
   "name": "angular-16-crud",
   "version": "0.0.0",
   "scripts": {
+    "ng": "ng",
     "start": "ng serve --port 8081",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
