@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port 8081",
     "build": "ng build",
+    "heroku-postbuild": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -37,6 +38,7 @@
     "typescript": "~5.0.2"
   },
   "engines": {
-  "node": "20.5.0"
+    "node": "20.x",
+    "npm": "9.x"
   }
 }
