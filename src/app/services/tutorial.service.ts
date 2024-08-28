@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Tutorial } from '../models/tutorial.model';
 
 //const baseUrl = 'http://localhost:8080/api/tutorials';
-const baseUrl = 'https://demo-heroku-315200bec293.herokuapp.com';
+const baseUrl = 'https://demo-heroku-315200bec293.herokuapp.com/api/tutorials';
 
 @Injectable({
   providedIn: 'root',
