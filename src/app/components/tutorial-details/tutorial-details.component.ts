@@ -73,7 +73,7 @@ export class TutorialDetailsComponent {
           console.log(res);
           this.message = res.message
             ? res.message
-            : 'This tutorial was updated successfully!';
+            : 'This member was updated successfully!';
         },
         error: (e) => console.error(e)
       });
