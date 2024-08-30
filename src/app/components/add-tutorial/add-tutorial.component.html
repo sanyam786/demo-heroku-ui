@@ -24,6 +24,17 @@
         />
       </div>
 
+      <div class="form-group">
+        <label for="officeAddress">Office Address</label>
+        <input
+          class="form-control"
+          id="officeAddress"
+          required
+          [(ngModel)]="tutorial.officeAddress"
+          name="officeAddress"
+        />
+      </div>
+
       <button (click)="saveTutorial()" class="btn btn-success">Save</button>
     </div>
 

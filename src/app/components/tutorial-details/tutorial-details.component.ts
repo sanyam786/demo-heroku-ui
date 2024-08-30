@@ -14,6 +14,7 @@ export class TutorialDetailsComponent {
   @Input() currentTutorial: Tutorial = {
     title: '',
     description: '',
+    officeAddress: '',
     published: false
   };
 
@@ -46,6 +47,7 @@ export class TutorialDetailsComponent {
     const data = {
       title: this.currentTutorial.title,
       description: this.currentTutorial.description,
+      officeAddress: this.currentTutorial.officeAddress,
       published: status
     };
 
