@@ -4,4 +4,5 @@ export class Tutorial {
   description?: string;
   officeAddress?: string;
   published?: boolean;
+  status?: string;
 }

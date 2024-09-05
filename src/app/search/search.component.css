@@ -1,0 +1,41 @@
+.single-line{
+    display: flex; 
+    flex-direction: row;
+}
+
+.expand-width {
+    width: 100%;
+}
+
+.search-elments-style{
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 30%;
+}
+
+.search-elments-button-style{
+    padding-left: 90.5%;
+    padding-right: 1%;
+}
+
+.add-family-style{
+    padding-left: 70%;
+}
+
+.filter-style{
+    padding-top: 2%;
+    width: 100%;
+}
+
+.approved-chip{
+    background-color: #008000cf !important;
+    
+}
+
+.pending-chip{
+    background-color:#ff0000cf !important;
+}
+
+.actions-dropdown-style{
+    width: 10%;
+}
