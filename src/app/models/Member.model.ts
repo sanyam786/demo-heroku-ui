@@ -26,6 +26,7 @@ export class Member {
     checkIAffirm?: boolean = false;
     aborigine?: string = '';
     status?: string;
-    photo?: Blob;
+    // photo?: Blob;
+    photo?: string;
     photoBase64?: Blob;
   }

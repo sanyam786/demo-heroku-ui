@@ -46,6 +46,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
   formdata!: FormData;
+  imageInBase64!: string; 
 
   familyMember: Member = {
     familyHead: false,
@@ -135,13 +136,16 @@ export class CreateUpdateMemberComponent  implements OnInit{
       if(this.familyMember.checkedSameWhatsappNumber || (!this.familyMember.checkedSameWhatsappNumber && this.familyMember.whatsappMobile)){
         if (this.familyMember.firstName && this.familyMember.lastName && this.familyMember.fatherName && this.familyMember.gender 
           && !this.checkMobileNumberErrors(this.familyMember.mobile)) {
-          if(this.selectedFile){
-            this.onUpload();
-          }else if(this.familyMember.photo){
-            this.setFormData();
+          // if(this.selectedFile){
+          //   this.onUpload();
+          // }else if(this.familyMember.photo){
+          //   this.setFormData();
+          // }
+          if(this.imageInBase64){
+            this.familyMember.photo = this.imageInBase64;
           }
           if(this.pageMode === 'edit' && this.familyMember.photo){
-            this.familyMemberService.update(this.formdata, this.familyId).subscribe({
+            this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
               next: (res) => {
                 console.log(res);
                 this.submitted = true;
@@ -154,7 +158,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
             console.error('Form is invalid');
           } 
           if(this.pageMode === 'create' && this.selectedFile){
-            this.familyMemberService.create(this.formdata, this.familyId).subscribe({
+            this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
               next: (res) => {
                 console.log(res);
                 this.submitted = true;
@@ -205,37 +209,104 @@ export class CreateUpdateMemberComponent  implements OnInit{
   //   }
   // }
 
+  // onFileSelected(event: any): void {
+  //   const fileInput = event.target as HTMLInputElement;
+  //   var base64String = null;
+  //   if (fileInput.files && fileInput.files[0]) {
+  //     this.selectedFile = fileInput.files[0];
+
+
+  //     // Preview the selected image
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       this.previewUrl = reader.result;
+  //       base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+  //     };
+  //     reader.readAsDataURL(this.selectedFile);
+  //     if(base64String !== null){
+  //       this.familyMember.photo = base64String;
+  //     }
+  //   }
+  // }
   onFileSelected(event: any): void {
     const fileInput = event.target as HTMLInputElement;
-
+    
     if (fileInput.files && fileInput.files[0]) {
       this.selectedFile = fileInput.files[0];
-
-      // Preview the selected image
+  
+      
+        // Preview the selected image
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.previewUrl = reader.result;
+        const result = reader.result as string; // Typecast result to string
+        this.previewUrl = result;
+        
+        // Extract the Base64 portion of the Data URL
+        const base64String = result.replace("data:", "").replace(/^.+,/, "");
+        this.imageInBase64= base64String;
+        // // Convert Base64 string to Blob
+        // const byteString = atob(base64String);
+        // const byteNumbers = new Array(byteString.length);
+        // for (let i = 0; i < byteString.length; i++) {
+        //   byteNumbers[i] = byteString.charCodeAt(i);
+        // }
+        // const byteArray = new Uint8Array(byteNumbers);
+        // if(this.selectedFile !== null){
+        //   const blob = new Blob([byteArray], { type: this.selectedFile.type });
+        //   this.familyMember.photo = blob;
+        // }  
       };
       reader.readAsDataURL(this.selectedFile);
+      
     }
   }
 
-  onUpload(): Boolean {
-    if (this.selectedFile) {
-      if (this.selectedFile.size > this.MAX_FILE_SIZE) {
-        //alert('File is too large!');
-        return false;
-      }
-      this.formdata = new FormData();
-      this.formdata.append('file', this.selectedFile);
-      this.formdata.append(
-        'familyMember',
-        new Blob([JSON.stringify(this.familyMember)], { type: 'application/json' })
-      );
-      return true
-    }
-    return false;
-  }
+  // onUpload(): Boolean {
+  //   if (this.selectedFile) {
+  //     if (this.selectedFile.size > this.MAX_FILE_SIZE) {
+  //       //alert('File is too large!');
+  //       return false;
+  //     }
+  //     const fileInput = document.getElementById('fileInput');
+
+  //     //fileInput.addEventListener('change', function() {
+  //         const file = this.selectedFile;
+  //         const reader = new FileReader();
+          
+  //         if(reader !== null && reader.result !== null){
+  //           reader.onloadend = function() {
+  //             const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+  //             const payload = {
+  //                 fileContent: base64String
+  //             };
+
+  //             this.f
+
+  //             // fetch('/upload', {
+  //             //     method: 'POST',
+  //             //     headers: {
+  //             //         'Content-Type': 'application/json'
+  //             //     },
+  //             //     body: JSON.stringify(payload)
+  //             // })
+  //             // .then(response => response.json())
+  //             // .then(data => console.log(data));
+  //         };
+
+  //         reader.readAsDataURL(file);
+  //         }
+          
+  //    // });
+  //     // this.formdata = new FormData();
+  //     // this.formdata.append('file', this.selectedFile);
+  //     // this.formdata.append(
+  //     //   'familyMember',
+  //     //   new Blob([JSON.stringify(this.familyMember)], { type: 'application/json' })
+  //     // );
+  //     return true
+  //   }
+  //   return false;
+  // }
 
   setFormData() {
     this.formdata = new FormData();
