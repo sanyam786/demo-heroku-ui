@@ -15,6 +15,7 @@ export class ViewComponent implements OnInit {
   pageMode!: string;
   submitted!: boolean;
   readonly panelOpenState = signal(false);
+  isLoading = true;  // Track the loading state
 
   constructor(
     private route: ActivatedRoute,
@@ -30,12 +31,17 @@ export class ViewComponent implements OnInit {
   }
 
   loadData(id: string): void {
+    this.isLoading = true;  // Show progress bar
     this.familyMemberService.getFamilyByMemberId(id).subscribe({
       next: (data) => {
         this.familyMember = data;
-        console.log(data);
+        this.isLoading = false;
+        //console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;  // Hide progress bar on error
+      }
     });
   }
 
