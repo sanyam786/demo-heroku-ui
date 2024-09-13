@@ -269,28 +269,30 @@ export class CreateUpdateMemberComponent  implements OnInit{
   checkForAlreadyExistingPhoneNumberForAnotherFamily(inputMobileNumber: any): Boolean {
     const allmembers = this.allFamilyMembers;
     var currentFamilyMembers: any[];
-    if(this.currentFamily !== undefined && this.currentFamily.members !== undefined && this.currentFamily.members?.length> 0){
+    if(this.currentFamily !== null && this.currentFamily !== undefined && this.currentFamily.members !== undefined && this.currentFamily.members?.length> 0){
       currentFamilyMembers = this.currentFamily.members;
     }else {
       currentFamilyMembers = [];
     }
 
-    var i = allmembers.length
-    while (i--) {
-      if(currentFamilyMembers !== undefined){
-        for(let j=0; j<currentFamilyMembers.length; j++)
-          {
-            if (allmembers[i].memberId === currentFamilyMembers[j].memberId) { 
-                allmembers.splice(i, 1);
+    if(allmembers !== null && allmembers !== undefined && allmembers.length > 0){
+      var i = allmembers.length
+      while (i--) {
+        if(currentFamilyMembers !== undefined){
+          for(let j=0; j<currentFamilyMembers.length; j++)
+            {
+              if (allmembers[i].memberId === currentFamilyMembers[j].memberId) { 
+                  allmembers.splice(i, 1);
+              }
             }
+        }
+      }
+
+      for(let k=0; k<allmembers.length; k++){
+          if (allmembers[k].mobile === inputMobileNumber) { 
+              return true;
           }
       }
-    }
-
-    for(let k=0; k<allmembers.length; k++){
-        if (allmembers[k].mobile === inputMobileNumber) { 
-            return true;
-        }
     }
 
     return false;
