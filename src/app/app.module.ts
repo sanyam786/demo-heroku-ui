@@ -14,6 +14,15 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +32,8 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
 import { ViewComponent } from './view/view.component';
+import { FamilyComponent } from './family/family.component';
+import { CreateUpdateMemberComponent } from './create-update-member/create-update-member.component';
 
 
 @NgModule({
@@ -33,7 +44,9 @@ import { ViewComponent } from './view/view.component';
     TutorialsListComponent,
     DashboardComponent,
     SearchComponent,
-    ViewComponent
+    ViewComponent,
+    FamilyComponent,
+    CreateUpdateMemberComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +65,17 @@ import { ViewComponent } from './view/view.component';
     MatChipsModule,
     MatSelectModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatDividerModule,
+    MatListModule,
+    MatExpansionModule,
+    MatSnackBarModule
+
+    //MatMomentDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

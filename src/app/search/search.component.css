@@ -1,6 +1,8 @@
 .single-line{
     display: flex; 
     flex-direction: row;
+    justify-content: space-between;
+    overflow-x: hidden;
 }
 
 .expand-width {
@@ -14,12 +16,25 @@
 }
 
 .search-elments-button-style{
-    padding-left: 90.5%;
-    padding-right: 1%;
+    background-color: white !important;
+    color: #66548e !important;
+}
+
+.table-layout {
+    overflow-x: auto;
+}
+
+.table-style {
+    /* background-color: #ede5ff !important; */
+    color: #66548e !important;
+}
+
+.table-header {
+    white-space: nowrap;
 }
 
 .add-family-style{
-    padding-left: 70%;
+    /* padding-left: 70%; */
 }
 
 .filter-style{
@@ -27,15 +42,57 @@
     width: 100%;
 }
 
-.approved-chip{
-    background-color: #008000cf !important;
-    
+.filter-input {
+    background-color: white !important;
+}
+
+/* .approved-chip{
+    background-color: #b9eb93 !important;
+    color: #66548e !important;
 }
 
 .pending-chip{
-    background-color:#ff0000cf !important;
+    background-color: #ff4444 !important;
+    color: white !important;
+} */
+
+::ng-deep .mat-mdc-standard-chip.approved-chip .mdc-evolution-chip__text-label {
+    color: #66548e !important; /* Override the text color */
+}
+
+::ng-deep .mat-mdc-standard-chip.pending-chip .mdc-evolution-chip__text-label {
+    color: white !important; /* Override the text color */
+}
+
+.approved-chip {
+    background-color: #4caf50 !important; /* Green background */
+}
+
+.pending-chip {
+    background-color: #ff4444 !important; /* Red background */
 }
 
 .actions-dropdown-style{
     width: 10%;
+}
+
+.search-card {
+    /* background-color: rgb(252, 252, 252); */
+    /* background-color: rgb(233, 232, 232); */
+    /* background-color: #e7e7e7; */
+    background-color: rgb(242, 242, 241);
+}
+
+.card-layout {
+    background-color: #fef5f5;
+    border-radius: 20px;
+}
+
+.primary-button-style {
+    background-color: #ede5ff !important;
+    color: #66548e !important;
+}
+
+.font-color-primary {
+    color: #66548e !important;
 }

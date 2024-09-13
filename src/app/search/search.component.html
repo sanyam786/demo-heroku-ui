@@ -1,15 +1,15 @@
-<mat-card appearance="raised">
+<mat-card appearance="raised" class="card-layout">
     <mat-card-content>
         <div class="single-line expand-width">
-            <span> <h2>Search Members</h2></span>
+            <span class="font-color-primary"> <h2>Search Members</h2></span>
             <span class="add-family-style">
-                <button mat-raised-button color="primary" (click)="onSearch()">Add New Family</button>
+                <button mat-raised-button color="primary" class="primary-button-style" (click)="onAddNewFamily()">Add New Family</button>
             </span>
         </div>
         <div>
-            <mat-form-field class="search-elments-style">
+            <!-- <mat-form-field class="search-elments-style">
                 <mat-label>First Name</mat-label>
-                <input id="firstName" matInput placeholder="First Name" [(ngModel)]="firstName">
+                <input id="firstName" matInput placeholder="First Name" [(ngModel)]="familyMember.firstName">
             </mat-form-field>
 
             <mat-form-field class="search-elments-style">
@@ -30,10 +30,10 @@
             <mat-form-field class="search-elments-style">
                 <mat-label>Area</mat-label>
                 <input id="area" matInput placeholder="Area" [(ngModel)]="area">
-            </mat-form-field>
+            </mat-form-field> -->
             <br>
-            <div class="search-elments-button-style">
-                <button mat-raised-button color="secondary" (click)="onSearch()" type="submit">Search</button>
+            <div>
+                <button class="search-elments-button-style" mat-raised-button color="secondary" (click)="onSearch()" type="submit">Search All</button>
             </div>
         </div>
        
@@ -45,102 +45,82 @@
         </div>
 
         <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
-          
-              <!-- ID Column -->
-              <!-- <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-              </ng-container> -->
-          
-              <!-- Progress Column -->
-               <ng-container matColumnDef="actions" class="actions-dropdown-style">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td class="actions-dropdown-style" mat-cell *matCellDef="let row">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                        <mat-icon>more_vert</mat-icon>
-                      </button>
-                      <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
-                          <mat-icon>visibility</mat-icon>
-                          <span (click)="onViewDetails(row.id)">View Details</span>
-                        </button>
-                        <!--<button mat-menu-item disabled>
-                          <mat-icon>voicemail</mat-icon>
-                          <span>Check voice mail</span>
-                        </button>-->
-                        <button mat-menu-item>
-                          <mat-icon>add</mat-icon>
-                          <span>Add Member</span>
-                        </button>
-                        <button mat-menu-item>
-                            <mat-icon>edit</mat-icon>
-                            <span>Modify</span>
-                        </button>
-                        <button mat-menu-item>
-                            <mat-icon>update</mat-icon>
-                            <span>Update Family Head</span>
-                        </button>
-                      </mat-menu>
-                    <!--<mat-form-field>
-                        <mat-label>Select</mat-label>
-                        <mat-select [disabled]="">
-                          <mat-option value="modify" (click)="onViewDetails(row.id)">
-                            View Details
-                          </mat-option>
-                          <mat-option value="modify" (click)="onSearch()">
-                            Add Member
-                          </mat-option>
-                          <mat-option value="modify" (click)="onSearch()">
-                            Modify
-                          </mat-option>
-                          <mat-option value="modify" (click)="onSearch()">
-                            Update Family Head
-                          </mat-option>
-                          
-                        </mat-select>
-                      </mat-form-field> -->
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let row"> {{row.title}} </td>
-              </ng-container>
-          
-              <!-- Name Column -->
-              <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-              </ng-container>
-          
-              <!-- Fruit Column -->
-              <ng-container matColumnDef="officeAddress">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Office Address </th>
-                <td mat-cell *matCellDef="let row"> {{row.officeAddress}} </td>
-              </ng-container>
+            <div class="table-layout">
+                <table class="table-style" mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="actions" class="actions-dropdown-style" sticky>
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td class="actions-dropdown-style font-color-primary" mat-cell *matCellDef="let row">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>visibility</mat-icon>
+                                    <span (click)="onViewDetails(row.memberId)">View Details</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>add</mat-icon>
+                                    <span (click)="onAddNewMember(row.memberId)">Add Member</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span (click)="onEditMember(row.memberId)">Modify</span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="firstName">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="fatherName">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Father's Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.fatherName}} </td>
+                    </ng-container>
 
-               <!-- Fruit Column -->
-               <ng-container matColumnDef="published">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-chip *ngIf="row.status==='Approved'" class="approved-chip">{{row.status}}</mat-chip>
-                    <mat-chip *ngIf="row.status==='Pending'" class="pending-chip">{{row.status}}</mat-chip>
-                </td>
-              </ng-container>
+                    <ng-container matColumnDef="mobile">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Primary Number </th>
+                        <td mat-cell *matCellDef="let row"> {{row.mobile}} </td>
+                    </ng-container>
 
-              
-          
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          
-              <!-- Row shown when there is no matching data. -->
-              <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-              </tr>
-            </table>
-          
+                    <ng-container matColumnDef="area">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Area </th>
+                        <td mat-cell *matCellDef="let row"> {{row.area}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="profession">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Profession </th>
+                        <td mat-cell *matCellDef="let row"> {{row.profession}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bloodGroup">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Blood Group </th>
+                        <td mat-cell *matCellDef="let row"> {{row.bloodGroup}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-chip *ngIf="row.status==='Approved'" class="approved-chip">{{row.status}}</mat-chip>
+                            <mat-chip *ngIf="row.status==='Pending'" class="pending-chip">{{row.status}}</mat-chip>
+                        </td>
+                    </ng-container>
+
+                
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+                </table>
+            </div>
+            
             <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-          </div>
+        </div>
           
           <!--<div *ngIf="tutorials">
             <h3>Search Results:</h3>

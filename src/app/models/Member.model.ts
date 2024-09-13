@@ -1,0 +1,31 @@
+export class Member {
+    familyId?: any;
+    memberId?: any;
+    familyHead?: boolean = false;
+    firstName?: string = '';
+    lastName?: string = '';
+    fatherName?: string = '';
+    gender?: string = '';
+    dateOfBirth?: string = '';
+    maritalStatus?: string = '';
+    bloodGroup?: string = '';
+    education?: string = '';
+    permanentAddress?: string = '';
+    mobile?: string = '';
+    altMobile?: string = '';
+    whatsappMobile?: string = '';
+    checkedSameWhatsappNumber?: boolean = false;
+    email?: string = '';
+    area?: string = '';
+    checkedSameAddress?: boolean = false;
+    currentAddress?: string = '';
+    profession?: string = '';
+    professionAddress?: string = '';
+    professionEmail?: string = '';
+    professionNumber?: string = '';
+    checkIAffirm?: boolean = false;
+    aborigine?: string = '';
+    status?: string;
+    photo?: Blob;
+    photoBase64?: Blob;
+  }

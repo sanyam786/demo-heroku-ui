@@ -1,0 +1,236 @@
+<mat-card-content class="main-card-layout card-layout">
+    <div class="align-row-left-right">
+        <span class="font-color-primary"> <h2>Add Member</h2></span>
+        <span class="image-layout">
+            <button mat-raised-button class="primary-button-style" name="back-button" (click)="backToSearchPage(memeberId)">Back</button>
+        </span>
+    </div>
+    <form #memberForm="ngForm" (ngSubmit)="onSaveOrUpdate()">
+    <div>
+        <br>
+        <mat-radio-group *ngIf="alreadyExistingFamilyHead === false" class="search-elments-style single-line family-radio-button" aria-label="Family Head and Family Member">
+            <mat-radio-button [checked]="pageMode==='edit' && familyMember.familyHead" class="padding-radio-checkbox" name="member-type" value={{true}} [(ngModel)]="familyMember.familyHead" required ngDefaultControl>Family Head</mat-radio-button>
+            <mat-radio-button [checked]="pageMode==='edit' && !familyMember.familyHead" name="member-type" value={{false}} [(ngModel)]="familyMember.familyHead" required ngDefaultControl>Family Member</mat-radio-button>
+            <mat-error *ngIf="memberForm.form.controls['member-type']?.invalid && memberForm.form.controls['member-type']?.touched">Member type is required</mat-error>
+        </mat-radio-group>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
+            <br>
+            <span class="font-color-primary"> <h3>Personal Details</h3></span>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-radio-group class="search-elments-style" aria-label="Select Gender">
+                <mat-label class="font-color-primary">Gender</mat-label>
+                <br>
+                <span class="single-line family-radio-button">
+                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'male'" name= "gender" value="male" [(ngModel)]="familyMember.gender" required ngDefaultControl>Male</mat-radio-button>
+                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'female'" name="gender" value="female" [(ngModel)]="familyMember.gender" required ngDefaultControl>Female</mat-radio-button>
+                </span>
+                <mat-error *ngIf="memberForm.form.controls['gender']?.invalid && memberForm.form.controls['gender']?.touched">Gender is required</mat-error>
+            </mat-radio-group>
+            <br>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>First Name</mat-label>
+                <input name="firstName" id="firstName" matInput placeholder="First Name" [(ngModel)]="familyMember.firstName" #firstName="ngModel" required>
+                <mat-error *ngIf="firstName.invalid && firstName.touched">First Name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Last Name</mat-label>
+                <input name="lastName" id="lastName" matInput placeholder="Last Name" [(ngModel)]="familyMember.lastName" #lastName="ngModel" required>
+                <mat-error *ngIf="lastName.invalid && lastName.touched">Last Name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Father's Name</mat-label>
+                <input name="fatherName" id="fatherName" matInput placeholder="Father's Name" [(ngModel)]="familyMember.fatherName" #fatherName="ngModel" required>
+                <mat-error *ngIf="fatherName.invalid && fatherName.touched">Father's Name is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Date Of Birth</mat-label>
+                <input name="dateOfBirth" matInput [matDatepicker]="picker" [(ngModel)]="familyMember.dateOfBirth" #dateOfBirth="ngModel" required>
+                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="dateOfBirth.invalid && dateOfBirth.touched">Date of Birth is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Marital Status</mat-label>
+                <mat-select [(ngModel)]="familyMember.maritalStatus" name="maritalStatus" #maritalStatus="ngModel" required>
+                    <mat-option value="single"  >Single</mat-option>
+                    <mat-option value="married" >Married</mat-option>
+                </mat-select>
+                <mat-error *ngIf="maritalStatus.invalid && maritalStatus.touched">Marital Status is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Blood Group</mat-label>
+                <mat-select [(ngModel)]="familyMember.bloodGroup" name="bloodGroup">
+                <mat-option value="A+"  ngDefaultControl>A+</mat-option>
+                <mat-option value="A-"  ngDefaultControl>A-</mat-option>
+                <mat-option value="B+"  ngDefaultControl>B+</mat-option>
+                <mat-option value="B-"  ngDefaultControl>B-</mat-option>
+                <mat-option value="AB+" ngDefaultControl>AB+</mat-option>
+                <mat-option value="AB-" ngDefaultControl>AB-</mat-option>
+                <mat-option value="O+"  ngDefaultControl>O+</mat-option>
+                <mat-option value="O-"  ngDefaultControl>O-</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Education</mat-label>
+                <input name="education" id="education" matInput placeholder="Education" [(ngModel)]="familyMember.education">
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Aborigine</mat-label>
+                <input name="aborigine" id="aborigine" matInput placeholder="Mool Niwas" [(ngModel)]="familyMember.aborigine">
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Area</mat-label>
+                <mat-select [(ngModel)]="familyMember.area" name="area" #area="ngModel" required>
+                <mat-option value="Ambamata" ngDefaultControl>Ambamata</mat-option>
+                <mat-option value="Ayad, University Road" ngDefaultControl>Ayad, University Road</mat-option>
+                <mat-option value="Balicha" ngDefaultControl>Balicha</mat-option>
+                <mat-option value="Bhupalpura, New Bhupalpura" ngDefaultControl>Bhupalpura, New Bhupalpura</mat-option>
+                <mat-option value="Bhuwana" ngDefaultControl>Bhuwana</mat-option>
+                <mat-option value="Debari Circle" ngDefaultControl>Debari Circle</mat-option>
+                <mat-option value="Eklingpura" ngDefaultControl>Eklingpura</mat-option>
+                <mat-option value="Fatehpura, Ahinsapuri" ngDefaultControl>Fatehpura, Ahinsapuri</mat-option>
+                </mat-select>
+                <mat-error *ngIf="area.invalid && area.touched">Ares is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style-more-width-address">
+                <mat-label>Permanent Address</mat-label>
+                <textarea (keyup)="onSameAddressCheck($event)" name="address" matInput id="address" placeholder="Please add permanent address" [(ngModel)]="familyMember.permanentAddress" #permanentAddress="ngModel" required></textarea>
+                <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">Permanent address is required</mat-error>
+            </mat-form-field>
+            <br>
+            <div class="search-elments-style-more-width-address">
+                <mat-form-field class="width-current-address">
+                    <mat-label>Current Address</mat-label>
+                    <textarea name="currentAddress" matInput id="currentAddress" disabled="{{familyMember.checkedSameAddress}}" placeholder="Please add current address" [(ngModel)]="familyMember.currentAddress"></textarea>
+                </mat-form-field>
+                <br>
+                <mat-checkbox (click)="onSameAddressCheck($event)" name="sameAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.checkedSameAddress">Check if current address is same as permanent address</mat-checkbox>
+            </div>
+            <br>
+           </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
+            <br>
+            <span class="font-color-primary"> <h3>Contact Details</h3></span>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Primary Mobile</mat-label>
+                <input name="mobile" id="mobile" matInput placeholder="Mobile" [(ngModel)]="familyMember.mobile" #mobile="ngModel" required minlength="10" maxlength="10" type="tel">
+                <mat-error *ngIf="mobile.invalid && mobile.touched">
+                    <span *ngIf="mobile.errors?.['required']">Mobile number is required</span>
+                    <span *ngIf="mobile.errors?.['minlength'] || mobile.errors?.['maxlength']">Mobile number must be 10 digits</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Alternate Mobile</mat-label>
+                <input name="altMobile" id="altMobile" matInput placeholder="Alternate Mobile" [(ngModel)]="familyMember.altMobile" #altMobile="ngModel" minlength="10" maxlength="10" type="tel">
+                <mat-error *ngIf="altMobile.invalid && altMobile.touched">
+                    <span *ngIf="altMobile.errors?.['minlength'] || altMobile.errors?.['maxlength']">Number must be 10 digits</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Email</mat-label>
+                <input name="email" id="email" matInput placeholder="email" [(ngModel)]="familyMember.email" #email="ngModel" email>
+                <mat-error *ngIf="email.invalid && email.touched">
+                    <span *ngIf="email.errors?.['email']">Enter a valid email address</span>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Whatsapp Number</mat-label>
+                <input name="whatsappMobile" disabled="{{familyMember.checkedSameWhatsappNumber}}" id="whatsappMobile" matInput placeholder="WhatsApp Number" [(ngModel)]="familyMember.whatsappMobile" #whatsappMobile="ngModel" minlength="10" maxlength="10" type="tel">
+                <mat-error *ngIf="whatsappMobile.invalid && whatsappMobile.touched">
+                    <span *ngIf="whatsappMobile.errors?.['minlength'] || whatsappMobile.errors?.['maxlength']">Number must be 10 digits</span>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-checkbox (click)="onSameWhatsAppNumberCheck($event)" name="checkedSameWhatsappNumber" class="example-margin font-color-primary" [(ngModel)]="familyMember.checkedSameWhatsappNumber">Check if whatsapp number is same as primary mobile umber</mat-checkbox>
+            <br>
+            <br>
+           </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
+            <br>
+            <span class="font-color-primary"> <h3>Professional Details</h3></span>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-form-field class="search-elments-style-more-width">
+                <mat-label>Profession</mat-label>
+                <!-- <input id="proffession" matInput placeholder="proffession" [(ngModel)]="proffession"> -->
+                <textarea matInput name="profession" id="profession" placeholder="Please add profession details" [(ngModel)]="familyMember.profession"></textarea>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style-more-width">
+                <mat-label>Profession Address</mat-label>
+                <textarea matInput name="professionAddress" id="professionAddress" placeholder="Please add profession address" [(ngModel)]="familyMember.professionAddress"></textarea>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Profession Email</mat-label>
+                <input name="professionEmail" id="professionEmail" matInput placeholder="Profession Email" [(ngModel)]="familyMember.professionEmail" #professionEmail="ngModel" email>
+                <mat-error *ngIf="professionEmail.invalid && professionEmail.touched">
+                    <span *ngIf="professionEmail.errors?.['email']">Enter a valid email address</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Profession Number</mat-label>
+                <input name="professionNumber" id="professionNumber" matInput placeholder="Profession Number" [(ngModel)]="familyMember.professionNumber" #professionNumber="ngModel" minlength="10" maxlength="10" type="tel">
+                <mat-error *ngIf="professionNumber.invalid && professionNumber.touched">
+                    <span *ngIf="professionNumber.errors?.['minlength'] || professionNumber.errors?.['maxlength']">Profession number must be 10 digits</span>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+           </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
+                <span class="align-row-left-right">
+                    <span> 
+                        <input
+                        #fileInput
+                        type="file"
+                        hidden="true"
+                        onclick="this.value=null"
+                        (change)="onFileSelected($event)"
+                        accept="image/*"
+                        [(ngModel)]="familyMember.photo"
+                        required
+                        />    
+                        <button mat-raised-button type="button" class="primary-button-style" (click)="fileInput.click()">Choose Passport Size Photo</button></span>
+                    <span class="image-layout">
+                        <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200">
+                        <img *ngIf="familyMember.photo" [src]="'data:image/jpeg;base64,' + familyMember.photo" alt="Photo" width="200" height="200">
+                    </span>
+                </span>
+                <br>
+                <br>
+                <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>Check I Affirm dskjfsd ds fjsdfjkds fjkdsjk fsdjk fjkds fsd fsd fdsjkf sdjfjkdsfjkd.</mat-checkbox> 
+                <mat-error *ngIf="checkIAffirm.invalid && checkIAffirm.touched">Please Check</mat-error> 
+                <br>
+                <div class="search-elments-button-style">
+                    <button *ngIf="pageMode==='create'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Save</button>
+                    <button *ngIf="pageMode==='edit'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Update</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+  </form>
+</mat-card-content>

@@ -5,6 +5,8 @@ import { TutorialDetailsComponent } from './components/tutorial-details/tutorial
 import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewComponent } from './view/view.component';
+import { FamilyComponent } from './family/family.component';
+import { CreateUpdateMemberComponent } from './create-update-member/create-update-member.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'add', component: AddTutorialComponent },
-  { path: 'view/:id', component: ViewComponent }
+  { path: 'view/:id', component: ViewComponent },
+  { path: 'family/:id', component: FamilyComponent },
+  { path: 'create-update-member', component: CreateUpdateMemberComponent }
 ];
 
 @NgModule({
