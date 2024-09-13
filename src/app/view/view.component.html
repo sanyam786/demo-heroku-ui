@@ -1,5 +1,6 @@
-<div *ngIf="isLoading">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<div class="loading-container" *ngIf="isLoading">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!isLoading">
     <div *ngFor="let member of familyMember?.members">

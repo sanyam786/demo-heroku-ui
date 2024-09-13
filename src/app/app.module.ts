@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -75,8 +76,8 @@ import { CreateUpdateMemberComponent } from './create-update-member/create-updat
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatProgressBarModule
-    //MatMomentDateModule
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

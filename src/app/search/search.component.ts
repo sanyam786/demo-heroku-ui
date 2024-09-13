@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
   pageMode: string = '';
   dataSource!: MatTableDataSource<Member>;
   displayedColumns: string[] = ['actions', 'firstName', 'fatherName', 'mobile', 'area', 'profession', 'bloodGroup', 'status'];
+  isLoading = true;  // Track the loading state
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -56,6 +57,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
   }
 
   onSearch() {
+    this.isLoading = true;  // Show progress bar
     this.familyMemberService.getAll().subscribe({
       next: (data) => {
         this.members = data;
@@ -63,14 +65,19 @@ export class SearchComponent implements OnInit, AfterViewInit{
         this.dataSource = new MatTableDataSource(this.members);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.isLoading = false;
         }
-        console.log(data);
+       // console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;  // Hide progress bar on error
+      }
     });
   }
 
   searchAfterSaveOrUpdate() {
+    this.isLoading = true;  // Show progress bar
     this.familyMemberService.getFamilyByMemberId(this.memberIdAfterSaveOrUpdate).subscribe({
       next: (data) => {
         this.members = data.members;
@@ -78,10 +85,14 @@ export class SearchComponent implements OnInit, AfterViewInit{
         this.dataSource = new MatTableDataSource(this.members);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.isLoading = false;
         }
-        console.log(data);
+        //console.log(data);
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;  // Hide progress bar on error
+      }
     });
   }
 
