@@ -47,6 +47,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   previewUrl: string | ArrayBuffer | null = null;
   formdata!: FormData;
   imageInBase64!: string; 
+  isLoading = true;  // Track the loading state
 
   familyMember: Member = {
     familyHead: false,
@@ -93,6 +94,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   ) {}
 
   ngOnInit(): void{
+    this.isLoading = true;  // Show progress bar
     this.memeberId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.pageMode = this.activatedRoute.snapshot.paramMap.get('pageMode')!;
     this.alreadyExistingFamilyHead = false;
@@ -101,32 +103,45 @@ export class CreateUpdateMemberComponent  implements OnInit{
       next: (data) => {
         this.currentFamily = data;
         this.familyId = data.familyId;
-        console.log(this.currentFamily);
+        //console.log(this.currentFamily);
         this.alreadyExistingFamilyHead = this.checkForAlreadyExistingFamilyHead(data);
+        this.isLoading = false;
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;  // Hide progress bar on error
+      }
     });
     if(this.pageMode === 'edit'){
+      this.isLoading = true;  // Show progress bar
       this.familyMemberService.getMemberById(this.memeberId).subscribe({
         next: (data) => {
           this.familyMember = data;
           if(this.familyMember.checkedSameWhatsappNumber === null) {
             this.familyMember.checkedSameWhatsappNumber = false;
           }
+          this.isLoading = false;
           // if(this.familyMember.photo !== null) {
           //   this.selectedFile = this.familyMember.photo;
           // }
-          console.log(data);
+          //console.log(data);
         },
-        error: (e) => console.error(e)
+        error: (e) => {
+          console.error(e);
+          this.isLoading = false;  // Hide progress bar on error
+        }
       });
     }
 
-    this.familyMemberService.getAll().subscribe({
+    this.familyMemberService.getAllFamiliesForDefaultSearch().subscribe({
       next: (data) => {
         this.allFamilyMembers = data;
+        this.isLoading = false;
       },
-      error: (e) => console.error(e)
+      error: (e) => {
+        console.error(e);
+        this.isLoading = false;  // Hide progress bar on error
+      }
     });
 
   }

@@ -1,3 +1,7 @@
+<div class="loading-container" *ngIf="isLoading">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    <mat-spinner></mat-spinner>
+</div>
 <mat-card-content class="main-card-layout card-layout">
     <div class="align-row-left-right">
         <span class="font-color-primary"> <h2>Add Member</h2></span>
@@ -5,7 +9,7 @@
             <button mat-raised-button class="primary-button-style" name="back-button" (click)="backToSearchPage(memeberId)">Back</button>
         </span>
     </div>
-    <form #memberForm="ngForm" (ngSubmit)="onSaveOrUpdate()">
+    <form *ngIf="!isLoading" #memberForm="ngForm" (ngSubmit)="onSaveOrUpdate()">
     <div>
         <br>
         <mat-radio-group *ngIf="alreadyExistingFamilyHead === false" class="search-elments-style single-line family-radio-button" aria-label="Family Head and Family Member">
