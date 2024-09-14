@@ -262,7 +262,10 @@
 
   .triangle {
     position: absolute;
-    border-radius: 22%;
+    border-top-left-radius: 22%;
+    border-top-right-radius: 8%;
+    border-bottom-left-radius: 8%;
+    border-bottom-right-radius: 22%;
     object-fit: cover;
     top: 0;
     left: 0px;

@@ -12,7 +12,7 @@ import { FamilyMember } from '../models/FamilyMember.model';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class SearchComponent implements OnInit, AfterViewInit{
 
@@ -23,14 +23,14 @@ export class SearchComponent implements OnInit, AfterViewInit{
   members?: Member[];
   member?: Member;
   pageMode: string = '';
-  dataSource!: MatTableDataSource<Member>;
-  displayedColumns: string[] = ['actions', 'firstName', 'fatherName', 'mobile', 'area', 'profession', 'bloodGroup', 'status'];
+  //dataSource!: MatTableDataSource<Member>;
+  //displayedColumns: string[] = ['actions', 'firstName', 'fatherName', 'mobile', 'area', 'profession', 'bloodGroup', 'status'];
   isLoading = true;  // Track the loading state
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  //@ViewChild(MatPaginator)
+  //paginator!: MatPaginator;
+  //@ViewChild(MatSort)
+  //sort!: MatSort;
   constructor(
     private familyMemberService: FamilyMemberService,
     private router: Router
@@ -49,11 +49,11 @@ export class SearchComponent implements OnInit, AfterViewInit{
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
   }
 
   onSearch() {
@@ -62,9 +62,9 @@ export class SearchComponent implements OnInit, AfterViewInit{
       next: (data) => {
         this.members = data;
         if(this.members !== undefined){
-        this.dataSource = new MatTableDataSource(this.members);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        //this.dataSource = new MatTableDataSource(this.members);
+        //this.dataSource.paginator = this.paginator;
+        //this.dataSource.sort = this.sort;
         this.isLoading = false;
         }
        // console.log(data);
@@ -82,9 +82,9 @@ export class SearchComponent implements OnInit, AfterViewInit{
       next: (data) => {
         this.members = data.members;
         if(this.members !== undefined){
-        this.dataSource = new MatTableDataSource(this.members);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        // this.dataSource = new MatTableDataSource(this.members);
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
         this.isLoading = false;
         }
         //console.log(data);
@@ -117,5 +117,21 @@ export class SearchComponent implements OnInit, AfterViewInit{
     this.pageMode = 'edit';
     // Navigate to the view component and pass the id
     this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode}]);
+  }
+
+  getAge(dateOfBirth: string): number {
+    if (!dateOfBirth) {
+      return 0; // Handle undefined dates
+    }
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+  
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+  
+    return age;
   }
 }
