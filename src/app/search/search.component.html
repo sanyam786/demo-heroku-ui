@@ -24,7 +24,7 @@
         </div>
 
         <div *ngIf="!isLoading" class="">
-            <div *ngFor="let member of members" class="">
+            <div *ngFor="let member of filteredMembers" class="">
                 <mat-card class="action-card" appearance="outlined">
                     <mat-card-content>
                         <div *ngIf="member.status==='Approved'" class="triangle-approved">

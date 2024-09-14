@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
   //dataSource!: MatTableDataSource<Member>;
   //displayedColumns: string[] = ['actions', 'firstName', 'fatherName', 'mobile', 'area', 'profession', 'bloodGroup', 'status'];
   isLoading = true;  // Track the loading state
-
+  filteredMembers: Member[] = [];
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
   //@ViewChild(MatSort)
@@ -48,12 +48,22 @@ export class SearchComponent implements OnInit, AfterViewInit{
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    var filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim().toLowerCase();  // Remove whitespace and convert to lowercase for case-insensitive search
 
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
+    if(this.members !== undefined){
+      this.filteredMembers = this.members.filter(member =>
+        member.firstName!.toLowerCase().includes(filterValue) ||
+        member.lastName!.toLowerCase().includes(filterValue) ||
+        member.mobile!.includes(filterValue) ||
+        //member.dateOfBirth!.includes(filterValue) ||
+        // member.memberId!.includes(filterValue) ||
+        member.bloodGroup!.toLowerCase().includes(filterValue) ||
+        //member.whatsappMobile!.includes(filterValue) ||
+        member.area!.toLowerCase().includes(filterValue) ||
+        member.status!.toLowerCase().includes(filterValue)
+      );
+    }
   }
 
   onSearch() {
@@ -62,6 +72,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
       next: (data) => {
         this.members = data;
         if(this.members !== undefined){
+          this.filteredMembers = this.members;  // Initially, show all members
         //this.dataSource = new MatTableDataSource(this.members);
         //this.dataSource.paginator = this.paginator;
         //this.dataSource.sort = this.sort;
@@ -82,6 +93,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
       next: (data) => {
         this.members = data.members;
         if(this.members !== undefined){
+          this.filteredMembers = this.members;  // Initially, show all members
         // this.dataSource = new MatTableDataSource(this.members);
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
