@@ -58,7 +58,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
 
   onSearch() {
     this.isLoading = true;  // Show progress bar
-    this.familyMemberService.getAll().subscribe({
+    this.familyMemberService.getAllFamiliesForDefaultSearch().subscribe({
       next: (data) => {
         this.members = data;
         if(this.members !== undefined){
