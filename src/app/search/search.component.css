@@ -259,3 +259,12 @@
     height: 552px;
     overflow-y: auto;
   }
+  /* The card container (flexbox item) can take up the remaining space */
+  .card-container {
+    flex-grow: 1; /* Takes remaining space */
+    display: flex;
+    justify-content: center; /* Centers the card horizontally */
+    align-items: center; /* Centers the card vertically */
+    padding: 10px;
+  }
+  
