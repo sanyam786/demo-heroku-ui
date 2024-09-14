@@ -17,6 +17,10 @@ export class FamilyMemberService {
     return this.http.get<FamilyMember[]>(baseUrl + '/families');
   }
 
+  getAllFamiliesForDefaultSearch(): Observable<Member[]> {
+    return this.http.get<Member[]>(baseUrl + '/defaultfamilies');
+  }
+
   get(id: any): Observable<FamilyMember> {
     return this.http.get<FamilyMember>(`${baseUrl}/families/${id}`);
   }
