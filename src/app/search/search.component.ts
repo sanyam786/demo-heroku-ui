@@ -27,6 +27,10 @@ export class SearchComponent implements OnInit, AfterViewInit{
   //displayedColumns: string[] = ['actions', 'firstName', 'fatherName', 'mobile', 'area', 'profession', 'bloodGroup', 'status'];
   isLoading = true;  // Track the loading state
   filteredMembers: Member[] = [];
+  visibleMembers: Member[] = [];  // Members to display
+  limit = 10;  // Number of items to load initially
+  offset = 0;  // Track how many items have been loaded
+  searchValue = '';  // Current search filter value
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
   //@ViewChild(MatSort)
@@ -50,7 +54,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
   applyFilter(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
     filterValue = filterValue.trim().toLowerCase();  // Remove whitespace and convert to lowercase for case-insensitive search
-
+    this.searchValue = filterValue;
     if(this.members !== undefined){
       this.filteredMembers = this.members.filter(member =>
         member.firstName!.toLowerCase().includes(filterValue) ||
@@ -64,6 +68,19 @@ export class SearchComponent implements OnInit, AfterViewInit{
         member.status!.toLowerCase().includes(filterValue)
       );
     }
+    // Reset visible members and offset for new search results
+    this.visibleMembers = [];
+    this.offset = 0;
+    this.loadMoreMembers();
+  }
+
+  // Handle infinite scroll
+  onScroll(event: any): void {
+    const element = event.target;
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      // Load more data when reaching the bottom
+      this.loadMoreMembers();
+    }
   }
 
   onSearch() {
@@ -73,6 +90,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
         this.members = data;
         if(this.members !== undefined){
           this.filteredMembers = this.members;  // Initially, show all members
+          this.loadMoreMembers();  // Load the first batch of members
         //this.dataSource = new MatTableDataSource(this.members);
         //this.dataSource.paginator = this.paginator;
         //this.dataSource.sort = this.sort;
@@ -94,6 +112,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
         this.members = data.members;
         if(this.members !== undefined){
           this.filteredMembers = this.members;  // Initially, show all members
+          this.loadMoreMembers();  // Load the first batch of members
         // this.dataSource = new MatTableDataSource(this.members);
         // this.dataSource.paginator = this.paginator;
         // this.dataSource.sort = this.sort;
@@ -107,6 +126,13 @@ export class SearchComponent implements OnInit, AfterViewInit{
       }
     });
   }
+
+    // Load a batch of members from filteredMembers
+    loadMoreMembers(): void {
+      const newMembers = this.filteredMembers.slice(this.offset, this.offset + this.limit);
+      this.visibleMembers = this.visibleMembers.concat(newMembers);
+      this.offset += this.limit;
+    }
 
   onViewDetails(id: string) {
     // Navigate to the view component and pass the id

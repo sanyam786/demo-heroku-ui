@@ -254,3 +254,8 @@
     color: white;
     font-weight: 500;
   }
+
+  .scroll-container {
+    height: 800px;
+    overflow-y: auto;
+  }

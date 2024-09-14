@@ -24,76 +24,78 @@
         </div>
 
         <div *ngIf="!isLoading" class="">
-            <div *ngFor="let member of filteredMembers" class="">
-                <mat-card class="action-card" appearance="outlined">
-                    <mat-card-content>
-                        <div *ngIf="member.status==='Approved'" class="triangle-approved">
-                            <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
-                            <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
-                        </div>
-                        <div *ngIf="member.status==='Pending'" class="triangle-pending">
-                            <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
-                            <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
-                        </div>
-                        <span class="align-row-left-right card-layout2">
-                            <span class="circle">
-                                <!-- <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="20" height="20"> -->
-                                  <div *ngIf="member.firstName && member.lastName" class="circle">
-                                    {{ member.firstName.charAt(0) }}{{ member.lastName.charAt(0) }}
-                                  </div>
-                            </span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="single-line width-webkit">
-                                <span class="padding-data">
-                                    <span class="padding-name">
-                                        {{member.firstName}} {{member.lastName}}
+            <div class="scroll-container" (scroll)="onScroll($event)">
+                <div *ngFor="let member of visibleMembers" class="">
+                    <mat-card class="action-card" appearance="outlined">
+                        <mat-card-content>
+                            <div *ngIf="member.status==='Approved'" class="triangle-approved">
+                                <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                                <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
+                            </div>
+                            <div *ngIf="member.status==='Pending'" class="triangle-pending">
+                                <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                                <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
+                            </div>
+                            <span class="align-row-left-right card-layout2">
+                                <span class="circle">
+                                    <!-- <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="20" height="20"> -->
+                                    <div *ngIf="member.firstName && member.lastName" class="circle">
+                                        {{ member.firstName.charAt(0) }}{{ member.lastName.charAt(0) }}
+                                    </div>
+                                </span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <span class="single-line width-webkit">
+                                    <span class="padding-data">
+                                        <span class="padding-name">
+                                            {{member.firstName}} {{member.lastName}}
+                                        </span>
+                                        <br>
+                                        <span class="style-data">
+                                            {{member.mobile}} 
+                                        </span>
+                                        <br>
+                                        <span class="style-data">
+                                            {{member.area}} 
+                                        </span>
                                     </span>
-                                    <br>
-                                    <span class="style-data">
-                                        {{member.mobile}} 
-                                    </span>
-                                    <br>
-                                    <span class="style-data">
-                                        {{member.area}} 
+                                    
+                                    <span>
+                                        <span>
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                            <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+                                                <button mat-menu-item>
+                                                    <mat-icon>visibility</mat-icon>
+                                                    <span (click)="onViewDetails(member.memberId)">View Details</span>
+                                                </button>
+                                                <button mat-menu-item>
+                                                    <mat-icon>add</mat-icon>
+                                                    <span (click)="onAddNewMember(member.memberId)">Add Member</span>
+                                                </button>
+                                                <button mat-menu-item>
+                                                    <mat-icon>edit</mat-icon>
+                                                    <span (click)="onEditMember(member.memberId)">Modify</span>
+                                                </button>
+                                            </mat-menu>
+                                        </span>
+                                        <br>
+                                        <span>
+                                            <!-- <div class="blood-group">
+                                                <mat-icon>opacity</mat-icon> 
+                                                <span>{{ member.bloodGroup }}</span> 
+                                            </div> -->
+                                            <mat-chip #bloodGroup class="blood-group" selected>
+                                                {{ member.bloodGroup }}
+                                            </mat-chip>
+                                        </span>
                                     </span>
                                 </span>
-                                
-                                <span>
-                                    <span>
-                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                                        <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu="matMenu">
-                                            <button mat-menu-item>
-                                                <mat-icon>visibility</mat-icon>
-                                                <span (click)="onViewDetails(member.memberId)">View Details</span>
-                                            </button>
-                                            <button mat-menu-item>
-                                                <mat-icon>add</mat-icon>
-                                                <span (click)="onAddNewMember(member.memberId)">Add Member</span>
-                                            </button>
-                                            <button mat-menu-item>
-                                                <mat-icon>edit</mat-icon>
-                                                <span (click)="onEditMember(member.memberId)">Modify</span>
-                                            </button>
-                                        </mat-menu>
-                                    </span>
-                                    <br>
-                                    <span>
-                                        <!-- <div class="blood-group">
-                                            <mat-icon>opacity</mat-icon> 
-                                            <span>{{ member.bloodGroup }}</span> 
-                                        </div> -->
-                                        <mat-chip #bloodGroup class="blood-group" selected>
-                                            {{ member.bloodGroup }}
-                                        </mat-chip>
-                                    </span>
-                                </span>
                             </span>
-                        </span>
-                    </mat-card-content>
-                  </mat-card>
-                  <br>
+                        </mat-card-content>
+                    </mat-card>
+                    <br>
+                </div>
             </div>
             
             <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
