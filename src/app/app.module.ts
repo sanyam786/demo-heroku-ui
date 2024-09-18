@@ -36,6 +36,9 @@ import { SearchComponent } from './search/search.component';
 import { ViewComponent } from './view/view.component';
 import { FamilyComponent } from './family/family.component';
 import { CreateUpdateMemberComponent } from './create-update-member/create-update-member.component';
+import { LoginComponent } from './login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -48,7 +51,8 @@ import { CreateUpdateMemberComponent } from './create-update-member/create-updat
     SearchComponent,
     ViewComponent,
     FamilyComponent,
-    CreateUpdateMemberComponent
+    CreateUpdateMemberComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,7 @@ import { CreateUpdateMemberComponent } from './create-update-member/create-updat
     MatProgressBarModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

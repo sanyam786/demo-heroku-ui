@@ -31,6 +31,8 @@ export class SearchComponent implements OnInit, AfterViewInit{
   limit = 10;  // Number of items to load initially
   offset = 0;  // Track how many items have been loaded
   searchValue = '';  // Current search filter value
+  loggedInRole = '';
+  loggedInMemberId = 0;
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
   //@ViewChild(MatSort)
@@ -41,6 +43,8 @@ export class SearchComponent implements OnInit, AfterViewInit{
   ) {}
 
   ngOnInit(): void{
+    this.loggedInRole = this.familyMemberService.getLoggedInRole();
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
     if(this.afterSaveOrUpdate && this.afterSaveOrUpdate !== "false"){
       this.searchAfterSaveOrUpdate();
     }else{
@@ -171,5 +175,19 @@ export class SearchComponent implements OnInit, AfterViewInit{
     }
   
     return age;
+  }
+
+  isSelfEdit(memberId: any): any {
+    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
+      return true;
+    }
+    return false;
+  }
+
+  checkRoles(): any {
+    if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){
+      return true;
+    }
+    return false;
   }
 }

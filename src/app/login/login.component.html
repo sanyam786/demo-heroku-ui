@@ -1,0 +1,22 @@
+<div class="page-container">
+    <mat-card class="card-layout" appearance="raised">
+        <mat-card-content>
+            <div class="div-layout">
+                <h2 class="font-color-primary">Login</h2>
+                <mat-form-field class="input-box">
+                <mat-label class="font-color-primary">Username</mat-label>
+                <input matInput [(ngModel)]="loginData.username" placeholder="Enter username">
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-box">
+                <mat-label class="font-color-primary">Password</mat-label>
+                <input matInput [(ngModel)]="loginData.password" type="password" placeholder="Enter password">
+                </mat-form-field>
+                <br>
+                <button class="primary-button-style" mat-raised-button (click)="onLogin()">Login</button>
+            
+                <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

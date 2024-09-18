@@ -5,7 +5,7 @@
     <mat-card-content>
         <div class="single-line expand-width">
             <span class="font-color-primary"> <h2>Search Members</h2></span>
-            <span class="add-family-style">
+            <span *ngIf="checkRoles()" class="add-family-style">
                 <button mat-raised-button color="primary" class="primary-button-style" (click)="onAddNewFamily()">Add New Family</button>
             </span>
         </div>
@@ -69,11 +69,11 @@
                                                     <mat-icon>visibility</mat-icon>
                                                     <span (click)="onViewDetails(member.memberId)">View Details</span>
                                                 </button>
-                                                <button mat-menu-item>
+                                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" mat-menu-item>
                                                     <mat-icon>add</mat-icon>
                                                     <span (click)="onAddNewMember(member.memberId)">Add Member</span>
                                                 </button>
-                                                <button mat-menu-item>
+                                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" mat-menu-item>
                                                     <mat-icon>edit</mat-icon>
                                                     <span (click)="onEditMember(member.memberId)">Modify</span>
                                                 </button>

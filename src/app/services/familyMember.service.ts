@@ -11,7 +11,40 @@ const baseUrl = 'https://demo-heroku-315200bec293.herokuapp.com/api/family';
   providedIn: 'root',
 })
 export class FamilyMemberService {
-  constructor(private http: HttpClient) {}
+
+    //public loginResponse: any;
+   public loggedInRole: string = '';
+   public loggedInMemberId: number = 0;
+
+  constructor(private http: HttpClient) {
+    // When the service initializes, load the saved value from localStorage
+    const role = localStorage.getItem('loggedInRole');
+    if (role) {
+      this.loggedInRole = role;  // Set the in-memory variable from localStorage
+    }
+    const memberId = localStorage.getItem('loggedInMemberId');
+    if (memberId) {
+      this.loggedInMemberId = parseInt(memberId);  // Set the in-memory variable from localStorage
+    }
+  }
+
+  setLoggedInRole(value: any) {
+    localStorage.setItem('loggedInRole', value);
+    this.loggedInRole = value;
+  }
+
+  setLoggedInMemberId(value: any) {
+    localStorage.setItem('loggedInMemberId', value);
+    this.loggedInMemberId = value;
+  }
+
+  getLoggedInMemberId(): any {
+    return this.loggedInMemberId;
+  }
+
+  getLoggedInRole(): any {
+    return this.loggedInRole;
+  }
 
   getAll(): Observable<FamilyMember[]> {
     return this.http.get<FamilyMember[]>(baseUrl + '/families');

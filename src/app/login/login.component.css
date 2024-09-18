@@ -1,0 +1,61 @@
+.login-form {
+    width: 300px;
+    margin: 100px auto;
+  }
+  
+  .error {
+    color: red;
+  }
+
+.card-layout {
+    background-color: #fef5f5;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.primary-button-style {
+    background-color: #ede5ff !important;
+    color: #66548e !important;
+}
+
+.font-color-primary {
+    color: #66548e !important;
+}
+
+/* Full-page container */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    min-height: calc(100vh - 70px); 
+    overflow: hidden; 
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  /* Optional: To control the card width */
+/* .mat-card {
+    width: 800px; 
+    padding: 20px; 
+  } */
+
+  .div-layout{
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .input-box {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .input-box {
+        width: 100%;
+      }
+  }
+
+  

@@ -126,13 +126,13 @@
             <mat-card class="action-card" appearance="outlined">
                 <mat-card-content>
                     <span class="action-button-row">
-                        <button class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
+                        <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
                         &nbsp;&nbsp;
                         <!-- <button class="primary-button-style" mat-raised-button color="primary" (click)="onUpdateFamilyHead(member.memberId)" mat-button>Make Family Head</button>
                         &nbsp; &nbsp; -->
-                        <button class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
+                        <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
                         &nbsp;&nbsp;
-                        <button class="approve-button-style" *ngIf="member.status==='Pending'" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
+                        <button class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
                     </span>
                 </mat-card-content>
             </mat-card>
@@ -355,15 +355,15 @@
                     <mat-card class="action-card-member" appearance="outlined">
                         <mat-card-content>
                             <span class="action-button-row">
-                                <button class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
+                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
                                 &nbsp; &nbsp;
-                                <button class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
+                                <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
                                 &nbsp; &nbsp;
-                                <button class="approve-button-style" *ngIf="member.status==='Pending'" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
+                                <button  class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
                             </span>
                             <br>
                             <span>
-                                <button class="primary-button-style" mat-raised-button color="primary" (click)="onUpdateFamilyHead(member.memberId)" mat-button>Make Family Head</button>
+                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="primary" (click)="onUpdateFamilyHead(member.memberId)" mat-button>Make Family Head</button>
                             </span>
                         </mat-card-content>
                     </mat-card>

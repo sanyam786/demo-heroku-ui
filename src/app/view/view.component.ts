@@ -16,6 +16,8 @@ export class ViewComponent implements OnInit {
   submitted!: boolean;
   readonly panelOpenState = signal(false);
   isLoading = true;  // Track the loading state
+  loggedInRole = '';
+  loggedInMemberId = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +29,8 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
     // Retrieve the id from the route parameters
     this.id = this.route.snapshot.paramMap.get('id')!;
+    this.loggedInRole = this.familyMemberService.getLoggedInRole();
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
     this.loadData(this.id); // Call a method to load data based on the id
   }
 
@@ -87,5 +91,19 @@ export class ViewComponent implements OnInit {
     }
   
     return age;
+  }
+
+  isSelfEdit(memberId: any): any {
+    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
+      return true;
+    }
+    return false;
+  }
+
+  checkRoles(): any {
+    if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){
+      return true;
+    }
+    return false;
   }
 }

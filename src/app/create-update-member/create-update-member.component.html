@@ -2,7 +2,8 @@
     <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
     <mat-spinner></mat-spinner>
 </div>
-<mat-card-content class="main-card-layout card-layout">
+
+<mat-card-content *ngIf="checkRoles()" class="main-card-layout card-layout">
     <div class="align-row-left-right">
         <span class="font-color-primary"> <h2>Add Member</h2></span>
         <span class="image-layout">
@@ -238,3 +239,7 @@
     </div>
   </form>
 </mat-card-content>
+
+<mat-card *ngIf="!checkRoles()" appearance="raised">
+    <mat-card-content>You are not authorizied to access this page.</mat-card-content>
+</mat-card>

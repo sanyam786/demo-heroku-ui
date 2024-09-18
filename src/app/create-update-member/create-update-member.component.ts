@@ -86,6 +86,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
   currentFamily!: FamilyMember;
   allFamilyMembers: any;
   MAX_FILE_SIZE = 1 * 1024 * 1024; // 2 MB in bytes
+  loggedInRole = '';
+  loggedInMemberId = 0;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -97,6 +99,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
     this.isLoading = true;  // Show progress bar
     this.memeberId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.pageMode = this.activatedRoute.snapshot.paramMap.get('pageMode')!;
+    this.loggedInRole = this.familyMemberService.getLoggedInRole();
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
     this.alreadyExistingFamilyHead = false;
     this.alreadyExistingPhoneNumberForAnotherFamily = false;
     this.familyMemberService.getFamilyByMemberId(this.memeberId).subscribe({
@@ -423,5 +427,28 @@ export class CreateUpdateMemberComponent  implements OnInit{
       //this.familyMember.whatsappMobile = '';
     }
     console.log(event.target.value);
+  }
+
+  isSelfEdit(memberId: any): any {
+    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
+      return true;
+    }
+    return false;
+  }
+
+  checkRoles(): any {
+    if(this.pageMode === 'edit'){
+      if((this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit') || this.isSelfEdit(this.familyMember.memberId)){
+        return true;
+      }
+    }
+
+    if(this.pageMode === 'create'){
+      if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){
+        return true;
+      }
+    }
+    
+    return false;
   }
 }

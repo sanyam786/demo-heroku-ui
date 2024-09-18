@@ -19,3 +19,13 @@
     min-height: calc(100vh - 60px); 
     overflow: hidden; 
   }
+
+
+.primary-button-style {
+    background-color: #42535a !important;
+    color: #66548e !important;
+}
+
+.font-color-primary {
+    color: #d8c7fe !important;
+}
