@@ -1,7 +1,12 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, signal } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, signal, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FamilyMemberService } from 'src/app/services/familyMember.service';
 import { FamilyMember } from 'src/app/models/FamilyMember.model';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view',
@@ -18,6 +23,10 @@ export class ViewComponent implements OnInit {
   isLoading = true;  // Track the loading state
   loggedInRole = '';
   loggedInMemberId = 0;
+  private _snackBar = inject(MatSnackBar);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -59,6 +68,7 @@ export class ViewComponent implements OnInit {
     this.familyMemberService.updateFamilyHead(memberId).subscribe({
       next: (res) => {
         console.log(res);
+        this.openSnackBarWithDuration('Success: Family Head updated successfully.', 'Close');
         this.loadData(memberId);
         //this.changeDetectorRef.markForCheck();
       },
@@ -70,6 +80,7 @@ export class ViewComponent implements OnInit {
     this.familyMemberService.approveStatus(memberId).subscribe({
       next: (res) => {
         console.log(res);
+        this.openSnackBarWithDuration('Success: Member approved successfully.', 'Close');
         this.loadData(memberId);
         //this.changeDetectorRef.markForCheck();
       },
@@ -105,5 +116,20 @@ export class ViewComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
+  }
+
+  openSnackBarWithDuration(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 8 * 1000
+    });
   }
 }
