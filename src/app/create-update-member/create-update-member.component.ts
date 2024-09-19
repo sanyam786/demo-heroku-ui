@@ -168,6 +168,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
               next: (res) => {
                 console.log(res);
                 this.submitted = true;
+                this.openSnackBarWithDuration('Success: Member updated successfully.', 'Close');
+                console.log('Member is updated');
                 this.backToSearchPage(res.memberId);
               },
               error: (e) => console.error(e)
@@ -181,6 +183,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
               next: (res) => {
                 console.log(res);
                 this.submitted = true;
+                this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
+                console.log('Member is updated');
                 this.backToSearchPage(res.memberId);
               },
               error: (e) => console.error(e)
@@ -407,7 +411,15 @@ export class CreateUpdateMemberComponent  implements OnInit{
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
+  }
+
+  openSnackBarWithDuration(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
+      duration: 8 * 1000
     });
   }
 
