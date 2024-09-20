@@ -299,3 +299,18 @@
     color: #66548e;
     font-weight: bold;
   }
+
+  .mat-button-toggle {
+    /* margin: 10px; */
+    background-color: #ede5ff;
+    color: #66548e;
+  }
+  
+  .mat-button-toggle.mat-button-toggle-checked {
+    background-color: #b9eb93 !important; /* Change color when selected */
+    color: #66548e !important;
+  }
+
+  .mat-button-group-layout {
+    border-radius: 40px;
+  }

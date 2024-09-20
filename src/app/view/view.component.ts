@@ -118,6 +118,13 @@ export class ViewComponent implements OnInit {
     return false;
   }
 
+  checkAdminRole(): any {
+    if(this.loggedInRole === 'admin'){
+      return true;
+    }
+    return false;
+  }
+
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       horizontalPosition: this.horizontalPosition,
@@ -130,6 +137,20 @@ export class ViewComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 8 * 1000
+    });
+  }
+
+  onRoleChange(event: any, memberId: any): void {
+    console.log('Role changed to: ', event.value);
+    var role = event.value;
+    this.familyMemberService.updateRole(memberId, role).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.openSnackBarWithDuration('Success: Member role updated successfully.', 'Close');
+        this.loadData(memberId);
+        //this.changeDetectorRef.markForCheck();
+      },
+      error: (e) => console.error(e)
     });
   }
 }

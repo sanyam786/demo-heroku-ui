@@ -134,6 +134,19 @@
                         &nbsp;&nbsp;
                         <button class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
                     </span>
+                    <br>
+                    <span>
+                        <mat-button-toggle-group *ngIf="checkAdminRole()"
+                            class="mat-button-group-layout"
+                            name="roles"
+                            aria-label="Roles"
+                            [value]="member.role"
+                            (change)="onRoleChange($event, member.memberId)">
+                            <mat-button-toggle value="admin">Admin</mat-button-toggle>
+                            <mat-button-toggle value="selfedit">Self Edit</mat-button-toggle>
+                            <mat-button-toggle value="edit">Edit</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </span>
                 </mat-card-content>
             </mat-card>
             
@@ -364,6 +377,20 @@
                             <br>
                             <span>
                                 <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="primary" (click)="onUpdateFamilyHead(member.memberId)" mat-button>Make Family Head</button>
+                            </span>
+                            <br>
+                            <br>
+                            <span>
+                                <mat-button-toggle-group *ngIf="checkAdminRole()"
+                                    class="mat-button-group-layout"
+                                    name="roles"
+                                    aria-label="Roles"
+                                    [value]="member.role"
+                                    (change)="onRoleChange($event, member.memberId)">
+                                    <mat-button-toggle value="admin">Admin</mat-button-toggle>
+                                    <mat-button-toggle value="selfedit">Self Edit</mat-button-toggle>
+                                    <mat-button-toggle value="edit">Edit</mat-button-toggle>
+                                </mat-button-toggle-group>  
                             </span>
                         </mat-card-content>
                     </mat-card>

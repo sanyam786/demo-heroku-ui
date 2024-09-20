@@ -82,6 +82,10 @@ export class FamilyMemberService {
     return this.http.put(`${baseUrl}/updateFamilyHead/${id}`, null);
   }
 
+  updateRole(id: any, role: any): Observable<any> {
+    return this.http.put(`${baseUrl}/updateRole/${id}/${role}`, null);
+  }
+
   approveStatus(id: any): Observable<any> {
     return this.http.put(`${baseUrl}/approveStatus/${id}`, null);
   }

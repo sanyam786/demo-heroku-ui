@@ -74,7 +74,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
     professionNumber: '',
     checkIAffirm: false,
     aborigine: '',
-    status: 'Pending'
+    status: 'Pending',
+    role: ''
   };
 
   submitted!: Boolean;
@@ -179,6 +180,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
             console.error('Form is invalid');
           } 
           if(this.pageMode === 'create' && this.selectedFile){
+            this.familyMember.role = 'selfedit';
             this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
               next: (res) => {
                 console.log(res);

@@ -29,4 +29,5 @@ export class Member {
     // photo?: Blob;
     photo?: string;
     photoBase64?: Blob;
+    role?: string
   }
