@@ -33,6 +33,8 @@ export class SearchComponent implements OnInit, AfterViewInit{
   searchValue = '';  // Current search filter value
   loggedInRole = '';
   loggedInMemberId = 0;
+  familyMember?: FamilyMember;
+  isSelfEditMember = false;
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
   //@ViewChild(MatSort)
@@ -178,11 +180,38 @@ export class SearchComponent implements OnInit, AfterViewInit{
   }
 
   isSelfEdit(memberId: any): any {
-    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
-      return true;
+    this.loadFamilyData(memberId);
+    if(this.familyMember != undefined && this.familyMember.members != undefined){
+      for(let i=0; i < this.familyMember?.members.length; i++){
+        if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === this.familyMember.members[i].memberId){
+          return this.isSelfEditMember = true;
+        }
+      }
     }
-    return false;
+    return this.isSelfEditMember = false;
   }
+
+  loadFamilyData(id: string): void {
+    //this.isLoading = true;  // Show progress bar
+    this.familyMemberService.getFamilyByMemberId(id).subscribe({
+      next: (data) => {
+        this.familyMember = data;
+        //this.isLoading = false;
+        //console.log(data);
+      },
+      error: (e) => {
+        console.error(e);
+        //this.isLoading = false;  // Hide progress bar on error
+      }
+    });
+  }
+
+  // isSelfEdit(memberId: any): any {
+  //   if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   checkRoles(): any {
     if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){

@@ -89,6 +89,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   MAX_FILE_SIZE = 1 * 1024 * 1024; // 2 MB in bytes
   loggedInRole = '';
   loggedInMemberId = 0;
+  familyMemberForAccessCheck?: FamilyMember;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -443,11 +444,38 @@ export class CreateUpdateMemberComponent  implements OnInit{
     console.log(event.target.value);
   }
 
+  // isSelfEdit(memberId: any): any {
+  //   if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   isSelfEdit(memberId: any): any {
-    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
-      return true;
+    this.loadFamilyData(memberId);
+    if(this.familyMemberForAccessCheck != undefined && this.familyMemberForAccessCheck.members != undefined){
+      for(let i=0; i < this.familyMemberForAccessCheck?.members.length; i++){
+        if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === this.familyMemberForAccessCheck.members[i].memberId){
+          return true;
+        }
+      }
     }
     return false;
+  }
+
+  loadFamilyData(id: string): void {
+    //this.isLoading = true;  // Show progress bar
+    this.familyMemberService.getFamilyByMemberId(id).subscribe({
+      next: (data) => {
+        this.familyMemberForAccessCheck = data;
+        //this.isLoading = false;
+        //console.log(data);
+      },
+      error: (e) => {
+        console.error(e);
+        //this.isLoading = false;  // Hide progress bar on error
+      }
+    });
   }
 
   checkRoles(): any {

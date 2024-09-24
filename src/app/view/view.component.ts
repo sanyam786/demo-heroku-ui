@@ -105,8 +105,12 @@ export class ViewComponent implements OnInit {
   }
 
   isSelfEdit(memberId: any): any {
-    if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
-      return true;
+    if(this.familyMember != undefined && this.familyMember.members != undefined){
+      for(let i=0; i < this.familyMember?.members.length; i++){
+        if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === this.familyMember.members[i].memberId){
+          return true;
+        }
+      }
     }
     return false;
   }

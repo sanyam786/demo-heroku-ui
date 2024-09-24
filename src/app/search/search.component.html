@@ -61,10 +61,24 @@
                                     
                                     <span>
                                         <span>
-                                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                            <button (click)="isSelfEdit(member.memberId)" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                                             <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu="matMenu">
+                                                <button mat-menu-item>
+                                                    <mat-icon>visibility</mat-icon>
+                                                    <span (click)="onViewDetails(member.memberId)">View Details</span>
+                                                </button>
+                                                <button *ngIf="checkRoles() || isSelfEditMember" mat-menu-item>
+                                                    <mat-icon>add</mat-icon>
+                                                    <span (click)="onAddNewMember(member.memberId)">Add Member</span>
+                                                </button>
+                                                <button *ngIf="checkRoles() || isSelfEditMember" mat-menu-item>
+                                                    <mat-icon>edit</mat-icon>
+                                                    <span (click)="onEditMember(member.memberId)">Modify</span>
+                                                </button>
+                                            </mat-menu>
+                                            <!-- <mat-menu #menu="matMenu">
                                                 <button mat-menu-item>
                                                     <mat-icon>visibility</mat-icon>
                                                     <span (click)="onViewDetails(member.memberId)">View Details</span>
@@ -77,7 +91,7 @@
                                                     <mat-icon>edit</mat-icon>
                                                     <span (click)="onEditMember(member.memberId)">Modify</span>
                                                 </button>
-                                            </mat-menu>
+                                            </mat-menu> -->
                                         </span>
                                         <br>
                                         <span>
