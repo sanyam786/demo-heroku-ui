@@ -1,5 +1,6 @@
-import { Component, Injectable, HostListener } from '@angular/core';
+import { Component, Injectable, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FamilyMemberService } from 'src/app/services/familyMember.service';
 import { AuthService } from './services/authService.service';
 
 @Injectable({
@@ -10,12 +11,20 @@ import { AuthService } from './services/authService.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Sadhumargi Sangh Directory';
+  loggedInMemberId = 0;
  
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router,
+    private authService: AuthService,
+    private familyMemberService: FamilyMemberService
+  ) {
     this.setViewportHeight();
     this.addEventListeners();
+  }
+
+  ngOnInit(): void {
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
   }
 
   // Function to dynamically calculate and set the viewport height
@@ -40,5 +49,12 @@ export class AppComponent {
       return true;
     }
     return false;
+  }
+
+  viewMyProfile() {
+      if(this.loggedInMemberId !== 0){
+        // Navigate to the view component and pass the id
+      this.router.navigate(['/view', this.loggedInMemberId]);
+      }
   }
 }
