@@ -40,6 +40,7 @@ import { CreateUpdateMemberComponent } from './create-update-member/create-updat
 import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { AllsearchComponent } from './allsearch/allsearch.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     ViewComponent,
     FamilyComponent,
     CreateUpdateMemberComponent,
-    LoginComponent
+    LoginComponent,
+    AllsearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,299 @@
+<div class="loading-container" *ngIf="isLoading">
+    <!-- <mat-progress-bar mode="determinate" value="40"></mat-progress-bar> -->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <!-- <mat-spinner></mat-spinner> -->
+</div>
+<mat-card appearance="raised" class="card-layout">
+    <mat-card-content>
+        <div class="single-line expand-width">
+            <span class="font-color-primary"> <h2>Search Members</h2></span>
+            <!-- <span class="add-family-style">
+                <button mat-raised-button color="primary" class="primary-button-style" (click)="onAddNewFamily()">Add New Family</button>
+            </span> -->
+        </div>
+        <div>
+            
+            <!-- <mat-form-field class="search-elments-style">
+                <mat-label>First Name</mat-label>
+                <input id="firstName" matInput placeholder="First Name" [(ngModel)]="member.firstName">
+            </mat-form-field>
+
+            <mat-form-field class="search-elments-style">
+                <mat-label>Last Name</mat-label>
+                <input id="lastName" matInput placeholder="Last Name" [(ngModel)]="lastName">
+            </mat-form-field>
+
+            <mat-form-field class="search-elments-style">
+                <mat-label>Father's Name</mat-label>
+                <input id="fatherName" matInput placeholder="Father's Name" [(ngModel)]="fatherName">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Mobile#</mat-label>
+                <input id="mobile" matInput maxlength="10" placeholder="Mobile#" [(ngModel)]="mobile" type="number">
+            </mat-form-field>
+
+            <mat-form-field class="search-elments-style">
+                <mat-label>Area</mat-label>
+                <input id="area" matInput placeholder="Area" [(ngModel)]="area">
+            </mat-form-field> -->
+            <mat-card>
+                <br>
+                <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+                    <mat-radio-group formControlName="gender" class="search-elments-style" aria-label="Select Gender">
+                        <mat-label class="font-color-primary">Gender</mat-label>
+                        
+                        <span class="single-line-radio-button family-radio-button">
+                            <mat-radio-button name= "gender" value="male" ngDefaultControl>Male</mat-radio-button>
+                            <mat-radio-button name="gender" value="female" ngDefaultControl>Female</mat-radio-button>
+                        </span>
+                        </mat-radio-group>
+                    <br>
+                    <br>
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Father Name</mat-label>
+                    <input matInput formControlName="fatherName">
+                  </mat-form-field>
+
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input name="dateOfBirth" matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                 </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Marital Status</mat-label>
+                    <mat-select formControlName="maritalStatus" name="maritalStatus">
+                        <mat-option value="single"  >Single</mat-option>
+                        <mat-option value="married" >Married</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Blood Group</mat-label>
+                    <mat-select formControlName="bloodGroup" name="bloodGroup">
+                    <mat-option value="A+"  ngDefaultControl>A+</mat-option>
+                    <mat-option value="A-"  ngDefaultControl>A-</mat-option>
+                    <mat-option value="B+"  ngDefaultControl>B+</mat-option>
+                    <mat-option value="B-"  ngDefaultControl>B-</mat-option>
+                    <mat-option value="AB+" ngDefaultControl>AB+</mat-option>
+                    <mat-option value="AB-" ngDefaultControl>AB-</mat-option>
+                    <mat-option value="O+"  ngDefaultControl>O+</mat-option>
+                    <mat-option value="O-"  ngDefaultControl>O-</mat-option>
+                    </mat-select>
+                </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Education</mat-label>
+                    <input matInput formControlName="education">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Permanent Address</mat-label>
+                    <input matInput formControlName="permanentAddress">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Mobile</mat-label>
+                    <input matInput formControlName="mobile">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Alt Mobile</mat-label>
+                    <input matInput formControlName="altMobile">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Whatsapp Mobile</mat-label>
+                    <input matInput formControlName="whatsappMobile">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                  </mat-form-field>
+
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Area</mat-label>
+                    <mat-select formControlName="area" name="area">
+                    <mat-option value="Ambamata" ngDefaultControl>Ambamata</mat-option>
+                    <mat-option value="Ayad, University Road" ngDefaultControl>Ayad, University Road</mat-option>
+                    <mat-option value="Balicha" ngDefaultControl>Balicha</mat-option>
+                    <mat-option value="Bhupalpura, New Bhupalpura" ngDefaultControl>Bhupalpura, New Bhupalpura</mat-option>
+                    <mat-option value="Bhuwana" ngDefaultControl>Bhuwana</mat-option>
+                    <mat-option value="Debari Circle" ngDefaultControl>Debari Circle</mat-option>
+                    <mat-option value="Eklingpura" ngDefaultControl>Eklingpura</mat-option>
+                    <mat-option value="Fatehpura, Ahinsapuri" ngDefaultControl>Fatehpura, Ahinsapuri</mat-option>
+                    </mat-select>
+                </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Current Address</mat-label>
+                    <input matInput formControlName="currentAddress">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Profession</mat-label>
+                    <input matInput formControlName="profession">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Profession Address</mat-label>
+                    <input matInput formControlName="professionAddress">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Profession Email</mat-label>
+                    <input matInput formControlName="professionEmail">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Profession Number</mat-label>
+                    <input matInput formControlName="professionNumber">
+                  </mat-form-field>
+              
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Aborigine</mat-label>
+                    <input matInput formControlName="aborigine">
+                  </mat-form-field>
+
+                  <mat-form-field class="search-elments-style">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status" name="status">
+                        <mat-option value="Pending"  >Pending</mat-option>
+                        <mat-option value="Approved" >Approved</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-checkbox formControlName="familyHead" name="familyHead" class="search-elments-style font-color-primary">Family Head</mat-checkbox>
+                  <br>
+                  <br>
+                  <span class="button-layout"><button class="primary-button-style" mat-raised-button color="secondary" type="submit">Search</button></span>
+                  <span class="inner-button-layout">
+                    <button class="search-elments-button-style" mat-raised-button color="secondary" (click)="onSearchAll()" type="submit">Search All</button>
+                  </span>
+                  <br>
+                  <br>
+                  <span class="button-layout"><button class="primary-button-style" mat-raised-button color="secondary" (click)="exportToExcel()">Download Excel</button></span>
+                  
+                  <span class="inner-button-layout"><button class="primary-button-style" mat-raised-button color="secondary" (click)="exportToPDF()">Download PDF</button></span>
+                  <br>
+                  <br>
+                </form>
+              </mat-card>
+              
+              <!-- <mat-list *ngIf="filteredMembers.length > 0">
+                <mat-list-item *ngFor="let member of filteredMembers">
+                  {{ member.firstName }} {{ member.lastName }} - {{ member.mobile }}
+                </mat-list-item>
+              </mat-list> -->
+            <br>
+            
+        </div>
+       
+        <div>
+            <mat-form-field class="filter-style">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jain" #input>
+            </mat-form-field>
+        </div>
+
+        <div class="mat-elevation-z8">
+            <div class="table-layout">
+                <table class="table-style" mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="actions" class="actions-dropdown-style">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td class="actions-dropdown-style font-color-primary" mat-cell *matCellDef="let row">
+                            <button mat-icon-button (click)="onViewDetails(row.memberId)" aria-label="Example icon-button with a menu">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <!-- <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>visibility</mat-icon>
+                                    <span (click)="onViewDetails(row.memberId)">View Details</span>
+                                </button>
+                                 <button mat-menu-item>
+                                    <mat-icon>add</mat-icon>
+                                    <span (click)="onAddNewMember(row.memberId)">Add Member</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span (click)="onEditMember(row.memberId)">Modify</span>
+                                </button> 
+                            </mat-menu> -->
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="firstName">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.firstName}} {{row.lastName}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="fatherName">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Father's Name </th>
+                        <td mat-cell *matCellDef="let row"> {{row.fatherName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="mobile">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Primary Number </th>
+                        <td mat-cell *matCellDef="let row"> {{row.mobile}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="area">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Area </th>
+                        <td mat-cell *matCellDef="let row"> {{row.area}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="profession">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Profession </th>
+                        <td mat-cell *matCellDef="let row"> {{row.profession}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bloodGroup">
+                        <th class="table-header font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Blood Group </th>
+                        <td mat-cell *matCellDef="let row"> {{row.bloodGroup}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th class="font-color-primary" mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-chip *ngIf="row.status==='Approved'" class="approved-chip">{{row.status}}</mat-chip>
+                            <mat-chip *ngIf="row.status==='Pending'" class="pending-chip">{{row.status}}</mat-chip>
+                        </td>
+                    </ng-container>
+
+                
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+                </table>
+            </div>
+            
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+          
+          <!--<div *ngIf="tutorials">
+            <h3>Search Results:</h3>
+            <ul>
+              <li *ngFor="let result of tutorials">
+                {{ result.title }} {{ result.description }} </li>
+            </ul>
+          </div> -->
+    </mat-card-content>
+  </mat-card>

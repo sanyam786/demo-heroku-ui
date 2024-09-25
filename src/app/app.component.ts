@@ -57,4 +57,8 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/view', this.loggedInMemberId]);
       }
   }
+
+  allSearch(){
+    this.router.navigate(['/allsearch']);
+  }
 }

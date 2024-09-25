@@ -1,0 +1,159 @@
+.single-line{
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;           /* Full height of the viewport */
+    width: 100vw;            /* Full width of the viewport */
+    position: absolute;      /* Absolute positioning to cover the entire page */
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background to dim the page */
+    z-index: 1000;           /* Ensure it's on top of other elements */
+  }
+
+.expand-width {
+    width: 100%;
+}
+
+.search-elments-style{
+    padding-left: 4%;
+    padding-right: 0%;
+    width: 32%;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .search-elments-style{
+        padding-left: 1%;
+        padding-right: 1%;
+        width: 50%;
+        display: inline-block;
+    }
+}
+
+.search-elments-button-style{
+    background-color: white !important;
+    color: #66548e !important;
+}
+
+.table-layout {
+    overflow-x: auto;
+}
+
+.table-style {
+    /* background-color: #ede5ff !important; */
+    color: #66548e !important;
+}
+
+.table-header {
+    white-space: nowrap;
+}
+
+.add-family-style{
+    /* padding-left: 70%; */
+}
+
+.filter-style{
+    padding-top: 2%;
+    width: 100%;
+}
+
+.filter-input {
+    background-color: white !important;
+}
+
+/* .approved-chip{
+    background-color: #b9eb93 !important;
+    color: #66548e !important;
+}
+
+.pending-chip{
+    background-color: #ff4444 !important;
+    color: white !important;
+} */
+
+::ng-deep .mat-mdc-standard-chip.approved-chip .mdc-evolution-chip__text-label {
+    color: #66548e !important; /* Override the text color */
+}
+
+::ng-deep .mat-mdc-standard-chip.pending-chip .mdc-evolution-chip__text-label {
+    color: white !important; /* Override the text color */
+}
+
+.approved-chip {
+    background-color: #4caf50 !important; /* Green background */
+}
+
+.pending-chip {
+    background-color: #ff4444 !important; /* Red background */
+}
+
+.actions-dropdown-style{
+    width: 10%;
+}
+
+.search-card {
+    /* background-color: rgb(252, 252, 252); */
+    /* background-color: rgb(233, 232, 232); */
+    /* background-color: #e7e7e7; */
+    background-color: rgb(242, 242, 241);
+}
+
+.card-layout {
+    background-color: #fef5f5;
+    border-radius: 20px;
+}
+
+.primary-button-style {
+    background-color: #ede5ff !important;
+    color: #66548e !important;
+}
+
+.font-color-primary {
+    color: #66548e !important;
+}
+
+.button-layout {
+    padding-left: 4%;
+    padding-right: 1%;
+}
+
+.inner-button-layout {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.single-line-radio-button{
+    display: flex; 
+    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+    .family-radio-button {
+        padding-left: 1%;
+        align-items: baseline;
+        white-space: nowrap;
+    }
+}
+
+.family-radio-button {
+    padding-left: 0%;
+    align-items: baseline;
+    white-space: nowrap;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+}
+
+:host ::ng-deep .mdc-label {
+    display: inline-block;
+    margin-bottom: 0 !important;
+}

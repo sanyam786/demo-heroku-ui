@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FamilyMember } from '../models/FamilyMember.model';
 import { Member } from '../models/Member.model';
@@ -52,6 +52,18 @@ export class FamilyMemberService {
 
   getAllFamiliesForDefaultSearch(): Observable<Member[]> {
     return this.http.get<Member[]>(baseUrl + '/defaultfamilies');
+  }
+
+  searchMembers(params: any): Observable<Member[]> {
+    let queryParams = new HttpParams();
+    
+    // Loop through the params object and set query parameters
+    for (const key in params) {
+      if (params[key]) {
+        queryParams = queryParams.set(key, params[key]);
+      }
+    }
+    return this.http.get<Member[]>(baseUrl + '/searchAllFilter', { params: queryParams });
   }
 
   get(id: any): Observable<FamilyMember> {
