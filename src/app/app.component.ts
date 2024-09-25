@@ -61,4 +61,8 @@ export class AppComponent implements OnInit {
   allSearch(){
     this.router.navigate(['/allsearch']);
   }
+
+  goToHome() {
+    this.router.navigate(['/dashboard']);
+  }
 }

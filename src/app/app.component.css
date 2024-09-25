@@ -29,3 +29,57 @@
 .font-color-primary {
     color: #d8c7fe !important;
 }
+
+section {
+  display: table;
+}
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 00px;
+}
+
+/* .example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+} */
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.sjs-layout {
+  padding-top: 20%;
+  padding-left: 100%;
+}
+
+.single-line{
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  overflow-x: hidden;
+  width: -webkit-fill-available;
+}
+
+.disply-flex {
+  display: flex;
+}
+
+.menu-button-layout {
+  background-color: #e0e0ff;
+  /* #5b345b */
+}
