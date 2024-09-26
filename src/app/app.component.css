@@ -84,17 +84,11 @@ section {
   /* #5b345b */
 }
 
-/* For screens smaller than 600px */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column; /* Stack navbar items vertically */
-  }
+.page-container {
+  overflow: hidden;
+}
 
-  .menu-button-layout {
-    margin: 0 auto; /* Center the menu button */
-  }
-
-  .navbar-brand {
-    margin: 10px auto; /* Ensure the brand is not affected by menu opening */
-  }
+mat-menu {
+  max-height: 90vh; /* Limit height of the menu */
+  overflow-y: auto; /* Add scroll behavior if it overflows */
 }
