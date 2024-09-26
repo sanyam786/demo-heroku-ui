@@ -1,40 +1,7 @@
 <div class="page-container">
-  <!-- <nav class="navbar navbar-dark primary-button-style"> -->
-  <div>
+  <nav class="navbar navbar-dark primary-button-style">
     <div class="single-line">
       <div class="disply-flex">
-        <section>
-          <!-- <div class="example-label">Mini FAB</div> -->
-          <div *ngIf="isLoggedOut()" class="example-button-row">
-            <div class="example-flex-container">
-              <div class="example-button-container">
-                <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
-                  <mat-icon>menu</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button (click)="goToHome()" mat-menu-item>
-                      <mat-icon>home</mat-icon>
-                      <span>Home</span>
-                      <!-- <a routerLink="dashboard" class="nav-link font-color-primary">Home</a> -->
-                  </button>
-                  <button (click)="viewMyProfile()" mat-menu-item>
-                      <mat-icon>people</mat-icon>
-                      <span>My Family</span>
-                  </button>
-                  <button (click)="allSearch()" mat-menu-item>
-                      <mat-icon>search</mat-icon>
-                      <span>Search</span>
-                  </button>
-              </mat-menu>
-              </div>
-              <!-- <div class="example-button-container">
-                <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
-                  <mat-icon>home</mat-icon>
-                </button>
-              </div> -->
-            </div>
-          </div>
-        </section>
         <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
       </div>
       <div>
@@ -53,8 +20,39 @@
         <button class="font-color-primary" mat-button (click)="allSearch()">SEARCH</button>
       </li>
     </div> -->
-  <!-- </nav> -->
-  </div>
+  </nav>
+  <section>
+    <!-- <div class="example-label">Mini FAB</div> -->
+    <div *ngIf="isLoggedOut()" class="example-button-row">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="goToHome()" mat-menu-item>
+                <mat-icon>home</mat-icon>
+                <span>Home</span>
+                <!-- <a routerLink="dashboard" class="nav-link font-color-primary">Home</a> -->
+            </button>
+            <button (click)="viewMyProfile()" mat-menu-item>
+                <mat-icon>people</mat-icon>
+                <span>My Family</span>
+            </button>
+            <button (click)="allSearch()" mat-menu-item>
+                <mat-icon>search</mat-icon>
+                <span>Search</span>
+            </button>
+        </mat-menu>
+        </div>
+        <!-- <div class="example-button-container">
+          <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+            <mat-icon>home</mat-icon>
+          </button>
+        </div> -->
+      </div>
+    </div>
+  </section>
   <div class="container mt-3 app-style">
   <!-- <div> -->
     <router-outlet></router-outlet>
