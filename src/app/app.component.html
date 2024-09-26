@@ -1,6 +1,6 @@
 <div class="page-container">
   <nav class="navbar navbar-dark primary-button-style">
-    <div class="single-line">
+    <!-- <div class="single-line"> -->
       <!-- <div class="disply-flex">
         <section>
           <div *ngIf="isLoggedOut()" class="example-button-row">
@@ -29,10 +29,10 @@
         </section>
         <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
       </div> -->
-      <div>
+      <!-- <div>
         <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
     
     <!-- <div class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -46,33 +46,38 @@
       </li>
     </div> -->
   </nav>
-  <div class="disply-flex">
-    <section>
-      <div *ngIf="isLoggedOut()" class="example-button-row">
-        <div class="example-flex-container">
-          <div class="example-button-container">
-            <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
-              <mat-icon>menu</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button (click)="goToHome()" mat-menu-item>
-                  <mat-icon>home</mat-icon>
-                  <span>Home</span>
+  <div class="single-line">
+    <div class="disply-flex">
+      <section>
+        <div *ngIf="isLoggedOut()" class="example-button-row">
+          <div class="example-flex-container">
+            <div class="example-button-container">
+              <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
+                <mat-icon>menu</mat-icon>
               </button>
-              <button (click)="viewMyProfile()" mat-menu-item>
-                  <mat-icon>people</mat-icon>
-                  <span>My Family</span>
-              </button>
-              <button (click)="allSearch()" mat-menu-item>
-                  <mat-icon>search</mat-icon>
-                  <span>Search</span>
-              </button>
-          </mat-menu>
+              <mat-menu #menu="matMenu">
+                <button (click)="goToHome()" mat-menu-item>
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </button>
+                <button (click)="viewMyProfile()" mat-menu-item>
+                    <mat-icon>people</mat-icon>
+                    <span>My Family</span>
+                </button>
+                <button (click)="allSearch()" mat-menu-item>
+                    <mat-icon>search</mat-icon>
+                    <span>Search</span>
+                </button>
+            </mat-menu>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
+      </section>
+      <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
+    </div>
+    <div>
+      <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
+    </div>
   </div>
   <div class="container mt-3 app-style">
   <!-- <div> -->
