@@ -11,18 +11,18 @@
                   <mat-icon>menu</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
+                  <button (click)="goToHome()" mat-menu-item>
                       <mat-icon>home</mat-icon>
-                      <span (click)="goToHome()">Home</span>
+                      <span>Home</span>
                       <!-- <a routerLink="dashboard" class="nav-link font-color-primary">Home</a> -->
                   </button>
-                  <button mat-menu-item>
+                  <button (click)="viewMyProfile()" mat-menu-item>
                       <mat-icon>people</mat-icon>
-                      <span (click)="viewMyProfile()">My Family</span>
+                      <span>My Family</span>
                   </button>
-                  <button mat-menu-item>
+                  <button (click)="allSearch()" mat-menu-item>
                       <mat-icon>search</mat-icon>
-                      <span (click)="allSearch()">Search</span>
+                      <span>Search</span>
                   </button>
               </mat-menu>
               </div>

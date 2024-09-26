@@ -83,12 +83,3 @@ section {
   background-color: #e0e0ff;
   /* #5b345b */
 }
-
-.page-container {
-  overflow: hidden;
-}
-
-mat-menu {
-  max-height: 90vh; /* Limit height of the menu */
-  overflow-y: auto; /* Add scroll behavior if it overflows */
-}
