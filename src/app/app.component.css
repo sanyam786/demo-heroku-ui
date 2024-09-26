@@ -83,3 +83,18 @@ section {
   background-color: #e0e0ff;
   /* #5b345b */
 }
+
+/* For screens smaller than 600px */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* Stack navbar items vertically */
+  }
+
+  .menu-button-layout {
+    margin: 0 auto; /* Center the menu button */
+  }
+
+  .navbar-brand {
+    margin: 10px auto; /* Ensure the brand is not affected by menu opening */
+  }
+}
