@@ -4,7 +4,7 @@
       <div class="disply-flex">
         <section>
           <!-- <div class="example-label">Mini FAB</div> -->
-          <div class="example-button-row">
+          <div *ngIf="isLoggedOut()" class="example-button-row">
             <div class="example-flex-container">
               <div class="example-button-container">
                 <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
