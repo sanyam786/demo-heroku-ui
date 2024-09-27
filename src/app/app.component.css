@@ -73,15 +73,9 @@ section {
 }
 
 .single-line{
-  /* display: flex; 
+  display: flex; 
   flex-direction: row;
   justify-content: space-between;
-  overflow-x: hidden;
-  width: -webkit-fill-available; */
-  display: grid;
-  grid-template-columns: 0fr auto; /* The first div takes the available space, the second div auto-sizes */
-  width: 100%; /* Ensure the container takes full width */
-  align-items: center; /* Optional: Align items vertically in the center */
   overflow-x: hidden;
   width: -webkit-fill-available;
 }
@@ -107,7 +101,7 @@ section {
 }
 
 .disply-flex {
-  /* display: flex; */
+  display: flex;
 }
 
 .menu-button-layout {
