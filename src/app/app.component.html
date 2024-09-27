@@ -1,7 +1,8 @@
 <div class="page-container">
   <nav class="navbar navbar-dark primary-button-style">
-    <!-- <div class="single-line"> -->
-      <!-- <div class="disply-flex">
+    <div class="justify-container">
+      <div class="disply-flex left-div">
+        <div class="float-left">
         <section>
           <div *ngIf="isLoggedOut()" class="example-button-row">
             <div class="example-flex-container">
@@ -27,12 +28,13 @@
             </div>
           </div>
         </section>
+        </div>
         <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
-      </div> -->
-      <!-- <div>
+      </div>
+      <div class="right-div">
         <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
-      </div> -->
-    <!-- </div> -->
+      </div>
+    </div>
     
     <!-- <div class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -46,7 +48,7 @@
       </li>
     </div> -->
   </nav>
-  <div class="single-line">
+  <!-- <div class="single-line">
     <div class="disply-flex">
       <section>
         <div *ngIf="isLoggedOut()" class="example-button-row">
@@ -78,7 +80,7 @@
     <div>
       <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
     </div>
-  </div>
+  </div> -->
   <div class="container mt-3 app-style">
   <!-- <div> -->
     <router-outlet></router-outlet>
