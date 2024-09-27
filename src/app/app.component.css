@@ -2,6 +2,11 @@
     /* background-color: aliceblue; */
 }
 
+
+.nav-height {
+  max-height: min-content;
+  height: 55px;
+}
 /* :root {
     --vh: 1vh;
   }
