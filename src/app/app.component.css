@@ -6,6 +6,7 @@
 .nav-height {
   max-height: min-content;
   height: 55px;
+  width: 100% !important;
 }
 /* :root {
     --vh: 1vh;
