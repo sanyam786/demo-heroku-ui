@@ -68,11 +68,11 @@ section {
 }
 
 .single-line{
-  display: flex; 
+  /* display: flex;  */
   flex-direction: row;
-  /* justify-content: space-between;
+  justify-content: space-between;
   overflow-x: hidden;
-  width: -webkit-fill-available; */
+  width: -webkit-fill-available;
 }
 
 .disply-flex {
