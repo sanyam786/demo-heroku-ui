@@ -94,6 +94,7 @@ section {
 
 .right-div {
   float: right;
+  top: 0rem !important;
 }
 
 .float-left {
