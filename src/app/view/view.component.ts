@@ -88,20 +88,23 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  getAge(dateOfBirth: string): number {
+  getAge(dateOfBirth: string): string {
     if (!dateOfBirth) {
-      return 0; // Handle undefined dates
+      return '00'; // Handle undefined dates
     }
+  
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
   
+    // Adjust age if birth month/day hasn't passed yet this year
     if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
   
-    return age;
+    // Return age as a string, pad with '0' if the age is a single digit
+    return age < 10 ? `0${age}` : `${age}`;
   }
 
   isSelfEdit(memberId: any): any {

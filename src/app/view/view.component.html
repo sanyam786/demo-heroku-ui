@@ -9,9 +9,17 @@
                     <span><h2>Family Head</h2></span>
                 </span>
             <div class="card-wrapper">
-                    <div class="triangle">
+                    <!-- <div class="triangle">
                         <span class="age-number" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
                         <span class="age-number" *ngIf="!member.dateOfBirth">N/A</span>
+                    </div> -->
+                    <div *ngIf="member.status==='Approved'" class="triangle-approved">
+                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
+                    </div>
+                    <div *ngIf="member.status==='Pending'" class="triangle-pending">
+                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <span class="align-row-left-right card-layout">
                         <span class="img-padding">
@@ -283,9 +291,18 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
                 <div class="card-wrapper card-layout">
-                    <div class="triangle">
+                    <!-- <div class="triangle">
                         <span class="age-number" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
                         <span class="age-number" *ngIf="!member.dateOfBirth">N/A</span>
+                    </div> -->
+
+                    <div *ngIf="member.status==='Approved'" class="triangle-approved">
+                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
+                    </div>
+                    <div *ngIf="member.status==='Pending'" class="triangle-pending">
+                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <span class="align-row-left-right width-webkit">
                         <span class="img-padding-family-member">

@@ -99,7 +99,7 @@
                                                 <mat-icon>opacity</mat-icon> 
                                                 <span>{{ member.bloodGroup }}</span> 
                                             </div> -->
-                                            <mat-chip #bloodGroup class="blood-group" selected>
+                                            <mat-chip *ngIf="member.bloodGroup !== ''" #bloodGroup class="blood-group" selected>
                                                 {{ member.bloodGroup }}
                                             </mat-chip>
                                         </span>
