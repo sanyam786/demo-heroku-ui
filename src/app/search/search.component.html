@@ -65,17 +65,17 @@
                                             <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu="matMenu">
-                                                <button mat-menu-item>
+                                                <button (click)="onViewDetails(member.memberId)" mat-menu-item>
                                                     <mat-icon>visibility</mat-icon>
-                                                    <span (click)="onViewDetails(member.memberId)">View Details</span>
+                                                    <span>View Details</span>
                                                 </button>
-                                                <button *ngIf="checkRoles() || isSelfEditMember" mat-menu-item>
+                                                <button *ngIf="checkRoles() || isSelfEditMember" (click)="onAddNewMember(member.memberId)" mat-menu-item>
                                                     <mat-icon>add</mat-icon>
-                                                    <span (click)="onAddNewMember(member.memberId)">Add Member</span>
+                                                    <span>Add Member</span>
                                                 </button>
-                                                <button *ngIf="checkRoles() || isSelfEditMember" mat-menu-item>
+                                                <button *ngIf="checkRoles() || isSelfEditMember" (click)="onEditMember(member.memberId)" mat-menu-item>
                                                     <mat-icon>edit</mat-icon>
-                                                    <span (click)="onEditMember(member.memberId)">Modify</span>
+                                                    <span>Modify</span>
                                                 </button>
                                             </mat-menu>
                                             <!-- <mat-menu #menu="matMenu">
