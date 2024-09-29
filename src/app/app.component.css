@@ -33,7 +33,7 @@
 }
 
 .font-color-primary {
-    color: #d8c7fe !important;
+  color: #66548e !important;
 }
 
 section {
@@ -69,8 +69,7 @@ section {
 }
 
 .sjs-layout {
-  padding-top: 20%;
-  padding-left: 100%;
+  padding-left: 40%;
 }
 
 .single-line{
@@ -104,6 +103,8 @@ section {
 
 .disply-flex {
   display: flex;
+  padding-left: 2%;
+  padding-top: 2%;
 }
 
 .menu-button-layout {

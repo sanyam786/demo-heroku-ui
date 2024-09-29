@@ -1,5 +1,5 @@
 <div class="page-container">
-  <nav class="navbar navbar-dark primary-button-style nav-height">
+  <!-- <nav class="navbar navbar-dark primary-button-style nav-height"> -->
     <div class="">
       <div class="disply-flex">
         <section>
@@ -23,7 +23,7 @@
                       <span>Search</span>
                   </button>
                   <button *ngIf="isLoggedOut()" (click)="logout()" mat-menu-item>
-                    <mat-icon>search</mat-icon>
+                    <mat-icon>logout</mat-icon>
                     <span>Logout</span>
                   </button>
               </mat-menu>
@@ -31,9 +31,9 @@
             </div>
           </div>
         </section>
-        <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
       </div>
     </div>
+    <!-- <div class="font-color-primary sjs-layout"><h1>Sadhumargi Jain Sangh Directory</h1></div> -->
     <!-- <div class="justify-container">
       <div class="left-div">
         <div class="float-left">
@@ -69,7 +69,7 @@
         <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
       </div>
     </div> -->
-  </nav>
+  <!-- </nav> -->
   <!-- <div class="single-line">
     <div class="disply-flex">
       <section>
