@@ -62,7 +62,7 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Aborigine:</strong> {{member.aborigine}}</p>
+                                    <p><strong>Mool Niwas:</strong> {{member.aborigine}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
@@ -157,7 +157,13 @@
                     </span>
                 </mat-card-content>
             </mat-card>
-            
+            <br>
+            <br>
+            <!-- <mat-card class="action-card" appearance="outlined">
+                <mat-card-content>
+                    <app-aibox [memberId]="member.memberId"></app-aibox>
+                </mat-card-content>
+            </mat-card> -->
             <!-- <div class="card-header">
                 <img class="profile-photo" *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo">
                 <div class="personal-info">
@@ -409,6 +415,13 @@
                                     <mat-button-toggle value="edit">Edit</mat-button-toggle>
                                 </mat-button-toggle-group>  
                             </span>
+                        </mat-card-content>
+                    </mat-card>
+                    <br>
+                    <br>
+                    <mat-card class="action-card-member" appearance="outlined">
+                        <mat-card-content>
+                            <app-aibox [memberId]="member.memberId"></app-aibox>
                         </mat-card-content>
                     </mat-card>
                     <br>

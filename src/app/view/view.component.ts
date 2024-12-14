@@ -68,7 +68,7 @@ export class ViewComponent implements OnInit {
     this.familyMemberService.updateFamilyHead(memberId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBarWithDuration('Success: Family Head updated successfully.', 'Close');
+        this.openSnackBarWithDuration('Success: Family Head updated successfully.', 'Close', 'success');
         this.loadData(memberId);
         //this.changeDetectorRef.markForCheck();
       },
@@ -80,7 +80,7 @@ export class ViewComponent implements OnInit {
     this.familyMemberService.approveStatus(memberId).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBarWithDuration('Success: Member approved successfully.', 'Close');
+        this.openSnackBarWithDuration('Success: Member approved successfully.', 'Close','success');
         this.loadData(memberId);
         //this.changeDetectorRef.markForCheck();
       },
@@ -132,18 +132,30 @@ export class ViewComponent implements OnInit {
     return false;
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition
-    });
-  }
-
-  openSnackBarWithDuration(message: string, action: string) {
+  openSnackBar(message: string, action: string, type: 'success' | 'error') {
+    const panelClass = type === 'success' ? 'success-snackbar' : 'error-snackbar';
     this._snackBar.open(message, action, {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      duration: 8 * 1000
+      panelClass: [panelClass]
+    });
+  }
+
+  // openSnackBarWithDuration(message: string, action: string) {
+  //   this._snackBar.open(message, action, {
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //     duration: 8 * 1000
+  //   });
+  // }
+
+  openSnackBarWithDuration(message: string, action: string, type: 'success' | 'error') {
+    const panelClass = type === 'success' ? 'success-snackbar' : 'error-snackbar';
+    this._snackBar.open(message, action, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 48 * 1000,
+      panelClass: [panelClass]
     });
   }
 
@@ -153,11 +165,15 @@ export class ViewComponent implements OnInit {
     this.familyMemberService.updateRole(memberId, role).subscribe({
       next: (res) => {
         console.log(res);
-        this.openSnackBarWithDuration('Success: Member role updated successfully.', 'Close');
+        this.openSnackBarWithDuration('Success: Member role updated successfully.', 'Close', 'success');
         this.loadData(memberId);
         //this.changeDetectorRef.markForCheck();
       },
       error: (e) => console.error(e)
     });
+  }
+
+  openAiBox() {
+    this.router.navigate(['/aibox']);
   }
 }

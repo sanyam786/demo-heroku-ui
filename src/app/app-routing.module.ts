@@ -10,6 +10,7 @@ import { CreateUpdateMemberComponent } from './create-update-member/create-updat
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { AllsearchComponent } from './allsearch/allsearch.component';
+import { AiboxComponent } from './aibox/aibox.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'family/:id', component: FamilyComponent, canActivate: [AuthGuard] },
   { path: 'create-update-member', component: CreateUpdateMemberComponent, canActivate: [AuthGuard] },
   { path: 'allsearch', component: AllsearchComponent, canActivate: [AuthGuard] },
+  { path: 'aibox', component: AiboxComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'login' },
   //{ path: 'admin-dashboard', component: AdminDashboardComponent },

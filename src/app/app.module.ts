@@ -25,6 +25,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+//import { CarouselModule } from 'ngx-owl-carousel-o';
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,6 +42,7 @@ import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AllsearchComponent } from './allsearch/allsearch.component';
+import { AiboxComponent } from './aibox/aibox.component';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { AllsearchComponent } from './allsearch/allsearch.component';
     FamilyComponent,
     CreateUpdateMemberComponent,
     LoginComponent,
-    AllsearchComponent
+    AllsearchComponent,
+    AiboxComponent
   ],
   imports: [
     BrowserModule,

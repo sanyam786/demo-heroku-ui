@@ -9,6 +9,15 @@
                 <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
                   <mat-icon>menu</mat-icon>
                 </button>
+
+                <!-- Logo Image -->
+                <img
+                src="assets/sjs_logo.png" 
+                alt="Logo"
+                class="logo-image"
+                />
+
+                <p class="logo-text"><strong><span style="color: red;">Sadhumargi Jain Sangh</span><span style="color: #66548e"> Udaipur</span></strong></p>
                 <mat-menu #menu="matMenu">
                   <button (click)="goToHome()" mat-menu-item>
                       <mat-icon>home</mat-icon>
@@ -22,6 +31,10 @@
                       <mat-icon>search</mat-icon>
                       <span>Search</span>
                   </button>
+                  <!-- <button (click)="openAiBox()" mat-menu-item>
+                    <mat-icon>search</mat-icon>
+                    <span>AI Box</span>
+                </button> -->
                   <button *ngIf="isLoggedOut()" (click)="logout()" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <span>Logout</span>
@@ -138,8 +151,34 @@
       </div>
     </div>
   </nav> -->
+
   <div class="container mt-3 app-style">
   <!-- <div> -->
+    <!-- <span>
+      <img src="assets/2S7A0670.JPG" alt="Test Image" class="carousel-image" />
+    </span> -->
+    
+    <div class="carousel-container">
+      <div class="carousel-images">
+        <img 
+          *ngFor="let image of images; let i = index" 
+          [src]="image" 
+          [class.active]="i === currentIndex" 
+          alt="Slide {{ i + 1 }}" 
+        />
+      </div>
+    
+      <button class="carousel-button prev" (click)="prevSlide()">&#10094;</button>
+      <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
+    
+      <div class="carousel-indicators">
+        <span 
+          *ngFor="let image of images; let i = index"
+          [class.active]="i === currentIndex"
+          (click)="goToSlide(i)"
+        ></span>
+      </div>
+    </div>
     <router-outlet></router-outlet>
   </div>
 </div>

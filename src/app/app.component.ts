@@ -1,4 +1,4 @@
-import { Component, Injectable, HostListener, OnInit } from '@angular/core';
+import { Component, Injectable, HostListener, OnInit, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
 import { FamilyMemberService } from 'src/app/services/familyMember.service';
 import { AuthService } from './services/authService.service';
@@ -12,9 +12,32 @@ import { AuthService } from './services/authService.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Sadhumargi Sangh Directory';
+
+  title = 'Sadhumargi Jain Sangh';
   loggedInMemberId = 0;
- 
+  images = [
+    'assets/2S7A0670.JPG',
+    'assets/2S7A0663.JPG',
+    'assets/image.jpg',
+    'assets/image2.jpg'
+  ];
+
+  currentIndex = 0;
+  intervalId: any;
+
+
+  nextSlide() {
+    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+  }
+
+  prevSlide() {
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+  }
+
+  goToSlide(index: number) {
+    this.currentIndex = index;
+  }
+
   constructor(private router: Router,
     private authService: AuthService,
     private familyMemberService: FamilyMemberService
@@ -24,6 +47,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Start automatic image sliding
+    this.startAutoSlide();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
   }
 
@@ -64,5 +89,16 @@ export class AppComponent implements OnInit {
 
   goToHome() {
     this.router.navigate(['/dashboard']);
+  }
+
+  ngOnDestroy() {
+    // Clear interval when component is destroyed
+    clearInterval(this.intervalId);
+  }
+
+  startAutoSlide() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 3000); // Change slide every 5 seconds
   }
 }

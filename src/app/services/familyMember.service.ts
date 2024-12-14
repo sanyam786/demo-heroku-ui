@@ -98,6 +98,11 @@ export class FamilyMemberService {
     return this.http.put(`${baseUrl}/updateRole/${id}/${role}`, null);
   }
 
+  // Call Spring Boot API to get AI analysis for member
+  getMemberAnalysis(memberId: number): Observable<string> {
+    return this.http.get(`${baseUrl}/${memberId}/analyze`, { responseType: 'text' });
+  }
+
   approveStatus(id: any): Observable<any> {
     return this.http.put(`${baseUrl}/approveStatus/${id}`, null);
   }
