@@ -19,27 +19,67 @@
 
                 <p class="logo-text"><strong><span style="color: red;">Sadhumargi Jain Sangh</span><span style="color: #66548e"> Udaipur</span></strong></p>
                 <mat-menu #menu="matMenu">
+                  <!-- Home Menu Item -->
                   <button (click)="goToHome()" mat-menu-item>
-                      <mat-icon>home</mat-icon>
-                      <span>Home</span>
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
                   </button>
+                
+                  <!-- My Family Menu Item -->
                   <button (click)="viewMyProfile()" mat-menu-item>
-                      <mat-icon>people</mat-icon>
-                      <span>My Family</span>
+                    <mat-icon>supervisor_account</mat-icon>
+                    <span>My Family</span>
                   </button>
+                
+                  <!-- Subheading -->
+                  <!-- <h3 style="margin: 10px; font-weight: bold;">Executive Members</h3> -->
+                
+                  <!-- Submenu Trigger -->
+                  <button mat-menu-item [matMenuTriggerFor]="subMenu">
+                    <mat-icon>group_outline</mat-icon>
+                    <span>Executive Members</span>
+                  </button>
+                
+                  <!-- Submenu -->
+                  <mat-menu #subMenu="matMenu">
+                    <button (click)="viewSJSInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Sadhumargi Jain Sangh</span>
+                    </button>
+                    <button (click)="viewSMMInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Samta Mahila Mandal</span>
+                    </button>
+                    <button (click)="viewSYSInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Samta Yuva Sangh</span>
+                    </button>
+                    <button (click)="viewSBMInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Samta Bahu Mandal</span>
+                    </button>
+                    <button (click)="viewSBMInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Samta Tarun Shakti</span>
+                    </button>
+                    <button (click)="viewSBMInfo()" mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Samta Yuvti Shakti</span>
+                    </button>
+                  </mat-menu>
+                
+                  <!-- Search Menu Item -->
                   <button (click)="allSearch()" mat-menu-item>
-                      <mat-icon>search</mat-icon>
-                      <span>Search</span>
-                  </button>
-                  <!-- <button (click)="openAiBox()" mat-menu-item>
                     <mat-icon>search</mat-icon>
-                    <span>AI Box</span>
-                </button> -->
+                    <span>Member Search</span>
+                  </button>
+                
+                  <!-- Logout Menu Item -->
                   <button *ngIf="isLoggedOut()" (click)="logout()" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <span>Logout</span>
                   </button>
-              </mat-menu>
+                </mat-menu> 
               </div>
             </div>
           </div>
@@ -153,32 +193,8 @@
   </nav> -->
 
   <div class="container mt-3 app-style">
-  <!-- <div> -->
-    <!-- <span>
-      <img src="assets/2S7A0670.JPG" alt="Test Image" class="carousel-image" />
-    </span> -->
     
-    <div class="carousel-container">
-      <div class="carousel-images">
-        <img 
-          *ngFor="let image of images; let i = index" 
-          [src]="image" 
-          [class.active]="i === currentIndex" 
-          alt="Slide {{ i + 1 }}" 
-        />
-      </div>
-    
-      <button class="carousel-button prev" (click)="prevSlide()">&#10094;</button>
-      <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
-    
-      <div class="carousel-indicators">
-        <span 
-          *ngFor="let image of images; let i = index"
-          [class.active]="i === currentIndex"
-          (click)="goToSlide(i)"
-        ></span>
-      </div>
-    </div>
+
     <router-outlet></router-outlet>
   </div>
 </div>

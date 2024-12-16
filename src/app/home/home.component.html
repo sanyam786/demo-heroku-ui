@@ -1,0 +1,62 @@
+<div class="carousel-container">
+    <div class="carousel-images">
+      <img 
+        *ngFor="let image of images; let i = index" 
+        [src]="image" 
+        [class.active]="i === currentIndex" 
+        alt="Slide {{ i + 1 }}" 
+      />
+    </div>
+  
+    <button class="carousel-button prev" (click)="prevSlide()">&#10094;</button>
+    <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
+  
+    <div class="carousel-indicators">
+      <span 
+        *ngFor="let image of images; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)"
+      ></span>
+    </div>
+  </div>
+
+  <div class="card-container">
+    <!-- Events Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Events</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Discover various events and activities.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="viewSBMInfo()">View Events</button>
+      </mat-card-actions>
+    </mat-card>
+  
+    <!-- Birthdays Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Birthdays</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Celebrate birthdays of our members.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="viewSBMInfo()">View Birthdays</button>
+      </mat-card-actions>
+    </mat-card>
+  
+    <!-- Members Directory Card -->
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>Members Directory</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Access the directory of all members.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="viewSBMInfo()">View Directory</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

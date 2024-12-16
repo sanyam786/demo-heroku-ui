@@ -43,6 +43,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AllsearchComponent } from './allsearch/allsearch.component';
 import { AiboxComponent } from './aibox/aibox.component';
+import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -58,7 +60,9 @@ import { AiboxComponent } from './aibox/aibox.component';
     CreateUpdateMemberComponent,
     LoginComponent,
     AllsearchComponent,
-    AiboxComponent
+    AiboxComponent,
+    ExecutiveinfoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

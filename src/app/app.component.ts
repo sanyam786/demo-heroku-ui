@@ -13,30 +13,9 @@ import { AuthService } from './services/authService.service';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Sadhumargi Jain Sangh';
+  
   loggedInMemberId = 0;
-  images = [
-    'assets/2S7A0670.JPG',
-    'assets/2S7A0663.JPG',
-    'assets/image.jpg',
-    'assets/image2.jpg'
-  ];
-
-  currentIndex = 0;
-  intervalId: any;
-
-
-  nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
-
-  prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-  }
-
-  goToSlide(index: number) {
-    this.currentIndex = index;
-  }
+  
 
   constructor(private router: Router,
     private authService: AuthService,
@@ -47,8 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Start automatic image sliding
-    this.startAutoSlide();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
   }
 
@@ -91,14 +68,19 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  ngOnDestroy() {
-    // Clear interval when component is destroyed
-    clearInterval(this.intervalId);
+  viewSJSInfo(){
+    this.router.navigate(['/sjsinfo']);
   }
 
-  startAutoSlide() {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 3000); // Change slide every 5 seconds
+  viewSMMInfo(){
+    this.router.navigate(['/smminfo']);
+  }
+
+  viewSYSInfo(){
+    this.router.navigate(['/sysinfo']);
+  }
+
+  viewSBMInfo(){
+    this.router.navigate(['/sbminfo']);
   }
 }

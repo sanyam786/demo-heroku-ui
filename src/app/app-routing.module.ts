@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { AllsearchComponent } from './allsearch/allsearch.component';
 import { AiboxComponent } from './aibox/aibox.component';
+import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
@@ -25,10 +27,17 @@ const routes: Routes = [
   { path: 'allsearch', component: AllsearchComponent, canActivate: [AuthGuard] },
   { path: 'aibox', component: AiboxComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'login' },
+  //{ path: '**', redirectTo: 'login' },
   //{ path: 'admin-dashboard', component: AdminDashboardComponent },
   //{ path: 'user-dashboard', component: UserDashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
+  { path: 'sjsinfo', component: ExecutiveinfoComponent, data: { page: 'sjsinfo' } },
+  { path: 'sysinfo', component: ExecutiveinfoComponent, data: { page: 'sysinfo' } },
+  { path: 'sbminfo', component: ExecutiveinfoComponent, data: { page: 'sbminfo' } },
+  { path: 'smminfo', component: ExecutiveinfoComponent, data: { page: 'smminfo' } },
+  { path: 'home', component: HomeComponent}
+
 ];
 
 @NgModule({
