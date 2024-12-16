@@ -45,6 +45,7 @@ import { AllsearchComponent } from './allsearch/allsearch.component';
 import { AiboxComponent } from './aibox/aibox.component';
 import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component';
 import { HomeComponent } from './home/home.component';
+import { EventsComponent } from './events/events.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { HomeComponent } from './home/home.component';
     AllsearchComponent,
     AiboxComponent,
     ExecutiveinfoComponent,
-    HomeComponent
+    HomeComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

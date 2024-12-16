@@ -43,10 +43,14 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authService.logout(); // Call the AuthService to perform logout
+    this.router.navigate(['/home']); // Redirect to the login page
+  }
+
+  login(): void {
     this.router.navigate(['/login']); // Redirect to the login page
   }
 
-  isLoggedOut() {
+  isLoggedIn() {
     if(this.authService.isAuthenticated()){
       return true;
     }
@@ -54,6 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   viewMyProfile() {
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId()
       if(this.loggedInMemberId !== 0){
         // Navigate to the view component and pass the id
       this.router.navigate(['/view', this.loggedInMemberId]);

@@ -54,4 +54,12 @@ export class HomeComponent implements OnInit  {
   viewSBMInfo(){
     this.router.navigate(['/sbminfo']);
   }
+
+  viewEvents(){
+    this.router.navigate(['/events']);
+  }
+
+  goToDirectoryDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
 }

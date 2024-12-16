@@ -98,6 +98,17 @@
     text-align: center;
     color: #66548e;
   }
+
+  @media (max-width: 768px) {
+    .dashboard-card {
+        width: 600px; /* Fixed width for each card */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visuals */
+        border-radius: 20px;
+        background-color: #fef5f5;
+        text-align: center;
+        color: #66548e;
+      }
+  }
   
   mat-card-title {
     font-size: 20px;

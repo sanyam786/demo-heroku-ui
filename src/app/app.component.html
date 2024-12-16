@@ -3,7 +3,7 @@
     <div class="">
       <div class="disply-flex">
         <section>
-          <div *ngIf="isLoggedOut()" class="example-button-row">
+          <div class="example-button-row">
             <div class="example-flex-container">
               <div class="example-button-container">
                 <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
@@ -24,13 +24,13 @@
                     <mat-icon>home</mat-icon>
                     <span>Home</span>
                   </button>
-                  <button (click)="goToDashboard()" mat-menu-item>
+                  <button *ngIf="isLoggedIn()" (click)="goToDashboard()" mat-menu-item>
                     <mat-icon>home</mat-icon>
                     <span>Directory</span>
                   </button>
                 
                   <!-- My Family Menu Item -->
-                  <button (click)="viewMyProfile()" mat-menu-item>
+                  <button *ngIf="isLoggedIn()" (click)="viewMyProfile()" mat-menu-item>
                     <mat-icon>supervisor_account</mat-icon>
                     <span>My Family</span>
                   </button>
@@ -73,15 +73,21 @@
                   </mat-menu>
                 
                   <!-- Search Menu Item -->
-                  <button (click)="allSearch()" mat-menu-item>
+                  <button *ngIf="isLoggedIn()" (click)="allSearch()" mat-menu-item>
                     <mat-icon>search</mat-icon>
                     <span>Member Search</span>
                   </button>
                 
                   <!-- Logout Menu Item -->
-                  <button *ngIf="isLoggedOut()" (click)="logout()" mat-menu-item>
+                  <button *ngIf="isLoggedIn()" (click)="logout()" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <span>Logout</span>
+                  </button>
+
+                  <!-- Login Menu Item -->
+                  <button *ngIf="!isLoggedIn()" (click)="login()" mat-menu-item>
+                    <mat-icon>login</mat-icon>
+                    <span>Login</span>
                   </button>
                 </mat-menu> 
               </div>

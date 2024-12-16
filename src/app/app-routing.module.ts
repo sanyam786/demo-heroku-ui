@@ -13,6 +13,7 @@ import { AllsearchComponent } from './allsearch/allsearch.component';
 import { AiboxComponent } from './aibox/aibox.component';
 import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component';
 import { HomeComponent } from './home/home.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
@@ -36,7 +37,8 @@ const routes: Routes = [
   { path: 'sysinfo', component: ExecutiveinfoComponent, data: { page: 'sysinfo' } },
   { path: 'sbminfo', component: ExecutiveinfoComponent, data: { page: 'sbminfo' } },
   { path: 'smminfo', component: ExecutiveinfoComponent, data: { page: 'smminfo' } },
-  { path: 'home', component: HomeComponent}
+  { path: 'home', component: HomeComponent},
+  { path: 'events', component: EventsComponent}
 
 ];
 
