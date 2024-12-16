@@ -65,6 +65,10 @@ export class AppComponent implements OnInit {
   }
 
   goToHome() {
+    this.router.navigate(['/home']);
+  }
+
+  goToDashboard() {
     this.router.navigate(['/dashboard']);
   }
 
