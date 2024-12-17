@@ -1,0 +1,18 @@
+<div class="loading-container" *ngIf="isLoading">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading" class="birthday-container">
+    <h2>Today's Birthdays</h2>
+    <div *ngIf="birthdayMembers.length > 0; else noBirthdays">
+      <div class="birthday-card" *ngFor="let member of birthdayMembers">
+        <h3>{{ member.firstName + " "+ member.lastName }}</h3>
+        <p>Date of Birth: {{ member.dateOfBirth | date: 'dd-MMM-yyyy' }}</p>
+      </div>
+    </div>
+  
+    <!-- No Birthdays Fallback -->
+    <ng-template #noBirthdays>
+      <p>No birthdays today 🎉</p>
+    </ng-template>
+  </div>

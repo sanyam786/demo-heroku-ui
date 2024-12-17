@@ -1,0 +1,24 @@
+.birthday-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .birthday-card {
+    background-color: #fef5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 10px auto;
+    max-width: 300px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .birthday-card h3 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .birthday-card p {
+    margin: 5px 0 0;
+    color: #666;
+  }

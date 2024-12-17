@@ -48,6 +48,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   formdata!: FormData;
   imageInBase64!: string; 
   isLoading = true;  // Track the loading state
+  isLoadingOnSubmit = false;
 
   familyMember: Member = {
     familyHead: false,
@@ -75,7 +76,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
     checkIAffirm: false,
     aborigine: '',
     status: 'Pending',
-    role: ''
+    role: '',
+    ratriBhojanTyag: '',
+    dhowanPani: ''
   };
 
   submitted!: Boolean;
@@ -153,63 +156,154 @@ export class CreateUpdateMemberComponent  implements OnInit{
   }
 
   onSaveOrUpdate(): void {
-    if(this.familyMember.checkedSameAddress || (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress)){
-      if(this.familyMember.checkedSameWhatsappNumber || (!this.familyMember.checkedSameWhatsappNumber && this.familyMember.whatsappMobile)){
-        if (this.familyMember.firstName && this.familyMember.lastName && this.familyMember.fatherName && this.familyMember.gender 
-          && !this.checkMobileNumberErrors(this.familyMember.mobile)) {
-          // if(this.selectedFile){
-          //   this.onUpload();
-          // }else if(this.familyMember.photo){
-          //   this.setFormData();
-          // }
-          if(this.imageInBase64){
+    if (this.isLoadingOnSubmit) return; // Prevent duplicate submissions
+  
+    if (
+      this.familyMember.checkedSameAddress ||
+      (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress)
+    ) {
+      if (
+        this.familyMember.checkedSameWhatsappNumber ||
+        (!this.familyMember.checkedSameWhatsappNumber && this.familyMember.whatsappMobile)
+      ) {
+        if (
+          this.familyMember.firstName &&
+          this.familyMember.lastName &&
+          this.familyMember.fatherName &&
+          this.familyMember.gender &&
+          this.familyMember.dhowanPani &&
+          this.familyMember.ratriBhojanTyag &&
+          !this.checkMobileNumberErrors(this.familyMember.mobile)
+        ) {
+          this.isLoadingOnSubmit = true; // Start the spinner
+    
+          if (this.imageInBase64) {
             this.familyMember.photo = this.imageInBase64;
           }
-          if(this.pageMode === 'edit' && this.familyMember.photo){
+    
+          // Update mode logic
+          if (this.pageMode === 'edit' && this.familyMember.photo) {
             this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
               next: (res) => {
-                console.log(res);
-                this.submitted = true;
-                this.openSnackBarWithDuration('Success: Member updated successfully.', 'Close');
-                console.log('Member is updated');
-                this.backToSearchPage(res.memberId);
+                setTimeout(() => {
+                  this.isLoadingOnSubmit = false; // Stop the spinner after delay
+                  this.submitted = true;
+                  this.openSnackBarWithDuration('Success: Member updated successfully.', 'Close');
+                  this.backToSearchPage(res.memberId);
+                }, 1000); // Simulate 1 second delay
               },
-              error: (e) => console.error(e)
+              error: (e) => {
+                setTimeout(() => {
+                  this.isLoadingOnSubmit = false; // Stop spinner after error delay
+                  console.error(e);
+                  this.openSnackBar('Error: Failed to update member.', 'Close');
+                }, 1000); // Simulate 1 second delay
+              },
             });
-          }else if(this.pageMode === 'edit' && !this.familyMember.photo) {
+          } else if (this.pageMode === 'edit' && !this.familyMember.photo) {
+            this.isLoadingOnSubmit = false; // Stop the spinner
             this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
-            console.error('Form is invalid');
-          } 
-          if(this.pageMode === 'create' && this.selectedFile){
+          }
+    
+          // Create mode logic
+          if (this.pageMode === 'create' && this.selectedFile) {
             this.familyMember.role = 'selfedit';
             this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
               next: (res) => {
-                console.log(res);
-                this.submitted = true;
-                this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
-                console.log('Member is updated');
-                this.backToSearchPage(res.memberId);
+                setTimeout(() => {
+                  this.isLoadingOnSubmit = false; // Stop the spinner after delay
+                  this.submitted = true;
+                  this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
+                  this.backToSearchPage(res.memberId);
+                }, 1000); // Simulate 1 second delay
               },
-              error: (e) => console.error(e)
+              error: (e) => {
+                setTimeout(() => {
+                  this.isLoadingOnSubmit = false; // Stop spinner after error delay
+                  console.error(e);
+                  this.openSnackBar('Error: Failed to add member.', 'Close');
+                }, 1000); // Simulate 1 second delay
+              },
             });
-          }else if(this.pageMode === 'create' && !this.selectedFile) {
+          } else if (this.pageMode === 'create' && !this.selectedFile) {
+            this.isLoadingOnSubmit = false; // Stop the spinner
             this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
-            console.error('Form is invalid');
           }
-          console.log('Family Member Data', this.familyMember);
-        } else {  
+        } else {
           this.openSnackBar('Error: Mobile number entered belongs to already existing family.', 'Close');
-          console.error('Form is invalid');
         }
-      }else {
-        this.openSnackBar('Error: WhatsApp number is required if not same as Primary mobile number.', 'Close');
-            console.error('Form is invalid');
+      } else {
+        this.openSnackBar(
+          'Error: WhatsApp number is required if not same as Primary mobile number.',
+          'Close'
+        );
       }
-    }else {
-        this.openSnackBar('Error: Current address is required if not same as Permanent address.', 'Close');
-            console.error('Form is invalid');
-      }
+    } else {
+      this.openSnackBar(
+        'Error: Current address is required if not same as Permanent address.',
+        'Close'
+      );
+    }
   }
+
+  // onSaveOrUpdate(): void {
+  //   if(this.familyMember.checkedSameAddress || (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress)){
+  //     if(this.familyMember.checkedSameWhatsappNumber || (!this.familyMember.checkedSameWhatsappNumber && this.familyMember.whatsappMobile)){
+  //       if (this.familyMember.firstName && this.familyMember.lastName && this.familyMember.fatherName && this.familyMember.gender 
+  //          && this.familyMember.dhowanPani && this.familyMember.ratriBhojanTyag && !this.checkMobileNumberErrors(this.familyMember.mobile)) {
+  //         // if(this.selectedFile){
+  //         //   this.onUpload();
+  //         // }else if(this.familyMember.photo){
+  //         //   this.setFormData();
+  //         // }
+  //         if(this.imageInBase64){
+  //           this.familyMember.photo = this.imageInBase64;
+  //         }
+  //         if(this.pageMode === 'edit' && this.familyMember.photo){
+  //           this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
+  //             next: (res) => {
+  //               console.log(res);
+  //               this.submitted = true;
+  //               this.openSnackBarWithDuration('Success: Member updated successfully.', 'Close');
+  //               console.log('Member is updated');
+  //               this.backToSearchPage(res.memberId);
+  //             },
+  //             error: (e) => console.error(e)
+  //           });
+  //         }else if(this.pageMode === 'edit' && !this.familyMember.photo) {
+  //           this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
+  //           console.error('Form is invalid');
+  //         } 
+  //         if(this.pageMode === 'create' && this.selectedFile){
+  //           this.familyMember.role = 'selfedit';
+  //           this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
+  //             next: (res) => {
+  //               console.log(res);
+  //               this.submitted = true;
+  //               this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
+  //               console.log('Member is updated');
+  //               this.backToSearchPage(res.memberId);
+  //             },
+  //             error: (e) => console.error(e)
+  //           });
+  //         }else if(this.pageMode === 'create' && !this.selectedFile) {
+  //           this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
+  //           console.error('Form is invalid');
+  //         }
+  //         console.log('Family Member Data', this.familyMember);
+  //       } else {  
+  //         this.openSnackBar('Error: Mobile number entered belongs to already existing family.', 'Close');
+  //         console.error('Form is invalid');
+  //       }
+  //     }else {
+  //       this.openSnackBar('Error: WhatsApp number is required if not same as Primary mobile number.', 'Close');
+  //           console.error('Form is invalid');
+  //     }
+  //   }else {
+  //       this.openSnackBar('Error: Current address is required if not same as Permanent address.', 'Close');
+  //           console.error('Form is invalid');
+  //     }
+  // }
   
 
   backToSearchPage(memberId: any){

@@ -207,6 +207,38 @@
         <br>
         <mat-card appearance="outlined">
             <mat-card-content>
+            <br>
+            <span class="font-color-primary"> <h3>Details For Marasa Visits</h3></span>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Dhowan Pani</mat-label>
+                <mat-select [(ngModel)]="familyMember.dhowanPani" name="dhowanPani" #dhowanPani="ngModel" required>
+                    <mat-option value="Chaturmas Kaal"  >Chaturmas Kaal</mat-option>
+                    <mat-option value="Always" >Always</mat-option>
+                    <mat-option value="Sometimes" >Sometimes</mat-option>
+                    <mat-option value="No" >No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="dhowanPani.invalid && dhowanPani.touched">Dhowan Pani is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Ratri Bhojan Tyag</mat-label>
+                <mat-select [(ngModel)]="familyMember.ratriBhojanTyag" name="ratriBhojanTyag" #ratriBhojanTyag="ngModel" required>
+                    <mat-option value="Chaturmas Kaal"  >Chaturmas Kaal</mat-option>
+                    <mat-option value="Always" >Always</mat-option>
+                    <mat-option value="Sometimes" >Sometimes</mat-option>
+                    <mat-option value="No" >No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="ratriBhojanTyag.invalid && ratriBhojanTyag.touched">Ratri Bhojan Tyag is required</mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+           </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
                 <span class="align-row-left-right">
                     <span> 
                         <input
@@ -227,12 +259,39 @@
                 </span>
                 <br>
                 <br>
-                <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>Check I Affirm dskjfsd ds fjsdfjkds fjkdsjk fsdjk fjkds fsd fsd fdsjkf sdjfjkdsfjkd.</mat-checkbox> 
+                <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>मैं आचार्य श्री रामेश के प्रति श्रद्धावान हूँ एवं साधुमार्गी संघ का सदस्य हूँ/बनना चाहता हूँ।</mat-checkbox> 
                 <mat-error *ngIf="checkIAffirm.invalid && checkIAffirm.touched">Please Check</mat-error> 
                 <br>
                 <div class="search-elments-button-style">
-                    <button *ngIf="pageMode==='create'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Save</button>
-                    <button *ngIf="pageMode==='edit'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Update</button>
+                    <!-- <button *ngIf="pageMode==='create'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Save</button>
+                    <button *ngIf="pageMode==='edit'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Update</button> -->
+                    <!-- Save Button for Create Mode -->
+                    <button *ngIf="pageMode === 'create'" 
+                    mat-raised-button 
+                    class="primary-button-style" 
+                    name="submit-button" 
+                    type="submit" 
+                    [disabled]="memberForm.invalid || isLoadingOnSubmit" 
+                    (click)="onSaveOrUpdate()">
+                    <span *ngIf="!isLoadingOnSubmit">Save</span>
+                    <span *ngIf="isLoadingOnSubmit">
+                    <mat-spinner diameter="20"></mat-spinner> Saving...
+                    </span>
+                    </button>
+
+                    <!-- Update Button for Edit Mode -->
+                    <button *ngIf="pageMode === 'edit'" 
+                    mat-raised-button 
+                    class="primary-button-style" 
+                    name="submit-button" 
+                    type="submit" 
+                    [disabled]="memberForm.invalid || isLoadingOnSubmit" 
+                    (click)="onSaveOrUpdate()">
+                    <span *ngIf="!isLoadingOnSubmit">Update</span>
+                    <span *ngIf="isLoadingOnSubmit">
+                    <mat-spinner diameter="20"></mat-spinner> Updating...
+                    </span>
+                    </button>
                 </div>
             </mat-card-content>
         </mat-card>

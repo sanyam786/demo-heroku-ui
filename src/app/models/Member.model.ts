@@ -29,5 +29,7 @@ export class Member {
     // photo?: Blob;
     photo?: string;
     photoBase64?: Blob;
-    role?: string
+    role?: string;
+    ratriBhojanTyag?: string;
+    dhowanPani?: string;
   }

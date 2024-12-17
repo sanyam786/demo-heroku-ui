@@ -62,4 +62,8 @@ export class HomeComponent implements OnInit  {
   goToDirectoryDashboard() {
     this.router.navigate(['/dashboard']);
   }
+
+  viewBirthdays() {
+    this.router.navigate(['/birthdays']);
+  }
 }

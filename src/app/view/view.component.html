@@ -36,11 +36,13 @@
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
                                     <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
-                                    <p><strong>Date Of Birth:</strong> {{member.dateOfBirth}}</p>
-                                    <p><strong>Gender:</strong> {{member.gender}}</p>
-                                    <p><strong>Marital Status:</strong> {{member.maritalStatus}}</p>
+                                    <p><strong>Date Of Birth:</strong> {{member.dateOfBirth | date: 'dd-MMM-yyyy'}}</p>
+                                    <p><strong>Gender:</strong> {{member.gender | titlecase}}</p>
+                                    <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
                                     <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
                                     <p><strong>Education:</strong> {{member.education}}</p>
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
                                     </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -325,11 +327,13 @@
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
                                     <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
-                                    <p><strong>Gender:</strong> {{member.gender}}</p>
+                                    <p><strong>Gender:</strong> {{member.gender | titlecase}}</p>
                                     <p><strong>Date Of Birth:</strong> {{member.dateOfBirth}}</p>
-                                    <p><strong>Marital Status:</strong> {{member.maritalStatus}}</p>
+                                    <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
                                     <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
                                     <p><strong>Education:</strong> {{member.education}}</p>
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
                                     </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -343,7 +347,7 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Aborigine:</strong> {{member.aborigine}}</p>
+                                    <p><strong>Mool Niwas:</strong> {{member.aborigine}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
@@ -419,12 +423,12 @@
                     </mat-card>
                     <br>
                     <br>
-                    <mat-card class="action-card-member" appearance="outlined">
+                    <!-- <mat-card class="action-card-member" appearance="outlined">
                         <mat-card-content>
                             <app-aibox [memberId]="member.memberId"></app-aibox>
                         </mat-card-content>
                     </mat-card>
-                    <br>
+                    <br> -->
                 </div>
             <br>
             </mat-expansion-panel>
