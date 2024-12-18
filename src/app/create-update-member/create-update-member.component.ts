@@ -89,7 +89,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
   alreadyExistingPhoneNumberForAnotherFamily!: Boolean;
   currentFamily!: FamilyMember;
   allFamilyMembers: any;
-  MAX_FILE_SIZE = 1 * 1024 * 1024; // 2 MB in bytes
+  fileSizeError: boolean = false; // To show/hide file size error
+  maxFileSize: number = 100 * 1024; // 100 KB in bytes
   loggedInRole = '';
   loggedInMemberId = 0;
   familyMemberForAccessCheck?: FamilyMember;
@@ -386,7 +387,16 @@ export class CreateUpdateMemberComponent  implements OnInit{
     
     if (fileInput.files && fileInput.files[0]) {
       this.selectedFile = fileInput.files[0];
-      
+  
+      // Check file size
+      if (this.selectedFile.size > this.maxFileSize) {
+        this.fileSizeError = true; // Show error message
+        this.previewUrl = null;    // Clear preview URL
+        return; // Stop further execution
+      } else {
+        this.fileSizeError = false; // Hide error message
+      }
+  
       const reader = new FileReader();
       reader.onload = (e) => {
         const result = reader.result as string;

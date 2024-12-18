@@ -257,6 +257,10 @@
                         <img *ngIf="familyMember.photo" [src]="'data:image/jpeg;base64,' + familyMember.photo" alt="Photo" width="200" height="200">
                     </span>
                 </span> -->
+                <div>
+                    *Photo size should not exceed 100 KB.
+                </div>
+                <br>
                 <span class="align-row-left-right">
                     <span> 
                         <input
@@ -274,9 +278,10 @@
                             class="primary-button-style" 
                             (click)="fileInput.click()"
                         >
-                            Choose Passport Size Photo
+                            Select Photo
                         </button>
                     </span>
+                    &nbsp;&nbsp;&nbsp;
                     <span class="image-layout">
                         <!-- <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200"> -->
                         <img *ngIf="familyMember.photo" 
@@ -286,6 +291,9 @@
                              height="200">
                     </span>
                 </span>
+                <div *ngIf="fileSizeError" class="error-message">
+                    Photo size exceeds 100 KB. Please select a smaller photo.
+                </div>
                 <br>
                 <br>
                 <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>मैं आचार्य श्री रामेश के प्रति श्रद्धावान हूँ एवं साधुमार्गी संघ का सदस्य हूँ/बनना चाहता हूँ।</mat-checkbox> 
