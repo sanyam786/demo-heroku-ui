@@ -348,36 +348,57 @@ export class CreateUpdateMemberComponent  implements OnInit{
   //     }
   //   }
   // }
+  // onFileSelected(event: any): void {
+  //   const fileInput = event.target as HTMLInputElement;
+    
+  //   if (fileInput.files && fileInput.files[0]) {
+  //     this.selectedFile = fileInput.files[0];
+  
+      
+  //       // Preview the selected image
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       const result = reader.result as string; // Typecast result to string
+  //       this.previewUrl = result;
+        
+  //       // Extract the Base64 portion of the Data URL
+  //       const base64String = result.replace("data:", "").replace(/^.+,/, "");
+  //       this.imageInBase64= base64String;
+  //       // // Convert Base64 string to Blob
+  //       // const byteString = atob(base64String);
+  //       // const byteNumbers = new Array(byteString.length);
+  //       // for (let i = 0; i < byteString.length; i++) {
+  //       //   byteNumbers[i] = byteString.charCodeAt(i);
+  //       // }
+  //       // const byteArray = new Uint8Array(byteNumbers);
+  //       // if(this.selectedFile !== null){
+  //       //   const blob = new Blob([byteArray], { type: this.selectedFile.type });
+  //       //   this.familyMember.photo = blob;
+  //       // }  
+  //     };
+  //     reader.readAsDataURL(this.selectedFile);
+      
+  //   }
+  // }
+
   onFileSelected(event: any): void {
     const fileInput = event.target as HTMLInputElement;
     
     if (fileInput.files && fileInput.files[0]) {
       this.selectedFile = fileInput.files[0];
-  
       
-        // Preview the selected image
       const reader = new FileReader();
       reader.onload = (e) => {
-        const result = reader.result as string; // Typecast result to string
+        const result = reader.result as string;
+  
+        // Set the image preview URL
         this.previewUrl = result;
-        
-        // Extract the Base64 portion of the Data URL
-        const base64String = result.replace("data:", "").replace(/^.+,/, "");
-        this.imageInBase64= base64String;
-        // // Convert Base64 string to Blob
-        // const byteString = atob(base64String);
-        // const byteNumbers = new Array(byteString.length);
-        // for (let i = 0; i < byteString.length; i++) {
-        //   byteNumbers[i] = byteString.charCodeAt(i);
-        // }
-        // const byteArray = new Uint8Array(byteNumbers);
-        // if(this.selectedFile !== null){
-        //   const blob = new Blob([byteArray], { type: this.selectedFile.type });
-        //   this.familyMember.photo = blob;
-        // }  
+  
+        // Extract the Base64 string and store it in the familyMember.photo
+        const base64String = result.split(',')[1];
+        this.familyMember.photo = base64String;
       };
       reader.readAsDataURL(this.selectedFile);
-      
     }
   }
 
@@ -584,7 +605,6 @@ export class CreateUpdateMemberComponent  implements OnInit{
         return true;
       }
     }
-    
     return false;
   }
 }

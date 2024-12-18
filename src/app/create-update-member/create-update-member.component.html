@@ -239,7 +239,7 @@
         <br>
         <mat-card appearance="outlined">
             <mat-card-content>
-                <span class="align-row-left-right">
+                <!-- <span class="align-row-left-right">
                     <span> 
                         <input
                         #fileInput
@@ -255,6 +255,35 @@
                     <span class="image-layout">
                         <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200">
                         <img *ngIf="familyMember.photo" [src]="'data:image/jpeg;base64,' + familyMember.photo" alt="Photo" width="200" height="200">
+                    </span>
+                </span> -->
+                <span class="align-row-left-right">
+                    <span> 
+                        <input
+                            #fileInput
+                            type="file"
+                            hidden="true"
+                            onclick="this.value=null"
+                            (change)="onFileSelected($event)"
+                            accept="image/*"
+                            required
+                        />    
+                        <button 
+                            mat-raised-button 
+                            type="button" 
+                            class="primary-button-style" 
+                            (click)="fileInput.click()"
+                        >
+                            Choose Passport Size Photo
+                        </button>
+                    </span>
+                    <span class="image-layout">
+                        <!-- <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200"> -->
+                        <img *ngIf="familyMember.photo" 
+                             [src]="'data:image/jpeg;base64,' + familyMember.photo" 
+                             alt="Photo" 
+                             width="200" 
+                             height="200">
                     </span>
                 </span>
                 <br>
