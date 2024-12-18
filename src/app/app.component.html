@@ -16,195 +16,92 @@
                 alt="Logo"
                 class="logo-image"
                 />
-
-                <p class="logo-text"><strong><span style="color: red;">Sadhumargi Jain Sangh</span><span style="color: #66548e"> Udaipur</span></strong></p>
-                <mat-menu #menu="matMenu">
-                  <!-- Home Menu Item -->
-                  <button (click)="goToHome()" mat-menu-item>
-                    <mat-icon>home</mat-icon>
-                    <span>Home</span>
-                  </button>
-                  <button *ngIf="isLoggedIn()" (click)="goToDashboard()" mat-menu-item>
-                    <mat-icon>home</mat-icon>
-                    <span>Directory</span>
-                  </button>
-                
-                  <!-- My Family Menu Item -->
-                  <button *ngIf="isLoggedIn()" (click)="viewMyProfile()" mat-menu-item>
-                    <mat-icon>supervisor_account</mat-icon>
-                    <span>My Family</span>
-                  </button>
-                
-                  <!-- Subheading -->
-                  <!-- <h3 style="margin: 10px; font-weight: bold;">Executive Members</h3> -->
-                
-                  <!-- Submenu Trigger -->
-                  <button mat-menu-item [matMenuTriggerFor]="subMenu">
-                    <mat-icon>group_outline</mat-icon>
-                    <span>Executive Members</span>
-                  </button>
-                
-                  <!-- Submenu -->
-                  <mat-menu #subMenu="matMenu">
-                    <button (click)="viewSJSInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Sadhumargi Jain Sangh</span>
-                    </button>
-                    <button (click)="viewSMMInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Samta Mahila Mandal</span>
-                    </button>
-                    <button (click)="viewSYSInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Samta Yuva Sangh</span>
-                    </button>
-                    <button (click)="viewSBMInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Samta Bahu Mandal</span>
-                    </button>
-                    <button (click)="viewSBMInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Samta Tarun Shakti</span>
-                    </button>
-                    <button (click)="viewSBMInfo()" mat-menu-item>
-                      <mat-icon>people_outline</mat-icon>
-                      <span>Samta Yuvti Shakti</span>
-                    </button>
-                  </mat-menu>
-                
-                  <!-- Search Menu Item -->
-                  <button *ngIf="isLoggedIn()" (click)="allSearch()" mat-menu-item>
-                    <mat-icon>search</mat-icon>
-                    <span>Member Search</span>
-                  </button>
-                
-                  <!-- Logout Menu Item -->
-                  <button *ngIf="isLoggedIn()" (click)="logout()" mat-menu-item>
-                    <mat-icon>logout</mat-icon>
-                    <span>Logout</span>
-                  </button>
-
-                  <!-- Login Menu Item -->
-                  <button *ngIf="!isLoggedIn()" (click)="login()" mat-menu-item>
-                    <mat-icon>login</mat-icon>
-                    <span>Login</span>
-                  </button>
-                </mat-menu> 
+                <!-- <p class="logo-text"><strong><span style="color: red;">Sadhumargi Jain Sangh</span><span style="color: #66548e"> Udaipur</span></strong></p> -->
+                <p class="logo-text">
+                  <strong>
+                    <span style="color: red; white-space: nowrap;">Sadhumargi Jain Sangh</span>
+                    <span style="color: #66548e; display: block;">Udaipur</span>
+                  </strong>
+                </p>
               </div>
             </div>
           </div>
         </section>
       </div>
     </div>
-    <!-- <div class="font-color-primary sjs-layout"><h1>Sadhumargi Jain Sangh Directory</h1></div> -->
-    <!-- <div class="justify-container">
-      <div class="left-div">
-        <div class="float-left">
-        <section>
-          <div *ngIf="isLoggedOut()" class="example-button-row">
-            <div class="example-flex-container">
-              <div class="example-button-container">
-                <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
-                  <mat-icon>menu</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button (click)="goToHome()" mat-menu-item>
-                      <mat-icon>home</mat-icon>
-                      <span>Home</span>
-                  </button>
-                  <button (click)="viewMyProfile()" mat-menu-item>
-                      <mat-icon>people</mat-icon>
-                      <span>My Family</span>
-                  </button>
-                  <button (click)="allSearch()" mat-menu-item>
-                      <mat-icon>search</mat-icon>
-                      <span>Search</span>
-                  </button>
-              </mat-menu>
-              </div>
-            </div>
-          </div>
-        </section>
-        </div>
-        <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
-      </div>
-      <div class="right-div">
-        <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
-      </div>
-    </div> -->
-  <!-- </nav> -->
-  <!-- <div class="single-line">
-    <div class="disply-flex">
-      <section>
-        <div *ngIf="isLoggedOut()" class="example-button-row">
-          <div class="example-flex-container">
-            <div class="example-button-container">
-              <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
-                <mat-icon>menu</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button (click)="goToHome()" mat-menu-item>
-                    <mat-icon>home</mat-icon>
-                    <span>Home</span>
-                </button>
-                <button (click)="viewMyProfile()" mat-menu-item>
-                    <mat-icon>people</mat-icon>
-                    <span>My Family</span>
-                </button>
-                <button (click)="allSearch()" mat-menu-item>
-                    <mat-icon>search</mat-icon>
-                    <span>Search</span>
-                </button>
-            </mat-menu>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
-    </div>
-    <div>
-      <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
-    </div>
-  </div> -->
-  <!-- <nav class="navbar navbar-dark primary-button-style nav-height">
-    <div class="single-line">
-      <div class="disply-flex">
-        <section>
-          <div *ngIf="isLoggedOut()" class="example-button-row">
-            <div class="example-flex-container">
-              <div class="example-button-container">
-                <button class="menu-button-layout" [matMenuTriggerFor]="menu" mat-mini-fab aria-label="Example icon button with a menu icon">
-                  <mat-icon>menu</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button (click)="goToHome()" mat-menu-item>
-                      <mat-icon>home</mat-icon>
-                      <span>Home</span>
-                  </button>
-                  <button (click)="viewMyProfile()" mat-menu-item>
-                      <mat-icon>people</mat-icon>
-                      <span>My Family</span>
-                  </button>
-                  <button (click)="allSearch()" mat-menu-item>
-                      <mat-icon>search</mat-icon>
-                      <span>Search</span>
-                  </button>
-              </mat-menu>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div class="navbar-brand font-color-primary sjs-layout">SJS</div>
-      </div>
-      <div>
-        <button *ngIf="isLoggedOut()" class="font-color-primary" mat-button (click)="logout()">Logout</button>
-      </div>
-    </div>
-  </nav> -->
-
   <div class="container mt-3 app-style">
-    
-
     <router-outlet></router-outlet>
   </div>
+  <mat-menu #menu="matMenu">
+    <!-- Home Menu Item -->
+    <button (click)="goToHome()" mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button *ngIf="isLoggedIn()" (click)="goToDashboard()" mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Directory</span>
+    </button>
+  
+    <!-- My Family Menu Item -->
+    <button *ngIf="isLoggedIn()" (click)="viewMyProfile()" mat-menu-item>
+      <mat-icon>supervisor_account</mat-icon>
+      <span>My Family</span>
+    </button>
+  
+    <!-- Subheading -->
+    <!-- <h3 style="margin: 10px; font-weight: bold;">Executive Members</h3> -->
+  
+    <!-- Submenu Trigger -->
+    <button mat-menu-item [matMenuTriggerFor]="subMenu">
+      <mat-icon>group_outline</mat-icon>
+      <span>Executive Members</span>
+    </button>
+  
+    <!-- Submenu -->
+    <mat-menu #subMenu="matMenu">
+      <button (click)="viewSJSInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Sadhumargi Jain Sangh</span>
+      </button>
+      <button (click)="viewSMMInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Samta Mahila Mandal</span>
+      </button>
+      <button (click)="viewSYSInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Samta Yuva Sangh</span>
+      </button>
+      <button (click)="viewSBMInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Samta Bahu Mandal</span>
+      </button>
+      <button (click)="viewSBMInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Samta Tarun Shakti</span>
+      </button>
+      <button (click)="viewSBMInfo()" mat-menu-item>
+        <mat-icon>people_outline</mat-icon>
+        <span>Samta Yuvti Shakti</span>
+      </button>
+    </mat-menu>
+  
+    <!-- Search Menu Item -->
+    <button *ngIf="isLoggedIn()" (click)="allSearch()" mat-menu-item>
+      <mat-icon>search</mat-icon>
+      <span>Member Search</span>
+    </button>
+  
+    <!-- Logout Menu Item -->
+    <button *ngIf="isLoggedIn()" (click)="logout()" mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+
+    <!-- Login Menu Item -->
+    <button *ngIf="!isLoggedIn()" (click)="login()" mat-menu-item>
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </mat-menu>
 </div>
