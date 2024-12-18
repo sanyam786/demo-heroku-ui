@@ -2,6 +2,7 @@ import { Component, Injectable, HostListener, OnInit, OnDestroy  } from '@angula
 import { Router } from '@angular/router';
 import { FamilyMemberService } from 'src/app/services/familyMember.service';
 import { AuthService } from './services/authService.service';
+import { Member } from './models/Member.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
 
   
   loggedInMemberId = 0;
+  member?: Member;
   
 
   constructor(private router: Router,
@@ -27,6 +29,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
+    this.loadData(this.loggedInMemberId);
+  }
+
+  loadData(id: number): void {
+    //this.isLoading = true;  // Show progress bar
+    this.familyMemberService.getMemberById(id).subscribe({
+      next: (data) => {
+        this.member = data;
+        //this.isLoading = false;
+        //console.log(data);
+      },
+      error: (e) => {
+        console.error(e);
+        //this.isLoading = false;  // Hide progress bar on error
+      }
+    });
   }
 
   // Function to dynamically calculate and set the viewport height

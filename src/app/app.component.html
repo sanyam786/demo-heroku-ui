@@ -23,6 +23,16 @@
                     <span style="color: #66548e; display: block;">Udaipur</span>
                   </strong>
                 </p>
+
+                <!-- Profile Image Placeholder -->
+                <!-- <div *ngIf="isLoggedIn()" class="profile-placeholder">
+                  <img [src]="'data:image/jpeg;base64,' + member?.photo" alt="Profile Picture" />
+                </div> -->
+                <button *ngIf="isLoggedIn()" class="profile-placeholder" [matMenuTriggerFor]="profileMenu" mat-mini-fab aria-label="Example icon button with a menu icon">
+                  <div class="">
+                    <img [src]="'data:image/jpeg;base64,' + member?.photo" />
+                  </div> 
+                </button>
               </div>
             </div>
           </div>
@@ -102,6 +112,19 @@
     <button *ngIf="!isLoggedIn()" (click)="login()" mat-menu-item>
       <mat-icon>login</mat-icon>
       <span>Login</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #profileMenu="matMenu">
+    <!-- My Family Menu Item -->
+    <button *ngIf="isLoggedIn()" (click)="viewMyProfile()" mat-menu-item>
+      <mat-icon>supervisor_account</mat-icon>
+      <span>My Family</span>
+    </button>
+    <!-- Logout Menu Item -->
+    <button *ngIf="isLoggedIn()" (click)="logout()" mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
     </button>
   </mat-menu>
 </div>
