@@ -39,8 +39,11 @@
                             <span class="align-row-left-right card-layout2">
                                 <span class="circle">
                                     <!-- <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="20" height="20"> -->
-                                    <div *ngIf="member.firstName && member.lastName" class="circle">
+                                    <div *ngIf="!member.photo && member.firstName && member.lastName" class="circle">
                                         {{ member.firstName.charAt(0) }}{{ member.lastName.charAt(0) }}
+                                    </div>
+                                    <div *ngIf="member.photo" class="profile-placeholder">
+                                        <img [src]="'data:image/jpeg;base64,' + member?.photo" />
                                     </div>
                                 </span>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
