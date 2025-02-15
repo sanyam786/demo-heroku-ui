@@ -32,4 +32,12 @@ export class Member {
     role?: string;
     ratriBhojanTyag?: string;
     dhowanPani?: string;
+    professiondd?: string;
+    navkarsi?: string;
+    sthanak: string[] = [];
+    interest: string[] = [];
+    availability?: string;
+    monthlyHours?: string;
+    sameAddAsFamilyHeadAddCheck?: boolean = false;
+    garamPani?: string;
   }

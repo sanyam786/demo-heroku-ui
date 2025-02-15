@@ -88,7 +88,7 @@
                 <input name="education" id="education" matInput placeholder="Education" [(ngModel)]="familyMember.education">
             </mat-form-field>
             <mat-form-field class="search-elments-style">
-                <mat-label>Aborigine</mat-label>
+                <mat-label>Mool Niwas</mat-label>
                 <input name="aborigine" id="aborigine" matInput placeholder="Mool Niwas" [(ngModel)]="familyMember.aborigine">
             </mat-form-field>
             <mat-form-field class="search-elments-style">
@@ -106,13 +106,15 @@
                 <mat-error *ngIf="area.invalid && area.touched">Ares is required</mat-error>
             </mat-form-field>
             <br>
-            <mat-form-field class="search-elments-style-more-width-address">
+            <mat-checkbox *ngIf="!familyMember.familyHead" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
+            <br>
+            <mat-form-field *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width-address">
                 <mat-label>Permanent Address</mat-label>
                 <textarea (keyup)="onSameAddressCheck($event)" name="address" matInput id="address" placeholder="Please add permanent address" [(ngModel)]="familyMember.permanentAddress" #permanentAddress="ngModel" required></textarea>
                 <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">Permanent address is required</mat-error>
             </mat-form-field>
             <br>
-            <div class="search-elments-style-more-width-address">
+            <div *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width-address">
                 <mat-form-field class="width-current-address">
                     <mat-label>Current Address</mat-label>
                     <textarea name="currentAddress" matInput id="currentAddress" disabled="{{familyMember.checkedSameAddress}}" placeholder="Please add current address" [(ngModel)]="familyMember.currentAddress"></textarea>
@@ -156,8 +158,9 @@
             <br>
             <mat-form-field class="search-elments-style">
                 <mat-label>Whatsapp Number</mat-label>
-                <input name="whatsappMobile" disabled="{{familyMember.checkedSameWhatsappNumber}}" id="whatsappMobile" matInput placeholder="WhatsApp Number" [(ngModel)]="familyMember.whatsappMobile" #whatsappMobile="ngModel" minlength="10" maxlength="10" type="tel">
+                <input name="whatsappMobile" disabled="{{familyMember.checkedSameWhatsappNumber}}" id="whatsappMobile" required matInput placeholder="WhatsApp Number" [(ngModel)]="familyMember.whatsappMobile" #whatsappMobile="ngModel" minlength="10" maxlength="10" type="tel">
                 <mat-error *ngIf="whatsappMobile.invalid && whatsappMobile.touched">
+                    <span *ngIf="mobile.errors?.['required']">WhatsApp number is required</span>
                     <span *ngIf="whatsappMobile.errors?.['minlength'] || whatsappMobile.errors?.['maxlength']">Number must be 10 digits</span>
                 </mat-error>
             </mat-form-field>
@@ -172,29 +175,43 @@
         <mat-card appearance="outlined">
             <mat-card-content>
             <br>
-            <span class="font-color-primary"> <h3>Professional Details</h3></span>
+            <span class="font-color-primary"> <h3>Profession Details</h3></span>
             <mat-divider></mat-divider>
             <br>
-            <mat-form-field class="search-elments-style-more-width">
+            <mat-form-field class="search-elments-style">
                 <mat-label>Profession</mat-label>
+                <mat-select [(ngModel)]="familyMember.professiondd" name="professiondd" #professiondd="ngModel" required>
+                <mat-option value="Business" ngDefaultControl>Business</mat-option>
+                <mat-option value="Profession" ngDefaultControl>Profession</mat-option>
+                <mat-option value="Job" ngDefaultControl>Job</mat-option>
+                <mat-option value="Retired" ngDefaultControl>Retired</mat-option>
+                <mat-option value="Student" ngDefaultControl>Student</mat-option>
+                <mat-option value="Housewife" ngDefaultControl>Housewife</mat-option>
+                <mat-option value="Others" ngDefaultControl>Others</mat-option>
+                </mat-select>
+                <mat-error *ngIf="professiondd.invalid && professiondd.touched">Profession is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style-more-width">
+                <mat-label>Details</mat-label>
                 <!-- <input id="proffession" matInput placeholder="proffession" [(ngModel)]="proffession"> -->
                 <textarea matInput name="profession" id="profession" placeholder="Please add profession details" [(ngModel)]="familyMember.profession"></textarea>
             </mat-form-field>
             <mat-form-field class="search-elments-style-more-width">
-                <mat-label>Profession Address</mat-label>
+                <mat-label>Address</mat-label>
                 <textarea matInput name="professionAddress" id="professionAddress" placeholder="Please add profession address" [(ngModel)]="familyMember.professionAddress"></textarea>
             </mat-form-field>
             <br>
             <mat-form-field class="search-elments-style">
-                <mat-label>Profession Email</mat-label>
+                <mat-label>Email</mat-label>
                 <input name="professionEmail" id="professionEmail" matInput placeholder="Profession Email" [(ngModel)]="familyMember.professionEmail" #professionEmail="ngModel" email>
                 <mat-error *ngIf="professionEmail.invalid && professionEmail.touched">
                     <span *ngIf="professionEmail.errors?.['email']">Enter a valid email address</span>
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="search-elments-style">
-                <mat-label>Profession Number</mat-label>
-                <input name="professionNumber" id="professionNumber" matInput placeholder="Profession Number" [(ngModel)]="familyMember.professionNumber" #professionNumber="ngModel" minlength="10" maxlength="10" type="tel">
+                <mat-label>Number</mat-label>
+                <input name="professionNumber" id="professionNumber" matInput placeholder="Number" [(ngModel)]="familyMember.professionNumber" #professionNumber="ngModel" minlength="10" maxlength="10" type="tel">
                 <mat-error *ngIf="professionNumber.invalid && professionNumber.touched">
                     <span *ngIf="professionNumber.errors?.['minlength'] || professionNumber.errors?.['maxlength']">Profession number must be 10 digits</span>
                 </mat-error>
@@ -208,7 +225,7 @@
         <mat-card appearance="outlined">
             <mat-card-content>
             <br>
-            <span class="font-color-primary"> <h3>Details For Marasa Visits</h3></span>
+            <span class="font-color-primary"> <h3>Dharmik Details</h3></span>
             <mat-divider></mat-divider>
             <br>
             <mat-form-field class="search-elments-style">
@@ -231,7 +248,75 @@
                 </mat-select>
                 <mat-error *ngIf="ratriBhojanTyag.invalid && ratriBhojanTyag.touched">Ratri Bhojan Tyag is required</mat-error>
             </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Navkarsi</mat-label>
+                <mat-select [(ngModel)]="familyMember.navkarsi" name="navkarsi" #navkarsi="ngModel" required>
+                    <mat-option value="Chaturmas Kaal"  >Chaturmas Kaal</mat-option>
+                    <mat-option value="Always" >Always</mat-option>
+                    <mat-option value="Sometimes" >Sometimes</mat-option>
+                    <mat-option value="No" >No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="navkarsi.invalid && navkarsi.touched">Navkarsi is required</mat-error>
+            </mat-form-field>
             <br>
+            <mat-form-field class="search-elments-style-more-66perwidth-address">
+                <mat-label>Affiliated/Nearest Sthanak</mat-label>
+                <mat-select [(ngModel)]="familyMember.sthanak" name="sthanak" #sthanak="ngModel" multiple required>
+                  <mat-option value="Business">Business</mat-option>
+                  <mat-option value="Profession">Profession</mat-option>
+                  <mat-option value="Job">Job</mat-option>
+                  <mat-option value="Retired">Retired</mat-option>
+                  <mat-option value="Student">Student</mat-option>
+                  <mat-option value="Housewife">Housewife</mat-option>
+                  <mat-option value="Others">Others</mat-option>
+                </mat-select>
+                <mat-error *ngIf="sthanak.invalid && sthanak.touched">Sthanak is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Garam Pani</mat-label>
+                <mat-select [(ngModel)]="familyMember.garamPani" name="garamPani" #garamPani="ngModel" required>
+                    <mat-option value="Chaturmas Kaal"  >Chaturmas Kaal</mat-option>
+                    <mat-option value="Always" >Always</mat-option>
+                    <mat-option value="Sometimes" >Sometimes</mat-option>
+                    <mat-option value="No" >No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="garamPani.invalid && garamPani.touched">Garam Pani is required</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Interest</mat-label>
+                <mat-select [(ngModel)]="familyMember.interest" name="interest" #interest="ngModel" multiple required>
+                <mat-option value="Gochri" ngDefaultControl>Gochri</mat-option>
+                <mat-option value="Vihar" ngDefaultControl>Vihar</mat-option>
+                <mat-option value="Swadhyay" ngDefaultControl>Swadhyay</mat-option>
+                <mat-option value="Sawar" ngDefaultControl>Sawar</mat-option>
+                <mat-option value="Tap" ngDefaultControl>Tap</mat-option>
+                <mat-option value="Management" ngDefaultControl>Management</mat-option>
+                <mat-option value="Speaker" ngDefaultControl>Speaker</mat-option>
+                <mat-option value="Shivir" ngDefaultControl>Shivir</mat-option>
+                <mat-option value="Medical" ngDefaultControl>Medical</mat-option>
+                <mat-option value="Pathshala" ngDefaultControl>Pathshala</mat-option>
+                <mat-option value="Samayik" ngDefaultControl>Samayik</mat-option>
+                <mat-option value="Leadership" ngDefaultControl>Leadership</mat-option>
+                </mat-select>
+                <mat-error *ngIf="interest.invalid && interest.touched">Interest is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Availability</mat-label>
+                <mat-select [(ngModel)]="familyMember.availability" name="availability" #availability="ngModel" required>
+                    <mat-option value="Weekdays"  >Weekdays</mat-option>
+                    <mat-option value="Weekend" >Weekend</mat-option>
+                </mat-select>
+                <mat-error *ngIf="availability.invalid && availability.touched">Availability is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="search-elments-style">
+                <mat-label>Monthly (Hours)</mat-label>
+                <input name="monthlyHours" id="monthlyHours" matInput placeholder="Hours" required [(ngModel)]="familyMember.monthlyHours" #monthlyHours="ngModel" minlength="1" type="number">
+                <mat-error *ngIf="monthlyHours.invalid && monthlyHours.touched">
+                    <span *ngIf="monthlyHours.errors?.['required']">Monthly (Hours) are required</span>
+                    
+                </mat-error>
+            </mat-form-field>
             <br>
            </mat-card-content>
         </mat-card>

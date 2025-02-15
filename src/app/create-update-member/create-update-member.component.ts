@@ -78,7 +78,15 @@ export class CreateUpdateMemberComponent  implements OnInit{
     status: 'Pending',
     role: '',
     ratriBhojanTyag: '',
-    dhowanPani: ''
+    dhowanPani: '',
+    professiondd: '',
+    navkarsi: '',
+    sthanak: [],
+    interest: [],
+    availability: '',
+    monthlyHours: '',
+    sameAddAsFamilyHeadAddCheck: false,
+    garamPani: ''
   };
 
   submitted!: Boolean;
@@ -557,6 +565,11 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }else {
       //this.familyMember.currentAddress = '';
     }
+    console.log(event.target.value);
+  }
+
+  onSameAddressAsFamilyHeadCheck(event: any){
+    this.familyMember.sameAddAsFamilyHeadAddCheck = event.target.checked;
     console.log(event.target.value);
   }
 

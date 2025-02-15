@@ -9,10 +9,6 @@
                     <span><h2>Family Head</h2></span>
                 </span>
             <div class="card-wrapper">
-                    <!-- <div class="triangle">
-                        <span class="age-number" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
-                        <span class="age-number" *ngIf="!member.dateOfBirth">N/A</span>
-                    </div> -->
                     <div *ngIf="member.status==='Approved'" class="triangle-approved">
                         <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
                         <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
@@ -41,19 +37,9 @@
                                     <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
                                     <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
                                     <p><strong>Education:</strong> {{member.education}}</p>
-                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
-                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
-                                    </div>
+                                </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
-                    
-                            <!-- <div class="section Personal">
-                            <h3>Personal Details</h3>
-                            <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
-                            <p><strong>Marital Status:</strong> {{member.maritalStatus}}</p>
-                            <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
-                            <p><strong>Education:</strong> {{member.education}}</p>
-                            </div> -->
                     
                             <mat-accordion class="accordian-section">
                                 <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -89,21 +75,35 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Profession:</strong> {{member.profession}}</p>
-                                    <p><strong>Profession Address:</strong> {{member.professionAddress}}</p>
-                                    <p><strong>Profession Number:</strong> {{member.professionNumber}}</p>
-                                    <p><strong>Profession Email:</strong> {{member.professionEmail}}</p>
+                                    <p><strong>Category:</strong> {{member.professiondd}}</p>
+                                    <p><strong>Details:</strong> {{member.profession}}</p>
+                                    <p><strong>Address:</strong> {{member.professionAddress}}</p>
+                                    <p><strong>Number:</strong> {{member.professionNumber}}</p>
+                                    <p><strong>Email:</strong> {{member.professionEmail}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
                         
-                            <!-- <div class="section profession">
-                            <h3>Professional Details</h3>
-                            <p><strong>Profession:</strong> {{member.profession}}</p>
-                            <p><strong>Profession Address:</strong> {{member.professionAddress}}</p>
-                            <p><strong>Profession Number:</strong> {{member.professionNumber}}</p>
-                            <p><strong>Profession Email:</strong> {{member.professionEmail}}</p>
-                            </div> -->
+                            <mat-accordion class="accordian-section">
+                                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="secondary-button-style"> Dharmik Details</mat-panel-title>
+                                    <mat-panel-description>
+                                        <span></span>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="section Personal">
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
+                                    <p><strong>Garam Pani:</strong> {{member.garamPani}}</p>
+                                    <p><strong>Navkarsi:</strong> {{member.navkarsi}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
+                                    <p><strong>Interest:</strong> {{member.interest}}</p>
+                                    <p><strong>Availability:</strong> {{member.availability}}</p>
+                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours}}</p>
+                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak}}</p>
+                                </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
                     
                             <mat-accordion class="accordian-section">
                                 <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -121,14 +121,6 @@
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
-                        
-                            <!-- <div class="section contact">
-                            <h3>Contact Details</h3>
-                            <p><strong>Primary Number:</strong> {{member.mobile}}</p>
-                            <p><strong>Alternate Number:</strong> {{member.altMobile}}</p>
-                            <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile}}</p>
-                            <p><strong>Email:</strong> {{member.email}}</p>
-                            </div> -->
                         </span>
                     </span>
                 </div>
@@ -138,8 +130,6 @@
                     <span class="action-button-row">
                         <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
                         &nbsp;&nbsp;
-                        <!-- <button class="primary-button-style" mat-raised-button color="primary" (click)="onUpdateFamilyHead(member.memberId)" mat-button>Make Family Head</button>
-                        &nbsp; &nbsp; -->
                         <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
                         &nbsp;&nbsp;
                         <button class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
@@ -161,126 +151,6 @@
             </mat-card>
             <br>
             <br>
-            <!-- <mat-card class="action-card" appearance="outlined">
-                <mat-card-content>
-                    <app-aibox [memberId]="member.memberId"></app-aibox>
-                </mat-card-content>
-            </mat-card> -->
-            <!-- <div class="card-header">
-                <img class="profile-photo" *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo">
-                <div class="personal-info">
-                    <h2>{{member.firstName}} {{member.lastName}}</h2>
-                    <p>Family Head</p>
-                    <p>{{member.gender}}</p>
-                    <p>Date of Birth: {{member.dateOfBirth}}</p>
-                </div>
-            </div> -->
-
-            <!-- <mat-accordion class="accordian-section">
-                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title> Personal Details </mat-panel-title>
-                    <mat-panel-description>
-                        <span></span>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="section Personal">
-                    <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
-                    <p><strong>Marital Status:</strong> {{member.maritalStatus}}</p>
-                    <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
-                    <p><strong>Education:</strong> {{member.education}}</p>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion> -->
-
-            <!-- <div class="section Personal">
-            <h3>Personal Details</h3>
-            <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
-            <p><strong>Marital Status:</strong> {{member.maritalStatus}}</p>
-            <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
-            <p><strong>Education:</strong> {{member.education}}</p>
-            </div> -->
-
-            <!-- <mat-accordion class="accordian-section">
-                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title> Demographics</mat-panel-title>
-                    <mat-panel-description>
-                        <span></span>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="section Personal">
-                    <p><strong>Aborigine:</strong> {{member.aborigine}}</p>
-                    <p><strong>Area:</strong> {{member.area}}</p>
-                    <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
-                    <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
-                </div>
-                </mat-expansion-panel>
-            </mat-accordion> -->
-        
-            <!-- <div class="section demographics">
-            <h3>Demographics</h3>
-            <p><strong>Aborigine:</strong> {{member.aborigine}}</p>
-            <p><strong>Area:</strong> {{member.area}}</p>
-            <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
-            <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
-            </div> -->
-
-            <!-- <mat-accordion class="accordian-section">
-                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title> Professional Details</mat-panel-title>
-                    <mat-panel-description>
-                        <span></span>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="section Personal">
-                    <p><strong>Profession:</strong> {{member.profession}}</p>
-                    <p><strong>Profession Address:</strong> {{member.professionAddress}}</p>
-                    <p><strong>Profession Number:</strong> {{member.professionNumber}}</p>
-                    <p><strong>Profession Email:</strong> {{member.professionEmail}}</p>
-                </div>
-                </mat-expansion-panel>
-            </mat-accordion> -->
-        
-            <!-- <div class="section profession">
-            <h3>Professional Details</h3>
-            <p><strong>Profession:</strong> {{member.profession}}</p>
-            <p><strong>Profession Address:</strong> {{member.professionAddress}}</p>
-            <p><strong>Profession Number:</strong> {{member.professionNumber}}</p>
-            <p><strong>Profession Email:</strong> {{member.professionEmail}}</p>
-            </div> -->
-
-            <!-- <mat-accordion class="accordian-section">
-                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-                <mat-expansion-panel-header>
-                    <mat-panel-title> Contact Details</mat-panel-title>
-                    <mat-panel-description>
-                        <span></span>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <div class="section Personal">
-                    <p><strong>Primary Number:</strong> {{member.mobile}}</p>
-                    <p><strong>Alternate Number:</strong> {{member.altMobile}}</p>
-                    <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile}}</p>
-                    <p><strong>Email:</strong> {{member.email}}</p>
-                </div>
-                </mat-expansion-panel>
-            </mat-accordion> -->
-        
-            <!-- <div class="section contact">
-            <h3>Contact Details</h3>
-            <p><strong>Primary Number:</strong> {{member.mobile}}</p>
-            <p><strong>Alternate Number:</strong> {{member.altMobile}}</p>
-            <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile}}</p>
-            <p><strong>Email:</strong> {{member.email}}</p>
-            </div> -->
-        
-            <!-- <div class="action-buttons">
-            <button mat-raised-button color="primary" (click)="onEditMember(member.memberId)">Edit</button>
-            <button *ngIf="member.status==='Pending'" mat-raised-button color="primary" (click)="onApproveStatus(member.memberId)">Approve</button>
-            <button mat-raised-button color="warn">Delete</button>
-            </div> -->
         </div>
     </div>
 </div>
@@ -299,12 +169,7 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
                 <div class="card-wrapper card-layout">
-                    <!-- <div class="triangle">
-                        <span class="age-number" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
-                        <span class="age-number" *ngIf="!member.dateOfBirth">N/A</span>
-                    </div> -->
-
-                    <div *ngIf="member.status==='Approved'" class="triangle-approved">
+                   <div *ngIf="member.status==='Approved'" class="triangle-approved">
                         <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
                         <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
@@ -332,9 +197,7 @@
                                     <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
                                     <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
                                     <p><strong>Education:</strong> {{member.education}}</p>
-                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
-                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
-                                    </div>
+                                </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
                     
@@ -364,14 +227,36 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Profession:</strong> {{member.profession}}</p>
-                                    <p><strong>Profession Address:</strong> {{member.professionAddress}}</p>
-                                    <p><strong>Profession Number:</strong> {{member.professionNumber}}</p>
-                                    <p><strong>Profession Email:</strong> {{member.professionEmail}}</p>
+                                    <p><strong>Category:</strong> {{member.professiondd}}</p>
+                                    <p><strong>Details:</strong> {{member.profession}}</p>
+                                    <p><strong>Address:</strong> {{member.professionAddress}}</p>
+                                    <p><strong>Number:</strong> {{member.professionNumber}}</p>
+                                    <p><strong>Email:</strong> {{member.professionEmail}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
                         
+                            <mat-accordion class="accordian-section">
+                                <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="secondary-button-style"> Dharmik Details</mat-panel-title>
+                                    <mat-panel-description>
+                                        <span></span>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <div class="section Personal">
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
+                                    <p><strong>Garam Pani:</strong> {{member.garamPani}}</p>
+                                    <p><strong>Navkarsi:</strong> {{member.navkarsi}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
+                                    <p><strong>Interest:</strong> {{member.interest}}</p>
+                                    <p><strong>Availability:</strong> {{member.availability}}</p>
+                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours}}</p>
+                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak}}</p>
+                                </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+
                             <mat-accordion class="accordian-section">
                                 <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
                                 <mat-expansion-panel-header>
@@ -423,12 +308,6 @@
                     </mat-card>
                     <br>
                     <br>
-                    <!-- <mat-card class="action-card-member" appearance="outlined">
-                        <mat-card-content>
-                            <app-aibox [memberId]="member.memberId"></app-aibox>
-                        </mat-card-content>
-                    </mat-card>
-                    <br> -->
                 </div>
             <br>
             </mat-expansion-panel>
