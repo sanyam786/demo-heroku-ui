@@ -88,6 +88,22 @@ export class ViewComponent implements OnInit {
     });
   }
 
+  onDelete(memberId: string){
+    this.familyMemberService.delete(memberId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.openSnackBarWithDuration(res.message, 'Close','success');
+        if(this.id !== memberId.toString()){
+          this.loadData(this.id);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
+        //this.changeDetectorRef.markForCheck();
+      },
+      error: (e) => console.error(e)
+    });
+  }
+
   getAge(dateOfBirth: string): string {
     if (!dateOfBirth) {
       return '00'; // Handle undefined dates

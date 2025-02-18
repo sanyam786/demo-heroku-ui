@@ -130,7 +130,7 @@
                     <span class="action-button-row">
                         <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
                         &nbsp;&nbsp;
-                        <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
+                        <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" (click)="onDelete(member.memberId)" mat-button>Delete</button>
                         &nbsp;&nbsp;
                         <button class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
                     </span>
@@ -282,7 +282,7 @@
                             <span class="action-button-row">
                                 <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" class="primary-button-style" mat-raised-button color="secondary" (click)="onEditMember(member.memberId)" mat-button>Edit</button>
                                 &nbsp; &nbsp;
-                                <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" mat-button>Delete</button>
+                                <button *ngIf="checkRoles()" class="delete-button-style" mat-raised-button color="secondary" (click)="onDelete(member.memberId)" mat-button>Delete</button>
                                 &nbsp; &nbsp;
                                 <button  class="approve-button-style" *ngIf="member.status==='Pending' && checkRoles()" mat-raised-button color="secondary" (click)="onApproveStatus(member.memberId)" mat-button>Approve</button>
                             </span>
