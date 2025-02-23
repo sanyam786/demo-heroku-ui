@@ -28,6 +28,7 @@
     "file-saver": "^2.0.5",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",
+    "ngx-image-compress": "^18.1.5",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.15",
     "tslib": "^2.3.0",
