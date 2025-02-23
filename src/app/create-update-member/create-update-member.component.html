@@ -13,11 +13,29 @@
     <form *ngIf="!isLoading" #memberForm="ngForm" (ngSubmit)="onSaveOrUpdate()">
     <div>
         <br>
-        <mat-radio-group *ngIf="alreadyExistingFamilyHead === false" class="search-elments-style single-line family-radio-button" aria-label="Family Head and Family Member">
-            <mat-radio-button [checked]="pageMode==='edit' && familyMember.familyHead" class="padding-radio-checkbox" name="member-type" value={{true}} [(ngModel)]="familyMember.familyHead" required ngDefaultControl>Family Head</mat-radio-button>
-            <mat-radio-button [checked]="pageMode==='edit' && !familyMember.familyHead" name="member-type" value={{false}} [(ngModel)]="familyMember.familyHead" required ngDefaultControl>Family Member</mat-radio-button>
-            <mat-error *ngIf="memberForm.form.controls['member-type']?.invalid && memberForm.form.controls['member-type']?.touched">Member type is required</mat-error>
+        <!-- <mat-radio-group *ngIf="alreadyExistingFamilyHead === false" class="search-elments-style single-line family-radio-button" aria-label="Family Head and Family Member">
+            <mat-radio-button [checked]="pageMode==='edit' && familyMember.familyHead" class="padding-radio-checkbox" name="familyHead" #familyHead="ngModel" value={{true}} [(ngModel)]="familyMember.familyHead" required ngDefaultControl>Family Head</mat-radio-button>
+            <mat-radio-button [checked]="pageMode==='edit' && !familyMember.familyHead" name="familyHead" value={{false}} [(ngModel)]="familyMember.familyHead" #familyHead="ngModel" required ngDefaultControl>Family Member</mat-radio-button>
+            <mat-error *ngIf="(memberForm.form.controls['familyHead']?.invalid && memberForm.form.controls['familyHead']?.touched) || (familyHead.invalid && ( familyHead.touched || isFormSubmitted))">Member type is required</mat-error>
+        </mat-radio-group> -->
+        <mat-radio-group 
+            *ngIf="alreadyExistingFamilyHead === false"
+            class="search-elments-style single-line family-radio-button"
+            aria-label="Family Head and Family Member"
+            [(ngModel)]="familyMember.familyHead"
+            name="familyHead"
+            #familyHead="ngModel"
+            required>
+            
+            <mat-radio-button class="padding-radio-checkbox" [value]="true">Family Head</mat-radio-button>
+            <mat-radio-button [value]="false">Family Member</mat-radio-button>
+            <!-- ✅ Show error when the field is invalid and touched OR form is submitted -->
+            <mat-error *ngIf="familyHead.invalid && (familyHead.touched || isFormSubmitted)">
+                Member type is required
+            </mat-error>
         </mat-radio-group>
+
+        
         <br>
         <br>
         <mat-card appearance="outlined">
@@ -30,17 +48,17 @@
                 <mat-label class="font-color-primary">Gender</mat-label>
                 <br>
                 <span class="single-line family-radio-button">
-                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'male'" name= "gender" value="male" [(ngModel)]="familyMember.gender" required ngDefaultControl>Male</mat-radio-button>
-                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'female'" name="gender" value="female" [(ngModel)]="familyMember.gender" required ngDefaultControl>Female</mat-radio-button>
+                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'male'" name= "gender" value="male" #gender="ngModel" [(ngModel)]="familyMember.gender" required ngDefaultControl>Male</mat-radio-button>
+                    <mat-radio-button [checked]="pageMode==='edit' && familyMember.gender === 'female'" name="gender" value="female" #gender="ngModel" [(ngModel)]="familyMember.gender" required ngDefaultControl>Female</mat-radio-button>
                 </span>
-                <mat-error *ngIf="memberForm.form.controls['gender']?.invalid && memberForm.form.controls['gender']?.touched">Gender is required</mat-error>
+                <mat-error *ngIf="(memberForm.form.controls['gender']?.invalid && memberForm.form.controls['gender']?.touched) || (gender.invalid && ( gender.touched || isFormSubmitted))">Gender is required</mat-error>
             </mat-radio-group>
             <br>
             <br>
             <mat-form-field class="search-elments-style">
                 <mat-label>First Name</mat-label>
                 <input name="firstName" id="firstName" matInput placeholder="First Name" [(ngModel)]="familyMember.firstName" #firstName="ngModel" required>
-                <mat-error *ngIf="firstName.invalid && firstName.touched">First Name is required</mat-error>
+                <mat-error *ngIf="firstName.invalid && (firstName.touched || isFormSubmitted)">First Name is required</mat-error>
             </mat-form-field>
             <mat-form-field class="search-elments-style">
                 <mat-label>Last Name</mat-label>
@@ -94,19 +112,13 @@
             <mat-form-field class="search-elments-style">
                 <mat-label>Area</mat-label>
                 <mat-select [(ngModel)]="familyMember.area" name="area" #area="ngModel" required>
-                <mat-option value="Ambamata" ngDefaultControl>Ambamata</mat-option>
-                <mat-option value="Ayad, University Road" ngDefaultControl>Ayad, University Road</mat-option>
-                <mat-option value="Balicha" ngDefaultControl>Balicha</mat-option>
-                <mat-option value="Bhupalpura, New Bhupalpura" ngDefaultControl>Bhupalpura, New Bhupalpura</mat-option>
-                <mat-option value="Bhuwana" ngDefaultControl>Bhuwana</mat-option>
-                <mat-option value="Debari Circle" ngDefaultControl>Debari Circle</mat-option>
-                <mat-option value="Eklingpura" ngDefaultControl>Eklingpura</mat-option>
-                <mat-option value="Fatehpura, Ahinsapuri" ngDefaultControl>Fatehpura, Ahinsapuri</mat-option>
+                    <mat-option *ngFor="let area of areas" [value]="area" ngDefaultControl>{{ area }}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="area.invalid && area.touched">Ares is required</mat-error>
+                <mat-error *ngIf="area.invalid && (area.touched || area.untouched)">Ares is required</mat-error>
             </mat-form-field>
             <br>
-            <mat-checkbox *ngIf="!familyMember.familyHead" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
+            <mat-checkbox *ngIf="!familyMember.familyHead && alreadyExistingFamilyHead === true" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
+            <br>
             <br>
             <mat-form-field *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width-address">
                 <mat-label>Permanent Address</mat-label>
@@ -262,13 +274,7 @@
             <mat-form-field class="search-elments-style-more-66perwidth-address">
                 <mat-label>Affiliated/Nearest Sthanak</mat-label>
                 <mat-select [(ngModel)]="familyMember.sthanak" name="sthanak" #sthanak="ngModel" multiple required>
-                  <mat-option value="Business">Business</mat-option>
-                  <mat-option value="Profession">Profession</mat-option>
-                  <mat-option value="Job">Job</mat-option>
-                  <mat-option value="Retired">Retired</mat-option>
-                  <mat-option value="Student">Student</mat-option>
-                  <mat-option value="Housewife">Housewife</mat-option>
-                  <mat-option value="Others">Others</mat-option>
+                  <mat-option *ngFor="let sthanak of allSthanks" [value]="sthanak">{{ sthanak }}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="sthanak.invalid && sthanak.touched">Sthanak is required</mat-error>
             </mat-form-field>
@@ -324,26 +330,8 @@
         <br>
         <mat-card appearance="outlined">
             <mat-card-content>
-                <!-- <span class="align-row-left-right">
-                    <span> 
-                        <input
-                        #fileInput
-                        type="file"
-                        hidden="true"
-                        onclick="this.value=null"
-                        (change)="onFileSelected($event)"
-                        accept="image/*"
-                        [(ngModel)]="familyMember.photo"
-                        required
-                        />    
-                        <button mat-raised-button type="button" class="primary-button-style" (click)="fileInput.click()">Choose Passport Size Photo</button></span>
-                    <span class="image-layout">
-                        <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200">
-                        <img *ngIf="familyMember.photo" [src]="'data:image/jpeg;base64,' + familyMember.photo" alt="Photo" width="200" height="200">
-                    </span>
-                </span> -->
                 <div>
-                    *Photo size should not exceed 100 KB.
+                    *We are compressing photo to 100 KB or less.
                 </div>
                 <br>
                 <span class="align-row-left-right">
@@ -368,8 +356,15 @@
                     </span>
                     &nbsp;&nbsp;&nbsp;
                     <span class="image-layout">
-                        <!-- <img *ngIf="previewUrl" [src]="previewUrl" alt="Image Preview" width="200" height="200"> -->
-                        <img *ngIf="familyMember.photo" 
+                        <!-- ✅ Show Preview When an Image is Selected -->
+                        <img *ngIf="previewUrl" 
+                             [src]="previewUrl" 
+                             alt="Image Preview" 
+                             width="200" 
+                             height="200">
+                        
+                        <!-- ✅ If No Preview, Show Existing Image from DB -->
+                        <img *ngIf="!previewUrl && familyMember.photo" 
                              [src]="'data:image/jpeg;base64,' + familyMember.photo" 
                              alt="Photo" 
                              width="200" 
@@ -382,13 +377,36 @@
                 <br>
                 <br>
                 <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>मैं आचार्य श्री रामेश के प्रति श्रद्धावान हूँ एवं साधुमार्गी संघ का सदस्य हूँ/बनना चाहता हूँ।</mat-checkbox> 
-                <mat-error *ngIf="checkIAffirm.invalid && checkIAffirm.touched">Please Check</mat-error> 
+                <mat-error class="affirm-padding" *ngIf="checkIAffirm.invalid && (checkIAffirm.touched || isFormSubmitted)">Please Affirm</mat-error> 
                 <br>
                 <div class="search-elments-button-style">
-                    <!-- <button *ngIf="pageMode==='create'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Save</button>
-                    <button *ngIf="pageMode==='edit'" mat-raised-button class="primary-button-style" name="submit-button" type="submit" [disabled]="memberForm.invalid">Update</button> -->
-                    <!-- Save Button for Create Mode -->
+                   <!-- [disabled]="!memberForm || memberForm.invalid || isLoadingOnSubmit" 
+                         Submit Button (for Create Mode) -->
                     <button *ngIf="pageMode === 'create'" 
+                        mat-raised-button 
+                        class="primary-button-style" 
+                        name="submit-button" 
+                        type="submit" 
+                        (click)="onSaveOrUpdate()">
+                        <span *ngIf="!isLoadingOnSubmit">Save</span>
+                        <span *ngIf="isLoadingOnSubmit">
+                            <mat-spinner diameter="20"></mat-spinner> Saving...
+                        </span>
+                    </button>
+
+                    <!-- Update Button (for Edit Mode) -->
+                    <button *ngIf="pageMode === 'edit'" 
+                        mat-raised-button 
+                        class="primary-button-style" 
+                        name="submit-button" 
+                        type="submit" 
+                        (click)="onSaveOrUpdate()">
+                        <span *ngIf="!isLoadingOnSubmit">Update</span>
+                        <span *ngIf="isLoadingOnSubmit">
+                            <mat-spinner diameter="20"></mat-spinner> Updating...
+                        </span>
+                    </button>
+                    <!-- <button *ngIf="pageMode === 'create'" 
                     mat-raised-button 
                     class="primary-button-style" 
                     name="submit-button" 
@@ -401,7 +419,6 @@
                     </span>
                     </button>
 
-                    <!-- Update Button for Edit Mode -->
                     <button *ngIf="pageMode === 'edit'" 
                     mat-raised-button 
                     class="primary-button-style" 
@@ -413,7 +430,7 @@
                     <span *ngIf="isLoadingOnSubmit">
                     <mat-spinner diameter="20"></mat-spinner> Updating...
                     </span>
-                    </button>
+                    </button> -->
                 </div>
             </mat-card-content>
         </mat-card>

@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, NgZone, ChangeDetectorRef, inject, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FamilyMember } from '../models/FamilyMember.model';
 import { Member } from '../models/Member.model';
@@ -8,6 +9,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 @Component({
@@ -17,28 +19,6 @@ import {
   styleUrls: ['./create-update-member.component.css']
 })
 export class CreateUpdateMemberComponent  implements OnInit{
-  // firstName: '';
-  // lastName: '';
-  // fatherName: '';
-  // memberType: '';
-  // gender: '';
-  // dateOfBirth: '';
-   //maritalStatusChk: string | undefined;
-  // bloodGroup: '';
-  // education: '';
-  // permanentAddress: '';
-  // mobile: '';
-  // email: '';
-  // area: '';
-  // checkedSameAddress: boolean = false;
-  // currentAddress: '';
-  // proffession: '';
-  // proffessionAddress: '';
-  // proffessionEmail: '';
-  // proffessionNumber: '';
-  // checkIAffirm: '';
-  // aborigine: '';
-
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -49,6 +29,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
   imageInBase64!: string; 
   isLoading = true;  // Track the loading state
   isLoadingOnSubmit = false;
+  @ViewChild('memberForm') memberForm!: NgForm;
+  isFormSubmitted = false; // Track if the form has been submitted
+
 
   familyMember: Member = {
     familyHead: false,
@@ -89,6 +72,62 @@ export class CreateUpdateMemberComponent  implements OnInit{
     garamPani: ''
   };
 
+  allSthanks: string[] = [
+    "Ahinsapuri Jain Sthanak Bhawan,Fatehpura",
+    "Aradhana Bhawan,Moti Magri Scheme,Near Jain Mandir",
+    "Devendra Dham, opp celebration Mall",
+    "Lokashah Jain Sthanak,Ashok Nagar",
+    "Mahaveer Bhawan Sector 11",
+    "Mahaveer Bhawan Sector 5",
+    "Mahaveer Bhawan Subash Nagar",
+    "Mahaveer Bhawan, Sector 3",
+    "Mahaveer Jain Bhawan , Ganesh Nagar",
+    "Mahaveer Jain Shwetambar Samiti Sector 14",
+    "Mahaveer Swadhyay Smiti,Ambamata",
+    "Mahaveer bhawan Sunderwas",
+    "Mohan Gyan Mandir & Juwar Bhawan, Bhopalpura",
+    "Nakoda Nagar Jain Sthanak, Nakoda Nagar",
+    "Ostwal Bhawan,Panchayati Noyra,Porwal Ka Noyra,mukherjee chowk",
+    "Rishabh Bhawan, Ayad",
+    "Shree Vardhman Sthanakwasi Jain Shravak Sansthan, Sector 4",
+    "Shri Jain Dharm Sthanak,Sector 14"
+  ];
+
+  areas: string[] = [
+    "Amba Mata", "Alkapuri", "Amba Mata Scheme", "Harsh Nagar", "Mulla Talai",
+    "Mulla Talai Choraha", "Rampura Choraha", "Rampura Road", "Sisarma Road", "Ashok Nagar",
+    "Durga Nursery Road", "Ayad", "Adarsh Nagar", "Ashirwad Nagar", "Ashok Vihar",
+    "Friends Colony", "Heera bagh Colony", "Jain Colony", "Keshav Nagar", "Khanij Nagar",
+    "New Ashok Vihar", "New Bhupalpura", "New Keshav Nagar", "New RTO", "University Road",
+    "Bhopalpura", "Bhatt ji ki Bari", "Gumaniawala nala", "hospital road", "madhuvan",
+    "New Ashok Nagar", "New Bhopalpura", "New Navratan", "Residency Road", "Sardarpura",
+    "Bhuwana", "Shobhagpura", "Meera Nagar", "Fatehpura", "Badgaon", "Bedla",
+    "Bedla Road", "Dewali", "New Fatehpura", "Old Fatehpura", "Pulla", "R K Circle",
+    "Sukhadia Circle", "Syphon", "Moti Magri Scheme", "Daitya Magri", "Panchwati",
+    "Saheli Nagar", "Polo Ground", "New Polo Ground", "Ganesh Nagar", "Bohra Ganesh",
+    "Bohra Ganesh ji Main Road", "Dhulkot Choraha", "Ganesh Nagar", "Pahada",
+    "University Campus", "Goverdhan vilas", "Sector 14", "Mewar Motors Gali",
+    "Gulab Bagh Road", "Mehtaji ki badi", "Mogra wadi", "Shivaji Nagar", "Sarvaritu Vilas",
+    "Amal Ka Kanta", "Ashwini Bazar", "Bada Bazar", "Bapu Bazar", "Bhadbhuja Ghati",
+    "Bhadesar Chowk", "Bhoiwada", "Bhopalwadi", "Delhigate", "Dhanmandi", "Ghanta Ghar",
+    "Hathipole", "Jagdish Chowk", "Kheradi Wada", "Lakhara Chowk", "Mandi Ki Naal",
+    "Moti Chowk", "Mukherjee Chowk", "Sindhi Bazar", "Maldas Street", "Madri Industrial Area",
+    "Madri Road", "Pratap Nagar", "North Sunderwas", "Ostwal Nagar", "South Sunderwas",
+    "Purohito Ki Madri", "Nakoda Nagar", "Dhuauji ki Badi", "N B Nagar", "RK Puram",
+    "Bhuwana", "Navratan Complex", "New Navratan", "Sukher", "Sector 3", "Kesar Bagh",
+    "MDS School", "Dore Nagar", "Vrindavan Vihar", "Vivek Nagar", "Tilak Nagar",
+    "Shanti Nagar & New Shanti Nagar", "Samta Nagar", "Vivek Park & Eklingnath Colony",
+    "Nirmal Vihar", "Rishi Nagar & Samta Nagar", "Parshwanath Nagar", "Sector 4",
+    "Vidhya Nagar", "Vaishali Apartment", "Tagore Nagar", "Seva Nagar & Petro Pump Road",
+    "Sarvottam Complex", "New Vidhya Nagar", "New Shiv Nagar", "Nakoda Complex",
+    "Mayur Complex", "Mahaveeram Apartment", "Mahaveer Nagar", "Gyan Nagar & Pooja Nagar",
+    "Chanakyapuri", "Adarsh nagar", "Sector 5", "Eklingpura", "Manwa Kheda",
+    "Paneriyon Ki Madri", "Gariawas", "Mali Colony", "Tekri", "Tekri Road",
+    "Kashipuri", "Savina", "Sector 6", "Sector 7", "Sector 8", "Sector 9",
+    "Machla Magra", "Sector 11", "Sector 13", "Sector 14", "Balicha", "Subash nagar",
+    "opp M B College", "Patho Ki Magri", "Sevashram Choraha"
+  ];
+
   submitted!: Boolean;
   familyId: any = 0;
   memeberId: any;
@@ -106,7 +145,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private change: ChangeDetectorRef,
-    private familyMemberService: FamilyMemberService
+    private familyMemberService: FamilyMemberService,
+    private imageCompress: NgxImageCompressService,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void{
@@ -115,7 +156,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     this.pageMode = this.activatedRoute.snapshot.paramMap.get('pageMode')!;
     this.loggedInRole = this.familyMemberService.getLoggedInRole();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
-    this.alreadyExistingFamilyHead = false;
+    //this.alreadyExistingFamilyHead = false;
     this.alreadyExistingPhoneNumberForAnotherFamily = false;
     this.familyMemberService.getFamilyByMemberId(this.memeberId).subscribe({
       next: (data) => {
@@ -123,10 +164,10 @@ export class CreateUpdateMemberComponent  implements OnInit{
         this.familyId = data.familyId;
         //console.log(this.currentFamily);
         this.alreadyExistingFamilyHead = this.checkForAlreadyExistingFamilyHead(data);
-        this.isLoading = false;
       },
       error: (e) => {
         console.error(e);
+        this.alreadyExistingFamilyHead = false;
         this.isLoading = false;  // Hide progress bar on error
       }
     });
@@ -165,11 +206,21 @@ export class CreateUpdateMemberComponent  implements OnInit{
   }
 
   onSaveOrUpdate(): void {
+    this.isFormSubmitted = true; // Mark that the form has been submitted
+
+    if (!this.memberForm || this.memberForm.invalid) {
+      console.log("❌ Form is invalid, cannot submit.");
+      return; // Prevent submission if form is invalid
+    }
+
+    console.log("✅ Form is valid, proceeding with submission.");
+  
+    // Proceed with saving/updating logic...
     if (this.isLoadingOnSubmit) return; // Prevent duplicate submissions
   
-    if (
-      this.familyMember.checkedSameAddress ||
-      (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress)
+    if (this.familyMember.sameAddAsFamilyHeadAddCheck ||
+      (this.familyMember.checkedSameAddress ||
+      (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress))
     ) {
       if (
         this.familyMember.checkedSameWhatsappNumber ||
@@ -211,7 +262,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
             });
           } else if (this.pageMode === 'edit' && !this.familyMember.photo) {
             this.isLoadingOnSubmit = false; // Stop the spinner
-            this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
+            this.openSnackBar('Error: Please upload photo.', 'Close');
           }
     
           // Create mode logic
@@ -253,67 +304,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
         'Close'
       );
     }
-  }
-
-  // onSaveOrUpdate(): void {
-  //   if(this.familyMember.checkedSameAddress || (!this.familyMember.checkedSameAddress && this.familyMember.currentAddress)){
-  //     if(this.familyMember.checkedSameWhatsappNumber || (!this.familyMember.checkedSameWhatsappNumber && this.familyMember.whatsappMobile)){
-  //       if (this.familyMember.firstName && this.familyMember.lastName && this.familyMember.fatherName && this.familyMember.gender 
-  //          && this.familyMember.dhowanPani && this.familyMember.ratriBhojanTyag && !this.checkMobileNumberErrors(this.familyMember.mobile)) {
-  //         // if(this.selectedFile){
-  //         //   this.onUpload();
-  //         // }else if(this.familyMember.photo){
-  //         //   this.setFormData();
-  //         // }
-  //         if(this.imageInBase64){
-  //           this.familyMember.photo = this.imageInBase64;
-  //         }
-  //         if(this.pageMode === 'edit' && this.familyMember.photo){
-  //           this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
-  //             next: (res) => {
-  //               console.log(res);
-  //               this.submitted = true;
-  //               this.openSnackBarWithDuration('Success: Member updated successfully.', 'Close');
-  //               console.log('Member is updated');
-  //               this.backToSearchPage(res.memberId);
-  //             },
-  //             error: (e) => console.error(e)
-  //           });
-  //         }else if(this.pageMode === 'edit' && !this.familyMember.photo) {
-  //           this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
-  //           console.error('Form is invalid');
-  //         } 
-  //         if(this.pageMode === 'create' && this.selectedFile){
-  //           this.familyMember.role = 'selfedit';
-  //           this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
-  //             next: (res) => {
-  //               console.log(res);
-  //               this.submitted = true;
-  //               this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
-  //               console.log('Member is updated');
-  //               this.backToSearchPage(res.memberId);
-  //             },
-  //             error: (e) => console.error(e)
-  //           });
-  //         }else if(this.pageMode === 'create' && !this.selectedFile) {
-  //           this.openSnackBar('Error: Please upload photo of size less than 1 MB.', 'Close');
-  //           console.error('Form is invalid');
-  //         }
-  //         console.log('Family Member Data', this.familyMember);
-  //       } else {  
-  //         this.openSnackBar('Error: Mobile number entered belongs to already existing family.', 'Close');
-  //         console.error('Form is invalid');
-  //       }
-  //     }else {
-  //       this.openSnackBar('Error: WhatsApp number is required if not same as Primary mobile number.', 'Close');
-  //           console.error('Form is invalid');
-  //     }
-  //   }else {
-  //       this.openSnackBar('Error: Current address is required if not same as Permanent address.', 'Close');
-  //           console.error('Form is invalid');
-  //     }
-  // }
-  
+  }  
 
   backToSearchPage(memberId: any){
     if(memberId !== undefined && memberId !== null && memberId !== '' && memberId !== 0 && memberId !== "0"){
@@ -323,149 +314,114 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }
   }
 
-  // onUpdate(): void {
-  //   if (this.familyMember.firstName && this.familyMember.lastName && this.familyMember.fatherName && this.familyMember.gender && !this.checkMobileNumberErrors(this.familyMember.mobile)) {
-  //     this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
-  //       next: (res) => {
-  //         console.log(res);
-  //         this.submitted = true;
-  //       },
-  //       error: (e) => console.error(e)
-  //     });
-  //   } else {
-  //     this.openSnackBar('Error: Mobile number entered belongs to already existing family.', 'Close');
-  //     console.error('Form is invalid');
-  //   }
-  // }
-
-  // onFileSelected(event: any): void {
-  //   const fileInput = event.target as HTMLInputElement;
-  //   var base64String = null;
-  //   if (fileInput.files && fileInput.files[0]) {
-  //     this.selectedFile = fileInput.files[0];
-
-
-  //     // Preview the selected image
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       this.previewUrl = reader.result;
-  //       base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-  //     };
-  //     reader.readAsDataURL(this.selectedFile);
-  //     if(base64String !== null){
-  //       this.familyMember.photo = base64String;
-  //     }
-  //   }
-  // }
   // onFileSelected(event: any): void {
   //   const fileInput = event.target as HTMLInputElement;
     
   //   if (fileInput.files && fileInput.files[0]) {
   //     this.selectedFile = fileInput.files[0];
   
-      
-  //       // Preview the selected image
+  //     // Check file size
+  //     if (this.selectedFile.size > this.maxFileSize) {
+  //       this.fileSizeError = true; // Show error message
+  //       this.previewUrl = null;    // Clear preview URL
+  //       return; // Stop further execution
+  //     } else {
+  //       this.fileSizeError = false; // Hide error message
+  //     }
+  
   //     const reader = new FileReader();
   //     reader.onload = (e) => {
-  //       const result = reader.result as string; // Typecast result to string
+  //       const result = reader.result as string;
+  
+  //       // Set the image preview URL
   //       this.previewUrl = result;
-        
-  //       // Extract the Base64 portion of the Data URL
-  //       const base64String = result.replace("data:", "").replace(/^.+,/, "");
-  //       this.imageInBase64= base64String;
-  //       // // Convert Base64 string to Blob
-  //       // const byteString = atob(base64String);
-  //       // const byteNumbers = new Array(byteString.length);
-  //       // for (let i = 0; i < byteString.length; i++) {
-  //       //   byteNumbers[i] = byteString.charCodeAt(i);
-  //       // }
-  //       // const byteArray = new Uint8Array(byteNumbers);
-  //       // if(this.selectedFile !== null){
-  //       //   const blob = new Blob([byteArray], { type: this.selectedFile.type });
-  //       //   this.familyMember.photo = blob;
-  //       // }  
+  
+  //       // Extract the Base64 string and store it in the familyMember.photo
+  //       const base64String = result.split(',')[1];
+  //       this.familyMember.photo = base64String;
   //     };
   //     reader.readAsDataURL(this.selectedFile);
-      
   //   }
   // }
 
   onFileSelected(event: any): void {
     const fileInput = event.target as HTMLInputElement;
-    
+  
     if (fileInput.files && fileInput.files[0]) {
       this.selectedFile = fileInput.files[0];
   
-      // Check file size
       if (this.selectedFile.size > this.maxFileSize) {
-        this.fileSizeError = true; // Show error message
-        this.previewUrl = null;    // Clear preview URL
-        return; // Stop further execution
+        this.compressImage(this.selectedFile);
       } else {
-        this.fileSizeError = false; // Hide error message
+        this.convertToBase64(this.selectedFile);
       }
-  
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = reader.result as string;
-  
-        // Set the image preview URL
-        this.previewUrl = result;
-  
-        // Extract the Base64 string and store it in the familyMember.photo
-        const base64String = result.split(',')[1];
-        this.familyMember.photo = base64String;
-      };
-      reader.readAsDataURL(this.selectedFile);
     }
   }
+  
+  // ✅ Ensure preview is updated after compression
+  compressImage(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const imageBase64 = reader.result as string;
+      let quality = 80;
+      let width = 50;
+      let height = 50;
+      let lastSizeInKB = 0;
+      const startTime = performance.now(); // Start compression timer
+  
+      const compressUntilSize = (imageDataUrl: string, quality: number, width: number, height: number) => {
+        this.imageCompress.compressFile(imageDataUrl, -1, quality, width).then((compressedImage) => {
+          let compressedSize = this.imageCompress.byteCount(compressedImage);
+          let compressedSizeInKB = (compressedSize / 1024).toFixed(2);
+          lastSizeInKB = parseFloat(compressedSizeInKB);
+  
+          console.log(`📉 Compressed Image Size: ${compressedSizeInKB} KB (Quality: ${quality}, Width: ${width}, Height: ${height})`);
+  
+          if (compressedSize <= this.maxFileSize) {
+            const endTime = performance.now(); // End compression timer
+            console.log(`✔️ Final Compressed Size: ${compressedSizeInKB} KB`);
+            console.log(`⏳ Compression Time: ${(endTime - startTime).toFixed(2)} ms`);
+  
+            // ✅ Force Angular UI update
+            this.ngZone.run(() => {
+              this.imageInBase64 = compressedImage.split(',')[1];
+              this.previewUrl = compressedImage; // ✅ Ensures new reference for UI update
+              this.change.detectChanges(); // 🔥 Refresh UI
+            });
+  
+            return;
+          } else if (quality > 10) {
+            quality -= 10;
+            width -= 10;
+            height -= 10;
+            console.log(`⚠️ Retrying with Quality ${quality}, Width ${width}, Height ${height}...`);
+            compressUntilSize(imageDataUrl, quality, width, height);
+          } else {
+            console.warn("❌ Cannot compress further without major quality loss.");
+            console.log(`🚨 Last Converted Size: ${lastSizeInKB} KB`);
+  
+            // Ensure UI updates when compression fails
+            this.ngZone.run(() => {
+              this.fileSizeError = true;
+              this.change.detectChanges();
+            });
+          }
+        });
+      };
+  
+      compressUntilSize(imageBase64, quality, width, height);
+    };
+  }
 
-  // onUpload(): Boolean {
-  //   if (this.selectedFile) {
-  //     if (this.selectedFile.size > this.MAX_FILE_SIZE) {
-  //       //alert('File is too large!');
-  //       return false;
-  //     }
-  //     const fileInput = document.getElementById('fileInput');
-
-  //     //fileInput.addEventListener('change', function() {
-  //         const file = this.selectedFile;
-  //         const reader = new FileReader();
-          
-  //         if(reader !== null && reader.result !== null){
-  //           reader.onloadend = function() {
-  //             const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-  //             const payload = {
-  //                 fileContent: base64String
-  //             };
-
-  //             this.f
-
-  //             // fetch('/upload', {
-  //             //     method: 'POST',
-  //             //     headers: {
-  //             //         'Content-Type': 'application/json'
-  //             //     },
-  //             //     body: JSON.stringify(payload)
-  //             // })
-  //             // .then(response => response.json())
-  //             // .then(data => console.log(data));
-  //         };
-
-  //         reader.readAsDataURL(file);
-  //         }
-          
-  //    // });
-  //     // this.formdata = new FormData();
-  //     // this.formdata.append('file', this.selectedFile);
-  //     // this.formdata.append(
-  //     //   'familyMember',
-  //     //   new Blob([JSON.stringify(this.familyMember)], { type: 'application/json' })
-  //     // );
-  //     return true
-  //   }
-  //   return false;
-  // }
+  convertToBase64(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageInBase64 = (reader.result as string).split(',')[1]; // Store Base64
+      this.previewUrl = reader.result; // Show image preview
+    };
+  }
 
   setFormData() {
     this.formdata = new FormData();
@@ -479,7 +435,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     this.router.navigate(['/family', id]);
   }
 
-  checkForAlreadyExistingFamilyHead(data: any): Boolean{
+  checkForAlreadyExistingFamilyHead(data: any): boolean{
     const familyMembers = data.members;
     for(var i=0; i < familyMembers.length; i++){
       if(familyMembers[i].familyHead){
@@ -513,6 +469,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
             {
               if (allmembers[i].memberId === currentFamilyMembers[j].memberId) { 
                   allmembers.splice(i, 1);
+                  break;
               }
             }
         }
@@ -526,22 +483,6 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }
 
     return false;
-    // var allowedPhNumbers: any;
-
-    // if(currentFamilyMembers !== undefined && currentFamilyMembers.length > 0){
-    //   for(let i=0; i<currentFamilyMembers.length; i++)
-    //   { 
-    //     allowedPhNumbers[i] = currentFamilyMembers[i].mobile;
-    //   }
-    //   for(var i=0; i < allmembers.length; i++){
-    //     for(let j=0; j<currentFamilyMembers.length; j++){
-    //       if(allmembers[i].memberId !== currentFamilyMembers[j].memberId && allowedPhNumbers.includes(allmembers[i].mobile)){
-    //         return true;
-    //       }
-    //     }
-    //   }
-    // }
-    // return false;
   }
 
   openSnackBar(message: string, action: string) {
@@ -581,13 +522,6 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }
     console.log(event.target.value);
   }
-
-  // isSelfEdit(memberId: any): any {
-  //   if(this.loggedInRole === 'selfedit' && memberId === this.loggedInMemberId){
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   isSelfEdit(memberId: any): any {
     this.loadFamilyData(memberId);
