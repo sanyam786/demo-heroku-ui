@@ -193,7 +193,7 @@
                                 <div class="section Personal">
                                     <p><strong>Father's Name:</strong> {{member.fatherName}}</p>
                                     <p><strong>Gender:</strong> {{member.gender | titlecase}}</p>
-                                    <p><strong>Date Of Birth:</strong> {{member.dateOfBirth}}</p>
+                                    <p><strong>Date Of Birth:</strong> {{member.dateOfBirth | date: 'dd-MMM-yyyy'}}</p>
                                     <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
                                     <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
                                     <p><strong>Education:</strong> {{member.education}}</p>
