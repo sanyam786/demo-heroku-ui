@@ -35,8 +35,8 @@
                                     <p><strong>Date Of Birth:</strong> {{member.dateOfBirth | date: 'dd-MMM-yyyy'}}</p>
                                     <p><strong>Gender:</strong> {{member.gender | titlecase}}</p>
                                     <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
-                                    <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
-                                    <p><strong>Education:</strong> {{member.education}}</p>
+                                    <p><strong>Blood Group:</strong> {{member.bloodGroup || 'Not Available'}}</p>
+                                    <p><strong>Education:</strong> {{member.education || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -50,10 +50,10 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Mool Niwas:</strong> {{member.aborigine}}</p>
+                                    <p><strong>Mool Niwas:</strong> {{member.aborigine || 'Not Available'}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
-                                    <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
-                                    <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
+                                    <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
+                                    <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -75,11 +75,11 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Category:</strong> {{member.professiondd}}</p>
-                                    <p><strong>Details:</strong> {{member.profession}}</p>
-                                    <p><strong>Address:</strong> {{member.professionAddress}}</p>
-                                    <p><strong>Number:</strong> {{member.professionNumber}}</p>
-                                    <p><strong>Email:</strong> {{member.professionEmail}}</p>
+                                    <p><strong>Category:</strong> {{member.professiondd || 'Not Available'}}</p>
+                                    <p><strong>Details:</strong> {{member.profession || 'Not Available'}}</p>
+                                    <p><strong>Address:</strong> {{member.professionAddress || 'Not Available'}}</p>
+                                    <p><strong>Number:</strong> {{member.professionNumber || 'Not Available'}}</p>
+                                    <p><strong>Email:</strong> {{member.professionEmail || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -93,14 +93,14 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
-                                    <p><strong>Garam Pani:</strong> {{member.garamPani}}</p>
-                                    <p><strong>Navkarsi:</strong> {{member.navkarsi}}</p>
-                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
-                                    <p><strong>Interest:</strong> {{member.interest}}</p>
-                                    <p><strong>Availability:</strong> {{member.availability}}</p>
-                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours}}</p>
-                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak}}</p>
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani || 'Not Available'}}</p>
+                                    <p><strong>Garam Pani:</strong> {{member.garamPani || 'Not Available'}}</p>
+                                    <p><strong>Navkarsi:</strong> {{member.navkarsi || 'Not Available'}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag || 'Not Available'}}</p>
+                                    <p><strong>Interest:</strong> {{member.interest || 'Not Available'}}</p>
+                                    <p><strong>Availability:</strong> {{member.availability || 'Not Available'}}</p>
+                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours || 'Not Available'}}</p>
+                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -114,10 +114,10 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Primary Number:</strong> {{member.mobile}}</p>
-                                    <p><strong>Alternate Number:</strong> {{member.altMobile}}</p>
-                                    <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile}}</p>
-                                    <p><strong>Email:</strong> {{member.email}}</p>
+                                    <p><strong>Primary Number:</strong> {{member.mobile || 'Not Available'}}</p>
+                                    <p><strong>Alternate Number:</strong> {{member.altMobile || 'Not Available'}}</p>
+                                    <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile || 'Not Available'}}</p>
+                                    <p><strong>Email:</strong> {{member.email || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -195,8 +195,8 @@
                                     <p><strong>Gender:</strong> {{member.gender | titlecase}}</p>
                                     <p><strong>Date Of Birth:</strong> {{member.dateOfBirth | date: 'dd-MMM-yyyy'}}</p>
                                     <p><strong>Marital Status:</strong> {{member.maritalStatus | titlecase}}</p>
-                                    <p><strong>Blood Group:</strong> {{member.bloodGroup}}</p>
-                                    <p><strong>Education:</strong> {{member.education}}</p>
+                                    <p><strong>Blood Group:</strong> {{member.bloodGroup || 'Not Available'}}</p>
+                                    <p><strong>Education:</strong> {{member.education || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -210,10 +210,10 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Mool Niwas:</strong> {{member.aborigine}}</p>
+                                    <p><strong>Mool Niwas:</strong> {{member.aborigine || 'Not Available'}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
-                                    <p><strong>Permanent Address:</strong> {{member.permanentAddress}}</p>
-                                    <p><strong>Current Address:</strong> {{member.currentAddress}}</p>
+                                    <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
+                                    <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -227,11 +227,11 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Category:</strong> {{member.professiondd}}</p>
-                                    <p><strong>Details:</strong> {{member.profession}}</p>
-                                    <p><strong>Address:</strong> {{member.professionAddress}}</p>
-                                    <p><strong>Number:</strong> {{member.professionNumber}}</p>
-                                    <p><strong>Email:</strong> {{member.professionEmail}}</p>
+                                    <p><strong>Category:</strong> {{member.professiondd || 'Not Available'}}</p>
+                                    <p><strong>Details:</strong> {{member.profession || 'Not Available'}}</p>
+                                    <p><strong>Address:</strong> {{member.professionAddress || 'Not Available'}}</p>
+                                    <p><strong>Number:</strong> {{member.professionNumber || 'Not Available'}}</p>
+                                    <p><strong>Email:</strong> {{member.professionEmail || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -245,14 +245,14 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani}}</p>
-                                    <p><strong>Garam Pani:</strong> {{member.garamPani}}</p>
-                                    <p><strong>Navkarsi:</strong> {{member.navkarsi}}</p>
-                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag}}</p>
-                                    <p><strong>Interest:</strong> {{member.interest}}</p>
-                                    <p><strong>Availability:</strong> {{member.availability}}</p>
-                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours}}</p>
-                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak}}</p>
+                                    <p><strong>Dhowan Pani:</strong> {{member.dhowanPani || 'Not Available'}}</p>
+                                    <p><strong>Garam Pani:</strong> {{member.garamPani || 'Not Available'}}</p>
+                                    <p><strong>Navkarsi:</strong> {{member.navkarsi || 'Not Available'}}</p>
+                                    <p><strong>Ratri Bhojan Tyag:</strong> {{member.ratriBhojanTyag || 'Not Available'}}</p>
+                                    <p><strong>Interest:</strong> {{member.interest || 'Not Available'}}</p>
+                                    <p><strong>Availability:</strong> {{member.availability || 'Not Available'}}</p>
+                                    <p><strong>Monthly Hours:</strong> {{member.monthlyHours || 'Not Available'}}</p>
+                                    <p><strong>Affiliated/Nearest Sthanak:</strong> {{member.sthanak || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
@@ -266,10 +266,10 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <div class="section Personal">
-                                    <p><strong>Primary Number:</strong> {{member.mobile}}</p>
-                                    <p><strong>Alternate Number:</strong> {{member.altMobile}}</p>
-                                    <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile}}</p>
-                                    <p><strong>Email:</strong> {{member.email}}</p>
+                                    <p><strong>Primary Number:</strong> {{member.mobile || 'Not Available'}}</p>
+                                    <p><strong>Alternate Number:</strong> {{member.altMobile || 'Not Available'}}</p>
+                                    <p><strong>WhatsApp Number:</strong> {{member.whatsappMobile || 'Not Available'}}</p>
+                                    <p><strong>Email:</strong> {{member.email || 'Not Available'}}</p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
