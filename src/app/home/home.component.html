@@ -22,7 +22,7 @@
 
   <div class="card-container">
     <!-- Members Directory Card -->
-    <mat-card class="dashboard-card">
+    <mat-card (click)="goToDirectoryDashboard()" class="dashboard-card">
       <mat-card-header>
         <mat-card-title>Members Directory</mat-card-title>
       </mat-card-header>
@@ -35,7 +35,7 @@
     </mat-card>
     
     <!-- Events Card -->
-    <mat-card class="dashboard-card">
+    <mat-card (click)="goToDirectoryDashboard()" class="dashboard-card">
       <mat-card-header>
         <mat-card-title>Events</mat-card-title>
       </mat-card-header>
@@ -48,7 +48,7 @@
     </mat-card>
   
     <!-- Birthdays Card -->
-    <mat-card class="dashboard-card">
+    <mat-card (click)="goToDirectoryDashboard()" class="dashboard-card">
       <mat-card-header>
         <mat-card-title>Birthdays</mat-card-title>
       </mat-card-header>
