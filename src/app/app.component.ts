@@ -83,6 +83,14 @@ export class AppComponent implements OnInit {
       }
   }
 
+  viewMyId() {
+    this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId()
+      if(this.loggedInMemberId !== 0){
+        // Navigate to the view component and pass the id
+      this.router.navigate(['/id-card', this.loggedInMemberId]);
+      }
+  }
+
   allSearch(){
     this.router.navigate(['/allsearch']);
   }

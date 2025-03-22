@@ -1,0 +1,66 @@
+<div style="text-align: right; margin-bottom: 10px;">
+    <label for="theme-select"><strong>Select Theme:</strong></label>
+    <!-- <select id="theme-select" (change)="changeTheme($event.target.value)"> -->
+        <select id="theme-select" (change)="changeTheme($event)">
+            <option *ngFor="let theme of themes" [value]="theme.value" [selected]="theme.value === selectedTheme">
+              {{ theme.label }}
+            </option>
+          </select>
+  </div>
+
+  <br>
+  <br>
+<div #card class="id-card">
+    <!-- Top Header -->
+    <div class="id-header">
+      <div class="logo-box">
+        <div class="logo-text">
+            <img
+            src="assets/sjs_logo-removebg.png" 
+            alt="Logo"
+            class="logo-image"
+            />
+        </div>
+        <!-- <div class="institution-small">INSTITUTION</div> -->
+      </div>
+      <div class="title-box">
+        <div class="institution-title">Sadhumargi Jain Sangh</div>
+        <div class="sub-title">SJS002325</div>
+      </div>
+    </div>
+  
+    <!-- Middle Section -->
+    <div class="id-body">
+      <div class="photo-box">
+        <img *ngIf="member?.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo">
+        <div *ngIf="!member?.photo" class="photo-placeholder">PHOTO SIZE<br>W=1 x H=1 in</div>
+      </div>
+  
+      <div class="details-box">
+        <!-- <div class="label">Name</div> -->
+        <div class="value name">{{ member?.firstName }} {{ member?.lastName }}</div>
+        <div class="label">Father's Name</div>
+        <div class="value">{{ member?.fatherName }}</div>
+  
+        <div class="label">D.O.B.</div>
+        <div class="value">{{ member?.dateOfBirth | date: 'dd-MMM-yyyy'}}</div>
+  
+        <div class="label">Mobile</div>
+        <div class="value">{{ member?.mobile }}</div>
+
+        <div class="label">Blood Group</div>
+        <div class="value">{{ member?.bloodGroup }}</div>
+      </div>
+    </div>
+  
+    <!-- Bottom Footer -->
+    <div class="id-footer">
+      <!-- <div class="qr-box">▣</div> -->
+      <div class="address-box">{{ member?.currentAddress }}</div>
+    </div>
+  </div>
+  
+  <!-- Download Button -->
+  <div class="download-btn">
+    <button mat-raised-button color="primary" (click)="downloadPDF()">Download PDF</button>
+  </div>

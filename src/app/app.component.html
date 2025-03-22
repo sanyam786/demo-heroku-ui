@@ -113,6 +113,11 @@
       <span>My Family</span>
     </button>
 
+    <button *ngIf="isLoggedIn()" (click)="viewMyId()" mat-menu-item>
+      <mat-icon>supervisor_account</mat-icon>
+      <span>My Id</span>
+    </button>
+
     <!-- Login Menu Item -->
     <button *ngIf="!isLoggedIn()" (click)="login()" mat-menu-item>
       <mat-icon>login</mat-icon>

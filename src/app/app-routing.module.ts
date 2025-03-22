@@ -15,6 +15,7 @@ import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component'
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { IdCardComponent } from './id-card/id-card.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Default route
@@ -40,7 +41,8 @@ const routes: Routes = [
   { path: 'smminfo', component: ExecutiveinfoComponent, data: { page: 'smminfo' } },
   { path: 'home', component: HomeComponent},
   { path: 'events', component: EventsComponent},
-  { path: 'birthdays', component: BirthdaysComponent, canActivate: [AuthGuard]}
+  { path: 'birthdays', component: BirthdaysComponent, canActivate: [AuthGuard]},
+  { path: 'id-card/:id', component: IdCardComponent, canActivate: [AuthGuard]}
 
 ];
 

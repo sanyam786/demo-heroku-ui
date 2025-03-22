@@ -47,6 +47,7 @@ import { ExecutiveinfoComponent } from './executiveinfo/executiveinfo.component'
 import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { IdCardComponent } from './id-card/id-card.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
     ExecutiveinfoComponent,
     HomeComponent,
     EventsComponent,
-    BirthdaysComponent
+    BirthdaysComponent,
+    IdCardComponent
   ],
   imports: [
     BrowserModule,
