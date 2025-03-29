@@ -54,7 +54,21 @@
                                     <p><strong>Area:</strong> {{member.area}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
-                                </div>
+                                    <p>
+                                        <google-map
+                                            height="300px"
+                                            width="100%"
+                                            [center]="{ lat: member.latitude, lng: member.longitude }"
+                                            [zoom]="15"
+                                            *ngIf="member.latitude && member.longitude"
+                                            >
+                                            <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
+                                        </google-map>
+                                    </p>
+                                    <p *ngIf="!member.latitude || !member.longitude">
+                                        📍 Location not provided.
+                                    </p>
+                                                                    </div>
                                 </mat-expansion-panel>
                             </mat-accordion>
                         
@@ -214,6 +228,20 @@
                                     <p><strong>Area:</strong> {{member.area}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
+                                    <p>
+                                        <google-map
+                                            height="300px"
+                                            width="100%"
+                                            [center]="{ lat: member.latitude, lng: member.longitude }"
+                                            [zoom]="15"
+                                            *ngIf="member.latitude && member.longitude"
+                                            >
+                                            <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
+                                        </google-map>
+                                    </p>
+                                    <p *ngIf="!member.latitude || !member.longitude">
+                                        📍 Location not provided.
+                                    </p>
                                 </div>
                                 </mat-expansion-panel>
                             </mat-accordion>

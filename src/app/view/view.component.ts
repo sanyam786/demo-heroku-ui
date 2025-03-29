@@ -26,7 +26,7 @@ export class ViewComponent implements OnInit {
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
+  
 
   constructor(
     private route: ActivatedRoute,

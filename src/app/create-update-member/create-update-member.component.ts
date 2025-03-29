@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, NgZone, ChangeDetectorRef, inject, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, NgZone, ChangeDetectorRef, inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FamilyMember } from '../models/FamilyMember.model';
@@ -10,6 +10,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 
 @Component({
@@ -69,7 +70,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
     availability: '',
     monthlyHours: '',
     sameAddAsFamilyHeadAddCheck: false,
-    garamPani: ''
+    garamPani: '',
+    latitude: 0,
+    longitude: 0
   };
 
   allSthanks: string[] = [
@@ -141,6 +144,13 @@ export class CreateUpdateMemberComponent  implements OnInit{
   loggedInRole = '';
   loggedInMemberId = 0;
   familyMemberForAccessCheck?: FamilyMember;
+
+  @ViewChild('searchBox', { static: false }) searchBox!: ElementRef<HTMLInputElement>;
+  @ViewChild('marker') marker!: MapMarker;
+  mapCenter = { lat: 24.5854, lng: 73.7125 }; // default to Udaipur
+  markerPosition = { lat: 24.5854, lng: 73.7125 };
+  autocompleteInitialized = false;
+  addressLabel: string = '';
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -563,5 +573,77 @@ export class CreateUpdateMemberComponent  implements OnInit{
       }
     }
     return false;
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.searchBox && !this.autocompleteInitialized) {
+      const input = this.searchBox.nativeElement;
+      const autocomplete = new google.maps.places.Autocomplete(input);
+  
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          const place = autocomplete.getPlace();
+          if (place.geometry && place.geometry.location) {
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+  
+            this.mapCenter = { lat, lng };
+            this.markerPosition = { lat, lng };
+            this.familyMember.latitude = lat;
+            this.familyMember.longitude = lng;
+          }
+        });
+      });
+  
+      this.autocompleteInitialized = true;  // flag to avoid re-initialization
+    }
+  }
+
+  getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        this.mapCenter = { lat, lng };
+        this.markerPosition = { lat, lng };
+        this.familyMember.latitude = lat;
+        this.familyMember.longitude = lng;
+        // ✅ Clear search box
+        if (this.searchBox?.nativeElement) {
+          this.searchBox.nativeElement.value = '';
+        }
+      }, (error) => {
+        console.error("Geolocation error:", error);
+        this.openSnackBar('Location access denied or unavailable.', 'Close');
+      });
+    } else {
+      this.openSnackBar('Geolocation not supported by this browser.', 'Close');
+    }
+  }
+
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      this.markerPosition = { lat, lng };
+      this.familyMember.latitude = lat;
+      this.familyMember.longitude = lng;
+    }
+  }
+
+  onMarkerDrag() {
+    const position = this.marker.getPosition();
+    if (position) {
+      const lat = position.lat();
+      const lng = position.lng();
+      this.markerPosition = { lat, lng };
+      this.familyMember.latitude = lat;
+      this.familyMember.longitude = lng;
+    }
+  }
+
+  preventSubmit(event: Event): void {
+    const keyboardEvent = event as KeyboardEvent;
+    keyboardEvent.preventDefault();
   }
 }

@@ -40,4 +40,6 @@ export class Member {
     monthlyHours?: string;
     sameAddAsFamilyHeadAddCheck?: boolean = false;
     garamPani?: string;
+    latitude?: number;
+    longitude?: number;
   }

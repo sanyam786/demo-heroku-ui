@@ -27,6 +27,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 //import { CarouselModule } from 'ngx-owl-carousel-o';
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -98,7 +99,8 @@ import { IdCardComponent } from './id-card/id-card.component';
     MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    GoogleMapsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

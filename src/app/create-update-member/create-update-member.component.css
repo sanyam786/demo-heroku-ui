@@ -151,3 +151,35 @@
     padding-left: 2%;
     padding-top: 1%;
 }
+
+.map-section {
+    margin-top: 20px;
+  }
+  
+  .map-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .search-box {
+    flex: 1 1 300px;
+  }
+  
+  .latlng-display {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 300px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }

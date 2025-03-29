@@ -330,6 +330,48 @@
         <br>
         <mat-card appearance="outlined">
             <mat-card-content>
+            <br>
+            <span class="font-color-primary"> <h3>Location Details</h3></span>
+            <mat-divider></mat-divider>
+            <br>
+            <!-- Search Box -->
+            <input
+                #searchBox
+                type="text"
+                placeholder="Search a place..."
+                class="search-box"
+                (keydown.enter)="preventSubmit($event)" />
+
+            <!-- Get Current Location -->
+            <button mat-raised-button color="primary" type="button" (click)="getCurrentLocation()">
+            Get Current Location
+            </button>
+            <br>
+            <br>
+            <!-- Show Current Lat/Lng -->
+            <p *ngIf="familyMember.latitude && familyMember.longitude">
+            Latitude: {{ familyMember.latitude }} | Longitude: {{ familyMember.longitude }}
+            </p>
+
+            <!-- Map -->
+            <google-map height="300px" width="100%"
+                    [center]="mapCenter"
+                    [zoom]="15"
+                    (mapClick)="onMapClick($event)">
+            <map-marker #marker="mapMarker"
+                    [position]="markerPosition"
+                    [options]="{ draggable: true }"
+                    (positionChanged)="onMarkerDrag()">
+            </map-marker>
+            </google-map>
+            <br>
+            <br>
+           </mat-card-content>
+        </mat-card>
+        <br>
+        <br>
+        <mat-card appearance="outlined">
+            <mat-card-content>
                 <div>
                     *We are compressing photo to 100 KB or less.
                 </div>
