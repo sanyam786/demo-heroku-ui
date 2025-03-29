@@ -55,15 +55,23 @@
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                     <p>
-                                        <google-map
-                                            height="300px"
-                                            width="100%"
-                                            [center]="{ lat: member.latitude, lng: member.longitude }"
-                                            [zoom]="15"
-                                            *ngIf="member.latitude && member.longitude"
+                                        <a
+                                            [href]="'https://www.google.com/maps/search/?api=1&query=' + member.latitude + ',' + member.longitude"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style="display: block; text-decoration: none;"
                                             >
-                                            <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
-                                        </google-map>
+                                            <google-map
+                                                height="300px"
+                                                width="100%"
+                                                [center]="{ lat: member.latitude, lng: member.longitude }"
+                                                [zoom]="15"
+                                                *ngIf="member.latitude && member.longitude"
+                                                style="pointer-events: none;"
+                                            >
+                                                <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
+                                            </google-map>
+                                        </a>
                                     </p>
                                     <p *ngIf="!member.latitude || !member.longitude">
                                         📍 Location not provided.
@@ -229,15 +237,23 @@
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                     <p>
-                                        <google-map
-                                            height="300px"
-                                            width="100%"
-                                            [center]="{ lat: member.latitude, lng: member.longitude }"
-                                            [zoom]="15"
-                                            *ngIf="member.latitude && member.longitude"
+                                        <a
+                                            [href]="'https://www.google.com/maps/search/?api=1&query=' + member.latitude + ',' + member.longitude"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style="display: block; text-decoration: none;"
                                             >
-                                            <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
-                                        </google-map>
+                                            <google-map
+                                                height="300px"
+                                                width="100%"
+                                                [center]="{ lat: member.latitude, lng: member.longitude }"
+                                                [zoom]="15"
+                                                *ngIf="member.latitude && member.longitude"
+                                                style="pointer-events: none;"
+                                            >
+                                                <map-marker [position]="{ lat: member.latitude, lng: member.longitude }"></map-marker>
+                                            </google-map>
+                                        </a>
                                     </p>
                                     <p *ngIf="!member.latitude || !member.longitude">
                                         📍 Location not provided.
