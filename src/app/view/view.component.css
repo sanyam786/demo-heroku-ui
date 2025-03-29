@@ -84,16 +84,16 @@
 
   @media (max-width: 768px) {
     .details-style-family-member {
-        padding-right: 8%;
-        padding-left: 8%;
+        padding-right: 7%;
+        padding-left: 7%;
         width: -webkit-fill-available;
       }
     }
 
   @media (max-width: 768px) {
     .details-style {
-        padding-right: 3%;
-        padding-left: 3%;
+        padding-right: 0%;
+        padding-left: 0%;
         width: 100% !important;
      }
     }
