@@ -592,7 +592,7 @@
   
   .label {
     font-size: 14px;
-    font-weight: bold;
+    /* font-weight: bold; */
     color: var(--primary-color);
     margin-top: 10px;
     display: flex;
@@ -602,7 +602,7 @@
   @media (max-width: 768px) {
     .label {
         font-size: 12px;
-        font-weight: bold;
+        /* font-weight: bold; */
         color: var(--primary-color);
         margin-top: 1%;
         display: flex;
@@ -615,6 +615,7 @@
     color: var(--secondary-color);
     display: flex;
     justify-content: flex-end;
+    font-weight: bold;
   }
 
   @media (max-width: 768px) {
@@ -623,6 +624,7 @@
         color: var(--secondary-color);
         display: flex;
         justify-content: flex-end;
+        font-weight: bold;
     }
   }
     

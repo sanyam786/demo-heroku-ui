@@ -81,7 +81,7 @@ export class IdCardComponent {
     { label: 'Dark Olive & Clay', value: 'olive-clay' }
   ];
 
-  selectedTheme = 'royal-blue';
+  selectedTheme = 'navy-ash';
 
   get themeClass() {
     return this.selectedTheme;
@@ -90,5 +90,6 @@ export class IdCardComponent {
   changeTheme(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
     this.selectedTheme = value;
+    //this.selectedTheme = 'navy-ash';
   }
 }
