@@ -42,4 +42,6 @@ export class Member {
     garamPani?: string;
     latitude?: number;
     longitude?: number;
+    uniqueMemberId?: string;
+    subArea?: string = '';
   }

@@ -29,11 +29,11 @@
                     <mat-card class="action-card" appearance="outlined">
                         <mat-card-content>
                             <div *ngIf="member.status==='Approved'" class="triangle-approved">
-                                <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                                <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                                 <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
                             </div>
                             <div *ngIf="member.status==='Pending'" class="triangle-pending">
-                                <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                                <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                                 <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
                             </div>
                             <span class="align-row-left-right card-layout2">

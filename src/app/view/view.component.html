@@ -10,11 +10,11 @@
                 </span>
             <div class="card-wrapper">
                     <div *ngIf="member.status==='Approved'" class="triangle-approved">
-                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                         <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <div *ngIf="member.status==='Pending'" class="triangle-pending">
-                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                         <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <span class="align-row-left-right card-layout">
@@ -52,6 +52,7 @@
                                 <div class="section Personal">
                                     <p><strong>Mool Niwas:</strong> {{member.aborigine || 'Not Available'}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
+                                    <p><strong>Sub Area:</strong> {{member.subArea}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                     <p>
@@ -192,11 +193,11 @@
             </mat-expansion-panel-header>
                 <div class="card-wrapper card-layout">
                    <div *ngIf="member.status==='Approved'" class="triangle-approved">
-                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                         <span class="age-number-approved " *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <div *ngIf="member.status==='Pending'" class="triangle-pending">
-                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}</span>
+                        <span class="age-number-pending" *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
                         <span class="age-number-pending" *ngIf="!member.dateOfBirth">N/A</span>
                     </div>
                     <span class="align-row-left-right width-webkit">
@@ -234,6 +235,7 @@
                                 <div class="section Personal">
                                     <p><strong>Mool Niwas:</strong> {{member.aborigine || 'Not Available'}}</p>
                                     <p><strong>Area:</strong> {{member.area}}</p>
+                                    <p><strong>Sub Area:</strong> {{member.subArea}}</p>
                                     <p><strong>Permanent Address:</strong> {{member.permanentAddress || 'Not Available'}}</p>
                                     <p><strong>Current Address:</strong> {{member.currentAddress || 'Not Available'}}</p>
                                     <p>

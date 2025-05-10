@@ -50,6 +50,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     whatsappMobile: '',
     email: '',
     area: '',
+    subArea: '',
     checkedSameAddress: false,
     checkedSameWhatsappNumber: false,
     currentAddress: '',
@@ -95,41 +96,38 @@ export class CreateUpdateMemberComponent  implements OnInit{
     "Shree Vardhman Sthanakwasi Jain Shravak Sansthan, Sector 4",
     "Shri Jain Dharm Sthanak,Sector 14"
   ];
+ 
+  areaSubAreaMap: { [key: string]: string[] } = {
+    "Amba Mata": ["Alkapuri", "Amba Mata", "Amba Mata Scheme", "Harsh Nagar", "Mulla Talai", "Rampura", "Sisarma", "Others"],
+    "Ashok Nagar": ["Ashok Nagar", "Durga Nursery Road", "Shiv Park Colony", "Others"],
+    "Ayad": ["Adarsh Nagar", "Ashok Vihar", "Ayad", "Friends Colony", "Heera bagh Colony", "Jain Colony", "Others"],
+    "Bhupalpura": ["Alipura", "Bhupalpura", "Gumaniawala Nala", "Kharakuwa", "Krishnapura", "New Ashok Nagar", "New Bhupalpura", "Residency Road", "Sardarpura", "Others"],
+    "Chetak": ["Bhatt ji ki Bari", "Chetak", "Hospital Road", "Madhuban", "Others"],
+    "City Area": ["Amal Ka Kanta", "Ashwini Bazar", "Bada Bazar", "Bapu Bazar", "Bhadbhuja Ghati", "Bhadesar Chowk", "Bhoiwada", "Bhopalwadi", "Delhigate", "Dhanmandi", "Ghanta Ghar", "Gulab Bagh", "Hathipole", "Jagdish Chowk", "Kheradi Wada", "Lakhara Chowk", "Maldas Street", "Mandi Ki Naal", "Mehtaji ki badi", "Mewar Motors Link Road", "Mogra Wadi", "Moti Chowk", "Mukherjee Chowk", "Nada Khada", "Sarvaritu Vilas", "Shivaji Nagar", "Sindhi Bazar", "Others"],
+    "Eklingpura": ["Eklingpura", "Manwakheda", "Others"],
+    "Fatehpura": ["Ahinsapuri", "Badgaon", "Bedla", "Dewali", "Fatehpura", "Kharol Colony", "Navratan", "New Fatehpura", "New Navratan", "Old Fatehpura", "Pula", "R K Circle", "Syphon", "Others"],
+    "Ganesh Nagar": ["Bekni Puliya", "Bohra Ganesh", "Dhulkot Choraha", "Ganesh Nagar", "Jaishree Colony", "Pahada", "University Road", "Others"],
+    "Keshav Nagar": ["Abhinandan Complex", "Ashirwad Nagar", "Keshav Nagar", "Khanij Nagar", "Krishna Vihar", "New Ashok Vihar", "New Keshav Nagar", "Roopsagar Road", "Others"],
+    "Madri": ["Arihant Vihar", "Madri", "Purohiton Ki Madri", "Surya Nagar", "Udai Vihar", "UIT Colony", "Others"],
+    "Pratap Nagar": ["Pratap Nagar", "Nakoda Nagar", "Transport Nagar", "Others"],
+    "Sector-3": ["Dore Nagar", "Eklingnath Colony", "Kesar Bagh", "MDS School", "New Shanti Nagar", "Nirmal Vihar", "Parshwanath Nagar", "Rishi Nagar", "Samta Nagar", "Sector 3", "Shanti Nagar", "Tilak Nagar", "Vivek Nagar", "Vivek Park", "Vrindavan Vihar", "Others"],
+    "Sector-4": ["Adarsh nagar", "Chanakyapuri", "Gyan Nagar", "Mahaveer Nagar", "Mahaveeram Apartment", "Mayur Complex", "Nakoda Complex", "New Shiv Nagar", "New Vidhya Nagar", "Pooja Nagar", "Sarvottam Complex", "Sector 4", "Seva Nagar & Petro Pump Road", "Tagore Nagar", "Vaishali Apartment", "Vidhya Nagar", "Others"],
+    "Sector-5": ["120 Feet", "Ashish Nagar", "Basant Vihar", "Ganpati Nagar", "Gariawas", "Gayatri Nagar", "Kashipuri", "Mali Colony", "Manva Kheda Road", "Nakoda Nagar", "Near Choudhary Hospital", "Near Milap Hospital", "Opp. Post Office Colony", "Paneriyon Ki Madri", "Prabhat Nagar", "Sector 5", "Shanti Nagar", "Sidharth Complex", "Tekri", "Tekri Road", "Tulsi Nagar", "Udai Park", "Vasant Vihar", "Others"],
+    "Sector-6": ["Bappa Rawal Nagar", "Behind Police Station", "Shiv Colony", "Veena nagar", "Sector 6", "Others"],
+    "Sector-7": ["Sector 7", "Gokul Village", "Others"],
+    "Sector-8": ["Ganpati Vihar", "J. P. Nagar", "Kan Nagar", "Sanjay Gandhi Nagar", "Savina", "Vasant Vatika Road", "Others"],
+    "Sector-9": ["Sector 9", "Others"],
+    "Sector-11": ["Chandan Chhaya", "Kamla Hospital Gali", "Machhala Magra Scheme", "Mahaveer Complex", "Near Agarwal Dharmshala", "Opp. Samudayik Kendra", "Ram Singh Ji Badi", "Sambhavnath complex", "Sector 11", "Shahi Complex", "Shopping Centre", "Vinoba Complex", "Others"],
+    "Sector-13": ["Govind Nagar", "Maharana Pratap Colony", "Near MVM School", "Near Navjeevan School", "Sector 13", "Others"],
+    "Sector-14": ["Ambedkar Colony", "Arihant Nagar", "Balicha", "Basant Vihar", "CA Circle", "Chitrakoot Vihar", "D Block", "E-Block", "Gandhi Nagar", "G-Block", "Govardhan Vilas", "Housing board colony", "Mahaveer Nagar", "Moti Chetan Palace", "Near Ca Bhawan", "Nela Road", "Rhb Colony", "Rishabh Nagar", "Roshan Ji Ki Badi", "Sector-14", "Others"],
+    "Sevashram": ["MB College", "Patho Ki Magri", "Sevashram", "Subhash Nagar", "Others"],
+    "Shobhagpura": ["Bhuwana", "Chitrakoot Nagar", "Khelgaon", "Meera Nagar", "New RTO", "NRI Colony", "Raghunathpura", "Shobhagpura", "Sukher", "Others"],
+    "Sundarwas": ["Glass Factory", "Kendriya Vidhyalaya", "North Sundarwas", "Ostwal Nagar", "South Sunderwas", "Others"],
+    "UIT Circle": ["Batheda House", "Daitya Magri", "Moti Magri Scheme", "New Polo Ground", "Panchwati", "Polo Ground", "Saheli Nagar", "Sukhadia Circle", "UIT Circle", "Others"]
+  };
 
-  areas: string[] = [
-    "Amba Mata", "Alkapuri", "Amba Mata Scheme", "Harsh Nagar", "Mulla Talai",
-    "Mulla Talai Choraha", "Rampura Choraha", "Rampura Road", "Sisarma Road", "Ashok Nagar",
-    "Durga Nursery Road", "Ayad", "Adarsh Nagar", "Ashirwad Nagar", "Ashok Vihar",
-    "Friends Colony", "Heera bagh Colony", "Jain Colony", "Keshav Nagar", "Khanij Nagar",
-    "New Ashok Vihar", "New Bhupalpura", "New Keshav Nagar", "New RTO", "University Road",
-    "Bhopalpura", "Bhatt ji ki Bari", "Gumaniawala nala", "hospital road", "madhuvan",
-    "New Ashok Nagar", "New Bhopalpura", "New Navratan", "Residency Road", "Sardarpura",
-    "Bhuwana", "Shobhagpura", "Meera Nagar", "Fatehpura", "Badgaon", "Bedla",
-    "Bedla Road", "Dewali", "New Fatehpura", "Old Fatehpura", "Pulla", "R K Circle",
-    "Sukhadia Circle", "Syphon", "Moti Magri Scheme", "Daitya Magri", "Panchwati",
-    "Saheli Nagar", "Polo Ground", "New Polo Ground", "Ganesh Nagar", "Bohra Ganesh",
-    "Bohra Ganesh ji Main Road", "Dhulkot Choraha", "Ganesh Nagar", "Pahada",
-    "University Campus", "Goverdhan vilas", "Sector 14", "Mewar Motors Gali",
-    "Gulab Bagh Road", "Mehtaji ki badi", "Mogra wadi", "Shivaji Nagar", "Sarvaritu Vilas",
-    "Amal Ka Kanta", "Ashwini Bazar", "Bada Bazar", "Bapu Bazar", "Bhadbhuja Ghati",
-    "Bhadesar Chowk", "Bhoiwada", "Bhopalwadi", "Delhigate", "Dhanmandi", "Ghanta Ghar",
-    "Hathipole", "Jagdish Chowk", "Kheradi Wada", "Lakhara Chowk", "Mandi Ki Naal",
-    "Moti Chowk", "Mukherjee Chowk", "Sindhi Bazar", "Maldas Street", "Madri Industrial Area",
-    "Madri Road", "Pratap Nagar", "North Sunderwas", "Ostwal Nagar", "South Sunderwas",
-    "Purohito Ki Madri", "Nakoda Nagar", "Dhuauji ki Badi", "N B Nagar", "RK Puram",
-    "Bhuwana", "Navratan Complex", "New Navratan", "Sukher", "Sector 3", "Kesar Bagh",
-    "MDS School", "Dore Nagar", "Vrindavan Vihar", "Vivek Nagar", "Tilak Nagar",
-    "Shanti Nagar & New Shanti Nagar", "Samta Nagar", "Vivek Park & Eklingnath Colony",
-    "Nirmal Vihar", "Rishi Nagar & Samta Nagar", "Parshwanath Nagar", "Sector 4",
-    "Vidhya Nagar", "Vaishali Apartment", "Tagore Nagar", "Seva Nagar & Petro Pump Road",
-    "Sarvottam Complex", "New Vidhya Nagar", "New Shiv Nagar", "Nakoda Complex",
-    "Mayur Complex", "Mahaveeram Apartment", "Mahaveer Nagar", "Gyan Nagar & Pooja Nagar",
-    "Chanakyapuri", "Adarsh nagar", "Sector 5", "Eklingpura", "Manwa Kheda",
-    "Paneriyon Ki Madri", "Gariawas", "Mali Colony", "Tekri", "Tekri Road",
-    "Kashipuri", "Savina", "Sector 6", "Sector 7", "Sector 8", "Sector 9",
-    "Machla Magra", "Sector 11", "Sector 13", "Sector 14", "Balicha", "Subash nagar",
-    "opp M B College", "Patho Ki Magri", "Sevashram Choraha"
-  ];
+  areas: string[] = Object.keys(this.areaSubAreaMap);
+  subAreas: string[] = [];
 
   submitted!: Boolean;
   familyId: any = 0;
@@ -188,6 +186,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
           this.familyMember = data;
           if(this.familyMember.checkedSameWhatsappNumber === null) {
             this.familyMember.checkedSameWhatsappNumber = false;
+          }  
+          if (this.familyMember.area) {
+            this.onAreaChange(this.familyMember.area);
           }
           this.isLoading = false;
           // if(this.familyMember.photo !== null) {
@@ -562,7 +563,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
 
   checkRoles(): any {
     if(this.pageMode === 'edit'){
-      if((this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit') || this.isSelfEdit(this.familyMember.memberId)){
+      if((this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit') || this.isSelfEdit(this.loggedInMemberId)){
         return true;
       }
     }
@@ -645,5 +646,13 @@ export class CreateUpdateMemberComponent  implements OnInit{
   preventSubmit(event: Event): void {
     const keyboardEvent = event as KeyboardEvent;
     keyboardEvent.preventDefault();
+  }
+
+  onAreaChange(selectedArea: string) {
+    this.subAreas = this.areaSubAreaMap[selectedArea] || [];
+  
+    if (!this.familyMember.subArea || !this.subAreas.includes(this.familyMember.subArea)) {
+      this.familyMember.subArea = '';
+    }
   }
 }
