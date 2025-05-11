@@ -96,6 +96,8 @@ export class SearchComponent implements OnInit, AfterViewInit{
         this.members = data;
         if(this.members !== undefined){
           this.filteredMembers = this.members;  // Initially, show all members
+          this.visibleMembers = [];
+          this.offset = 0;
           this.loadMoreMembers();  // Load the first batch of members
         //this.dataSource = new MatTableDataSource(this.members);
         //this.dataSource.paginator = this.paginator;

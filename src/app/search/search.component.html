@@ -26,7 +26,7 @@
         <div *ngIf="!isLoading" class="">
             <div class="scroll-container" (scroll)="onScroll($event)">
                 <div *ngFor="let member of visibleMembers" class="">
-                    <mat-card class="action-card" appearance="outlined">
+                    <mat-card class="action-card" appearance="outlined" (click)="isSelfEdit(member.memberId)" mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-card-content>
                             <div *ngIf="member.status==='Approved'" class="triangle-approved">
                                 <span class="age-number-approved " *ngIf="member.dateOfBirth">{{ getAge(member.dateOfBirth) }}y</span>
@@ -81,27 +81,9 @@
                                                     <span>Modify</span>
                                                 </button>
                                             </mat-menu>
-                                            <!-- <mat-menu #menu="matMenu">
-                                                <button mat-menu-item>
-                                                    <mat-icon>visibility</mat-icon>
-                                                    <span (click)="onViewDetails(member.memberId)">View Details</span>
-                                                </button>
-                                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" mat-menu-item>
-                                                    <mat-icon>add</mat-icon>
-                                                    <span (click)="onAddNewMember(member.memberId)">Add Member</span>
-                                                </button>
-                                                <button *ngIf="checkRoles() || isSelfEdit(member.memberId)" mat-menu-item>
-                                                    <mat-icon>edit</mat-icon>
-                                                    <span (click)="onEditMember(member.memberId)">Modify</span>
-                                                </button>
-                                            </mat-menu> -->
-                                        </span>
+                                           </span>
                                         <br>
                                         <span>
-                                            <!-- <div class="blood-group">
-                                                <mat-icon>opacity</mat-icon> 
-                                                <span>{{ member.bloodGroup }}</span> 
-                                            </div> -->
                                             <mat-chip *ngIf="member.bloodGroup !== ''" #bloodGroup class="blood-group" selected>
                                                 {{ member.bloodGroup }}
                                             </mat-chip>
