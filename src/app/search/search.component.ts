@@ -35,6 +35,7 @@ export class SearchComponent implements OnInit, AfterViewInit{
   loggedInMemberId = 0;
   familyMember?: FamilyMember;
   isSelfEditMember = false;
+  fullImage: string | null = null;
   //@ViewChild(MatPaginator)
   //paginator!: MatPaginator;
   //@ViewChild(MatSort)
@@ -223,5 +224,9 @@ export class SearchComponent implements OnInit, AfterViewInit{
       return true;
     }
     return false;
+  }
+
+  openImageViewer(photo: string) {
+    this.fullImage = photo;
   }
 }

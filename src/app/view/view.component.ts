@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, signal, inject } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, signal, inject} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FamilyMemberService } from 'src/app/services/familyMember.service';
 import { FamilyMember } from 'src/app/models/FamilyMember.model';
@@ -26,7 +26,8 @@ export class ViewComponent implements OnInit {
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  
+  fullImage: string | null = null;
+  openedMemberId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
     // Retrieve the id from the route parameters
     this.id = this.route.snapshot.paramMap.get('id')!;
+    this.openedMemberId = parseInt(this.id, 10);
     this.loggedInRole = this.familyMemberService.getLoggedInRole();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
     this.loadData(this.id); // Call a method to load data based on the id
@@ -191,5 +193,15 @@ export class ViewComponent implements OnInit {
 
   openAiBox() {
     this.router.navigate(['/aibox']);
+  }
+
+  openImageViewer(photo: string) {
+    this.fullImage = photo;
+  }
+
+  scrollToMember(elementRef: HTMLElement) {
+    setTimeout(() => {
+      elementRef.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300); // Delay to ensure panel expansion is complete
   }
 }

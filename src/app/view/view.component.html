@@ -19,7 +19,7 @@
                     </div>
                     <span class="align-row-left-right card-layout">
                         <span class="img-padding">
-                            <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="200" height="200">
+                            <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="200" height="200" (click)="openImageViewer(member.photo)">
                         </span>
                         <span class="details-style">
                             <mat-accordion class="accordian-section">
@@ -183,8 +183,8 @@
   <br>
   <div *ngIf="!isLoading">
     <div *ngFor="let member of familyMember?.members">
-        <mat-accordion *ngIf="member.familyHead===false">
-            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-accordion *ngIf="member.familyHead===false" #memberSection>
+            <mat-expansion-panel  #memberPanel [expanded]="member.memberId === openedMemberId" (opened)="scrollToMember(memberSection)" (closed)="panelOpenState.set(false)">
             <mat-expansion-panel-header>
                 <mat-panel-title class="secondary-button-style"> {{member.firstName}} {{member.lastName}} </mat-panel-title>
                 <mat-panel-description>
@@ -202,7 +202,7 @@
                     </div>
                     <span class="align-row-left-right width-webkit">
                         <span class="img-padding-family-member">
-                            <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="200" height="200">
+                            <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="200" height="200" (click)="openImageViewer(member.photo)">
                         </span>
                         <span class="details-style-family-member">
                             <mat-accordion class="accordian-section">
@@ -361,3 +361,6 @@
         <br>      
     </div>
 </div>
+<div *ngIf="fullImage" class="overlay" (click)="fullImage = null">
+    <img [src]="'data:image/jpeg;base64,' + fullImage" />
+  </div>
