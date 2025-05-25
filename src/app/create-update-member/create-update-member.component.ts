@@ -73,7 +73,9 @@ export class CreateUpdateMemberComponent  implements OnInit{
     sameAddAsFamilyHeadAddCheck: false,
     garamPani: '',
     latitude: 0,
-    longitude: 0
+    longitude: 0,
+    createdByUser: '',
+    lastUpdatedByUser: ''
   };
 
   allSthanks: string[] = [
@@ -140,7 +142,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   fileSizeError: boolean = false; // To show/hide file size error
   maxFileSize: number = 100 * 1024; // 100 KB in bytes
   loggedInRole = '';
-  loggedInMemberId = 0;
+  loggedInMemberId: any;
   familyMemberForAccessCheck?: FamilyMember;
 
   @ViewChild('searchBox', { static: false }) searchBox!: ElementRef<HTMLInputElement>;
@@ -164,6 +166,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     this.pageMode = this.activatedRoute.snapshot.paramMap.get('pageMode')!;
     this.loggedInRole = this.familyMemberService.getLoggedInRole();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
+    this.loadFamilyData(this.loggedInMemberId);
     //this.alreadyExistingFamilyHead = false;
     this.alreadyExistingPhoneNumberForAnotherFamily = false;
     this.familyMemberService.getFamilyByMemberId(this.memeberId).subscribe({
@@ -254,6 +257,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     
           // Update mode logic
           if (this.pageMode === 'edit' && this.familyMember.photo) {
+            this.familyMember.lastUpdatedByUser = this.loggedInMemberId.toString();
             this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
               next: (res) => {
                 setTimeout(() => {
@@ -279,6 +283,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
           // Create mode logic
           if (this.pageMode === 'create' && this.selectedFile) {
             this.familyMember.role = 'selfedit';
+            this.familyMember.createdByUser = this.loggedInMemberId.toString();
             this.familyMemberService.create(this.familyMember, this.familyId).subscribe({
               next: (res) => {
                 setTimeout(() => {
@@ -535,7 +540,6 @@ export class CreateUpdateMemberComponent  implements OnInit{
   }
 
   isSelfEdit(memberId: any): any {
-    this.loadFamilyData(memberId);
     if(this.familyMemberForAccessCheck != undefined && this.familyMemberForAccessCheck.members != undefined){
       for(let i=0; i < this.familyMemberForAccessCheck?.members.length; i++){
         if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === this.familyMemberForAccessCheck.members[i].memberId){
@@ -545,6 +549,15 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }
     return false;
   }
+
+  // isSelfEdit(memberId: any): boolean {
+  //   if (this.familyMemberForAccessCheck && this.familyMemberForAccessCheck.members) {
+  //     return this.familyMemberForAccessCheck.members.some(m =>
+  //       this.loggedInRole === 'selfedit' && this.loggedInMemberId === m.memberId
+  //     );
+  //   }
+  //   return false;
+  // }
 
   loadFamilyData(id: string): void {
     //this.isLoading = true;  // Show progress bar
