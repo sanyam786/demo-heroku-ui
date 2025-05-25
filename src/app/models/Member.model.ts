@@ -44,4 +44,6 @@ export class Member {
     longitude?: number;
     uniqueMemberId?: string;
     subArea?: string = '';
+    createdByUser?: string;
+    lastUpdatedByUser?: string;
   }
