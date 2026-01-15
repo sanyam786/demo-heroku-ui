@@ -100,7 +100,7 @@
     </mat-menu>
   
     <!-- Search Menu Item -->
-    <button *ngIf="isLoggedIn()" (click)="allSearch()" mat-menu-item>
+    <button *ngIf="isLoggedIn() && checkRoles()" (click)="allSearch()" mat-menu-item>
       <mat-icon>search</mat-icon>
       <span>Member Search</span>
     </button>

@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   
   loggedInMemberId = 0;
   member?: Member;
+  loggedInRole = '';
   
 
   constructor(private router: Router,
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
+    this.loggedInRole = this.familyMemberService.getLoggedInRole();
     this.loadData(this.loggedInMemberId);
   }
 
@@ -117,5 +119,12 @@ export class AppComponent implements OnInit {
 
   viewSBMInfo(){
     this.router.navigate(['/sbminfo']);
+  }
+
+  checkRoles(): any {
+    if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){
+      return true;
+    }
+    return false;
   }
 }
