@@ -15,6 +15,6 @@ export class FamilyComponent {
 
   onAddNewMember(memberId: string) {
     // Navigate to the view component and pass the id
-    this.router.navigate(['/create-update-member', {id: memberId, pageMode: 'create'}]);
+    this.router.navigate(['/create-update-member', {id: memberId, pageMode: 'create', pageFrom: 'existingUser'}]);
   }
 }

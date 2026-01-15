@@ -151,19 +151,19 @@ export class SearchComponent implements OnInit, AfterViewInit{
   onAddNewFamily() {
     this.pageMode = 'create';
     // Navigate to the view component and pass the id
-    this.router.navigate(['/create-update-member', {id: 0, pageMode: this.pageMode}]);
+    this.router.navigate(['/create-update-member', {id: 0, pageMode: this.pageMode, pageFrom: 'existingUser'}]);
   }
 
-  onAddNewMember(memberId: string) {
+  onAddNewMember(memberId: any) {
     this.pageMode = 'create';
     // Navigate to the view component and pass the id
-    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode}]);
+    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode, pageFrom: 'existingUser'}]);
   }
 
   onEditMember(memberId: string) {
     this.pageMode = 'edit';
     // Navigate to the view component and pass the id
-    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode}]);
+    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode, pageFrom: 'existingUser'}]);
   }
 
   getAge(dateOfBirth: string): string {
@@ -186,16 +186,13 @@ export class SearchComponent implements OnInit, AfterViewInit{
   }
 
   isSelfEdit(memberId: any): any {
-    this.loadFamilyData(memberId);
-    if(this.familyMember != undefined && this.familyMember.members != undefined){
-      for(let i=0; i < this.familyMember?.members.length; i++){
-        if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === this.familyMember.members[i].memberId){
-          return this.isSelfEditMember = true;
-        }
-      }
+    this.isSelfEditMember = false;
+    if(this.loggedInRole === 'selfedit' && this.loggedInMemberId === memberId){
+      this.isSelfEditMember = true;
     }
-    return this.isSelfEditMember = false;
+    return this.isSelfEditMember;
   }
+  
 
   loadFamilyData(id: string): void {
     //this.isLoading = true;  // Show progress bar

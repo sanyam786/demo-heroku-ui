@@ -63,7 +63,7 @@ export class ViewComponent implements OnInit {
   onEditMember(memberId: string) {
     this.pageMode = 'edit';
     // Navigate to the view component and pass the id
-    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode}]);
+    this.router.navigate(['/create-update-member', {id: memberId, pageMode: this.pageMode, pageFrom: 'existingUser'}]);
   }
 
   onUpdateFamilyHead(memberId: string){

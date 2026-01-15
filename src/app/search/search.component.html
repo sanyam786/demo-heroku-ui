@@ -5,7 +5,7 @@
     <mat-card-content>
         <div class="single-line expand-width">
             <span class="font-color-primary"> <h2>Search Members</h2></span>
-            <span *ngIf="checkRoles()" class="add-family-style">
+            <span *ngIf="loggedInRole === 'admin' ||  this.loggedInRole === 'edit'" class="add-family-style">
                 <button mat-raised-button color="primary" class="primary-button-style" (click)="onAddNewFamily()">Add New Family</button>
             </span>
         </div>
@@ -13,6 +13,9 @@
             <br>
             <div>
                 <button class="search-elments-button-style" mat-raised-button color="secondary" (click)="onSearch()" type="submit">Search All</button>
+                <br>
+                <br>
+                <button mat-raised-button color="primary" class="primary-button-style" (click)="onAddNewMember(loggedInMemberId)">Add New Family Member</button>
             </div>
         </div>
        
@@ -72,11 +75,11 @@
                                                     <mat-icon>visibility</mat-icon>
                                                     <span>View Details</span>
                                                 </button>
-                                                <button *ngIf="checkRoles() || isSelfEditMember" (click)="onAddNewMember(member.memberId)" mat-menu-item>
+                                                <button *ngIf="loggedInRole === 'admin' ||  this.loggedInRole === 'edit' || isSelfEditMember" (click)="onAddNewMember(member.memberId)" mat-menu-item>
                                                     <mat-icon>add</mat-icon>
                                                     <span>Add Member</span>
                                                 </button>
-                                                <button *ngIf="checkRoles() || isSelfEditMember" (click)="onEditMember(member.memberId)" mat-menu-item>
+                                                <button *ngIf="loggedInRole === 'admin' ||  this.loggedInRole === 'edit' || isSelfEditMember" (click)="onEditMember(member.memberId)" mat-menu-item>
                                                     <mat-icon>edit</mat-icon>
                                                     <span>Modify</span>
                                                 </button>

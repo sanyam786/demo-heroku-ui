@@ -14,6 +14,8 @@ export class LoginComponent {
   errorMessage: string = '';
   loggedInRole: string = '';
   loggedInMemberId: number = 0;
+  pageMode: string = '';
+  pageFrom: string = '';
 
   constructor(private authService: AuthService, 
     private router: Router,
@@ -36,5 +38,12 @@ export class LoginComponent {
         console.error('Login failed:', error);
       }
     );
+  }
+
+  onAddNewFamily() {
+    this.pageFrom = 'firstTimeUser';
+    this.pageMode = 'create';
+    // Navigate to the view component and pass the id
+    this.router.navigate(['/create-update-member', {id: 0, pageMode: this.pageMode, pageFrom: this.pageFrom}]);
   }
 }

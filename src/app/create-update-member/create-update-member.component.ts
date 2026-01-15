@@ -135,6 +135,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
   familyId: any = 0;
   memeberId: any;
   pageMode: string = '';
+  pageFrom: string = '';
   alreadyExistingFamilyHead!: Boolean;
   alreadyExistingPhoneNumberForAnotherFamily!: Boolean;
   currentFamily!: FamilyMember;
@@ -164,6 +165,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
     this.isLoading = true;  // Show progress bar
     this.memeberId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.pageMode = this.activatedRoute.snapshot.paramMap.get('pageMode')!;
+    this.pageFrom = this.activatedRoute.snapshot.paramMap.get('pageFrom')!;
     this.loggedInRole = this.familyMemberService.getLoggedInRole();
     this.loggedInMemberId = this.familyMemberService.getLoggedInMemberId();
     this.loadFamilyData(this.loggedInMemberId);
@@ -289,7 +291,11 @@ export class CreateUpdateMemberComponent  implements OnInit{
                 setTimeout(() => {
                   this.isLoadingOnSubmit = false; // Stop the spinner after delay
                   this.submitted = true;
-                  this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
+                  if(this.pageFrom === 'firstTimeUser') {
+                    this.openSnackBar('Success: Member added successfully, Please login with newly added member to add other family members.', 'Close');
+                  } else {
+                    this.openSnackBarWithDuration('Success: Member added successfully.', 'Close');
+                  }
                   this.backToSearchPage(res.memberId);
                 }, 1000); // Simulate 1 second delay
               },
@@ -582,10 +588,15 @@ export class CreateUpdateMemberComponent  implements OnInit{
     }
 
     if(this.pageMode === 'create'){
-      if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit'){
+      if(this.loggedInRole === 'admin' ||  this.loggedInRole === 'edit' || this.isSelfEdit(this.loggedInMemberId)){
         return true;
       }
     }
+
+    if(this.pageFrom === 'firstTimeUser'){
+      return true;
+    }
+
     return false;
   }
 

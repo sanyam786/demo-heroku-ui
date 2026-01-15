@@ -9,13 +9,22 @@
                 </mat-form-field>
                 <br>
                 <mat-form-field class="input-box">
-                <mat-label class="font-color-primary">Password</mat-label>
+                <mat-label class="font-color-primary">Password (ddmmyyyy)</mat-label>
                 <input matInput [(ngModel)]="loginData.password" type="password" placeholder="Enter password">
                 </mat-form-field>
                 <br>
                 <button class="primary-button-style" mat-raised-button (click)="onLogin()">Login</button>
             
                 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                <br>
+                <span class="div-layout">Not a member yet? Start by adding your family’s first member&nbsp;
+                <br>
+                <br>
+                <button mat-raised-button color="secondary" class="primary-button-style" (click)="onAddNewFamily()">Add New Family</button>
+                <br>
+                <br>
+                <i>*To add more family members to the same family, please log in using the newly added member.</i>
+                </span>
             </div>
         </mat-card-content>
     </mat-card>

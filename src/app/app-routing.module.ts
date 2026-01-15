@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'add', component: AddTutorialComponent, canActivate: [AuthGuard] },
   { path: 'view/:id', component: ViewComponent, canActivate: [AuthGuard] },
   { path: 'family/:id', component: FamilyComponent, canActivate: [AuthGuard] },
-  { path: 'create-update-member', component: CreateUpdateMemberComponent, canActivate: [AuthGuard] },
+  { path: 'create-update-member', component: CreateUpdateMemberComponent },
   { path: 'allsearch', component: AllsearchComponent, canActivate: [AuthGuard] },
   { path: 'aibox', component: AiboxComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
