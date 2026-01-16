@@ -8,9 +8,23 @@
                 <input matInput [(ngModel)]="loginData.username" placeholder="Enter Phone Number">
                 </mat-form-field>
                 <br>
-                <mat-form-field class="input-box">
-                <mat-label class="font-color-primary">Password (ddmmyyyy)</mat-label>
-                <input matInput [(ngModel)]="loginData.password" type="password" placeholder="Enter password">
+                <mat-form-field class="input-box" appearance="fill">
+                <mat-label class="font-color-primary">Password (DOB: 'ddmmyyyy')</mat-label>
+                <input matInput 
+                    [type]="hidePassword ? 'password' : 'text'" 
+                    placeholder="Enter password" 
+                    [(ngModel)]="loginData.password"
+                    name="password"
+                    required>
+                
+                <button mat-icon-button 
+                    matSuffix 
+                    (click)="hidePassword = !hidePassword" 
+                    [attr.aria-label]="'Hide or show password'" 
+                    [attr.aria-pressed]="!hidePassword" 
+                    type="button">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
                 </mat-form-field>
                 <br>
                 <button class="primary-button-style" mat-raised-button (click)="onLogin()">Login</button>

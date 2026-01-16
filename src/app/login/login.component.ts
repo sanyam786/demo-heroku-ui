@@ -16,6 +16,7 @@ export class LoginComponent {
   loggedInMemberId: number = 0;
   pageMode: string = '';
   pageFrom: string = '';
+  hidePassword = true;
 
   constructor(private authService: AuthService, 
     private router: Router,

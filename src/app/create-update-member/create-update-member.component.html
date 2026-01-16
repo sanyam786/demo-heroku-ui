@@ -304,7 +304,7 @@
                 <mat-option value="Gochri" ngDefaultControl>Gochri</mat-option>
                 <mat-option value="Vihar" ngDefaultControl>Vihar</mat-option>
                 <mat-option value="Swadhyay" ngDefaultControl>Swadhyay</mat-option>
-                <mat-option value="Sawar" ngDefaultControl>Sawar</mat-option>
+                <mat-option value="Sanwar" ngDefaultControl>Sanwar</mat-option>
                 <mat-option value="Tap" ngDefaultControl>Tap</mat-option>
                 <mat-option value="Management" ngDefaultControl>Management</mat-option>
                 <mat-option value="Speaker" ngDefaultControl>Speaker</mat-option>
@@ -321,6 +321,7 @@
                 <mat-select [(ngModel)]="familyMember.availability" name="availability" #availability="ngModel" required>
                     <mat-option value="Weekdays"  >Weekdays</mat-option>
                     <mat-option value="Weekend" >Weekend</mat-option>
+                    <mat-option value="Always" >Always</mat-option>
                 </mat-select>
                 <mat-error *ngIf="availability.invalid && availability.touched">Availability is required</mat-error>
             </mat-form-field>
