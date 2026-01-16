@@ -30,8 +30,8 @@
     /* height: 100vh; */
     min-height: calc(100vh - 70px); 
     overflow: hidden; 
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 8%;
+    padding-right: 8%;
   }
 
   /* Optional: To control the card width */
