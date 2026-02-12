@@ -48,6 +48,20 @@
     object-fit: cover; 
   }
 
+  .circle {
+    width: 200px;
+    height: 200px;
+    background-color: #ede5ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #66548e;
+    font-size: calc(1vw + 70px); /* Responsive font size */
+    /* font-weight: bold; */
+    text-transform: uppercase;
+  }
+
   .img-padding{
     padding-left: 5%;
   }

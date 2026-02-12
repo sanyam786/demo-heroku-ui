@@ -258,7 +258,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
           }
     
           // Update mode logic
-          if (this.pageMode === 'edit' && this.familyMember.photo) {
+          if (this.pageMode === 'edit' && ((this.familyMember.familyHead && this.familyMember.photo) || !this.familyMember.familyHead)) {
             this.familyMember.lastUpdatedByUser = this.loggedInMemberId.toString();
             this.familyMemberService.update(this.familyMember, this.familyId).subscribe({
               next: (res) => {
@@ -283,7 +283,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
           }
     
           // Create mode logic
-          if (this.pageMode === 'create' && this.selectedFile) {
+          if (this.pageMode === 'create' && ((this.familyMember.familyHead && this.selectedFile) || !this.familyMember.familyHead)) {
             this.familyMember.role = 'selfedit';
             this.familyMember.createdByUser = this.loggedInMemberId.toString();
             this.familyMemberService.create(this.familyMember, this.familyId).subscribe({

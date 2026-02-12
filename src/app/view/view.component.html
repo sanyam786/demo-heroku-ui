@@ -203,6 +203,9 @@
                     <span class="align-row-left-right width-webkit">
                         <span class="img-padding-family-member">
                             <img class="rounded-photo" mat-card-lg-image *ngIf="member.photo" [src]="'data:image/jpeg;base64,' + member.photo" alt="Photo" width="200" height="200" (click)="openImageViewer(member.photo)">
+                            <div class="circle" *ngIf="!member.photo && member.firstName && member.lastName">
+                                {{ member.firstName.charAt(0) }}{{ member.lastName.charAt(0) }}
+                            </div>
                         </span>
                         <span class="details-style-family-member">
                             <mat-accordion class="accordian-section">
