@@ -97,7 +97,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
     "Ostwal Bhawan,Panchayati Noyra,Porwal Ka Noyra,mukherjee chowk",
     "Rishabh Bhawan, Ayad",
     "Shree Vardhman Sthanakwasi Jain Shravak Sansthan, Sector 4",
-    "Shri Jain Dharm Sthanak,Sector 14"
+    "Shri Jain Dharm Sthanak,Sector 14",
+    "Other"
   ];
  
   areaSubAreaMap: { [key: string]: string[] } = {

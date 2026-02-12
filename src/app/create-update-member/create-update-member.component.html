@@ -316,6 +316,7 @@
                 <mat-option value="Pathshala" ngDefaultControl>Pathshala</mat-option>
                 <mat-option value="Samayik" ngDefaultControl>Samayik</mat-option>
                 <mat-option value="Leadership" ngDefaultControl>Leadership</mat-option>
+                <mat-option value="Other" ngDefaultControl>Other</mat-option>
                 </mat-select>
                 <mat-error *ngIf="interest.invalid && interest.touched">Interest is required</mat-error>
             </mat-form-field>
@@ -330,7 +331,7 @@
             </mat-form-field>
             <mat-form-field class="search-elments-style">
                 <mat-label>Monthly (Hours)</mat-label>
-                <input name="monthlyHours" id="monthlyHours" matInput placeholder="Hours" required [(ngModel)]="familyMember.monthlyHours" #monthlyHours="ngModel" minlength="1" type="number">
+                <input name="monthlyHours" id="monthlyHours" matInput placeholder="Hours" required [(ngModel)]="familyMember.monthlyHours" #monthlyHours="ngModel" minlength="1" min="0" type="number">
                 <mat-error *ngIf="monthlyHours.invalid && monthlyHours.touched">
                     <span *ngIf="monthlyHours.errors?.['required']">Monthly (Hours) are required</span>
                     
