@@ -110,8 +110,11 @@
                 <input name="aborigine" id="aborigine" matInput placeholder="Mool Niwas" [(ngModel)]="familyMember.aborigine">
             </mat-form-field>
             <br>
+            <mat-checkbox *ngIf="!familyMember.familyHead && alreadyExistingFamilyHead === true" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
+            <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">
+            <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">
             <!-- Area Dropdown -->
-            <mat-form-field class="search-elments-style-more-width">
+            <mat-form-field *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width">
                 <mat-label>Area</mat-label>
                 <mat-select [(ngModel)]="familyMember.area" name="area" (selectionChange)="onAreaChange($event.value)" required>
                 <mat-option *ngFor="let area of areas" [value]="area">{{ area }}</mat-option>
@@ -119,16 +122,14 @@
             </mat-form-field>
             
             <!-- Sub Area Dropdown -->
-            <mat-form-field class="search-elments-style-more-width">
+            <mat-form-field *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width">
                 <mat-label>Sub Area</mat-label>
                 <mat-select [(ngModel)]="familyMember.subArea" name="subArea" required>
                 <mat-option *ngFor="let subArea of subAreas" [value]="subArea">{{ subArea }}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <br>
-            <mat-checkbox *ngIf="!familyMember.familyHead && alreadyExistingFamilyHead === true" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
-            <br>
-            <br>
+            <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">
+            
             <mat-form-field *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck" class="search-elments-style-more-width-address">
                 <mat-label>Permanent Address</mat-label>
                 <textarea (keyup)="onSameAddressCheck($event)" name="address" matInput id="address" placeholder="Please add permanent address" [(ngModel)]="familyMember.permanentAddress" #permanentAddress="ngModel" required></textarea>
@@ -299,7 +300,7 @@
             </mat-form-field>
             <br>
             <mat-form-field class="search-elments-style">
-                <mat-label>Interest</mat-label>
+                <mat-label>My Interest</mat-label>
                 <mat-select [(ngModel)]="familyMember.interest" name="interest" #interest="ngModel" multiple required>
                 <mat-option value="Gochri" ngDefaultControl>Gochri</mat-option>
                 <mat-option value="Vihar" ngDefaultControl>Vihar</mat-option>
