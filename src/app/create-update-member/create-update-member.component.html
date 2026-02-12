@@ -110,6 +110,8 @@
                 <input name="aborigine" id="aborigine" matInput placeholder="Mool Niwas" [(ngModel)]="familyMember.aborigine">
             </mat-form-field>
             <br>
+            <mat-checkbox (click)="onNRIChecked($event)" name="isNRI" class="example-margin font-color-primary" [(ngModel)]="familyMember.nri">Are you NRI (Non-Resident Indian)?</mat-checkbox>
+            <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">
             <mat-checkbox *ngIf="!familyMember.familyHead && alreadyExistingFamilyHead === true" (click)="onSameAddressAsFamilyHeadCheck($event)" name="sameAddAsFamilyHeadAddCheck" class="example-margin font-color-primary" [(ngModel)]="familyMember.sameAddAsFamilyHeadAddCheck">Check if address is same as Family Head</mat-checkbox>
             <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">
             <br *ngIf="!familyMember.sameAddAsFamilyHeadAddCheck">

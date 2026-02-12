@@ -75,7 +75,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
     latitude: 0,
     longitude: 0,
     createdByUser: '',
-    lastUpdatedByUser: ''
+    lastUpdatedByUser: '',
+    nri: false
   };
 
   allSthanks: string[] = [
@@ -125,7 +126,8 @@ export class CreateUpdateMemberComponent  implements OnInit{
     "Sevashram": ["MB College", "Patho Ki Magri", "Sevashram", "Subhash Nagar", "Others"],
     "Shobhagpura": ["Bhuwana", "Chitrakoot Nagar", "Khelgaon", "Meera Nagar", "New RTO", "NRI Colony", "Raghunathpura", "Shobhagpura", "Sukher", "Others"],
     "Sundarwas": ["Glass Factory", "Kendriya Vidhyalaya", "North Sundarwas", "Ostwal Nagar", "South Sunderwas", "Others"],
-    "UIT Circle": ["Batheda House", "Daitya Magri", "Moti Magri Scheme", "New Polo Ground", "Panchwati", "Polo Ground", "Saheli Nagar", "Sukhadia Circle", "UIT Circle", "Others"]
+    "UIT Circle": ["Batheda House", "Daitya Magri", "Moti Magri Scheme", "New Polo Ground", "Panchwati", "Polo Ground", "Saheli Nagar", "Sukhadia Circle", "UIT Circle", "Others"],
+    "Other": ["Other (Please add details in below address box)"]
   };
 
   areas: string[] = Object.keys(this.areaSubAreaMap);
@@ -533,6 +535,11 @@ export class CreateUpdateMemberComponent  implements OnInit{
 
   onSameAddressAsFamilyHeadCheck(event: any){
     this.familyMember.sameAddAsFamilyHeadAddCheck = event.target.checked;
+    console.log(event.target.value);
+  }
+
+  onNRIChecked(event: any){
+    this.familyMember.nri = event.target.checked;
     console.log(event.target.value);
   }
 

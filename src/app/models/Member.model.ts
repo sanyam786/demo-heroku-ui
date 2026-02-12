@@ -46,4 +46,5 @@ export class Member {
     subArea?: string = '';
     createdByUser?: string;
     lastUpdatedByUser?: string;
+    nri?: boolean = false; 
   }
