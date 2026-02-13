@@ -471,7 +471,6 @@
                             <mat-spinner diameter="20"></mat-spinner> Saving...
                         </span>
                     </button>
-
                     <!-- Update Button (for Edit Mode) -->
                     <button *ngIf="pageMode === 'edit'" 
                         mat-raised-button 
@@ -484,6 +483,7 @@
                             <mat-spinner diameter="20"></mat-spinner> Updating...
                         </span>
                     </button>
+                    
                     <!-- <button *ngIf="pageMode === 'create'" 
                     mat-raised-button 
                     class="primary-button-style" 
@@ -510,6 +510,10 @@
                     </span>
                     </button> -->
                 </div>
+                <br>
+                <mat-error class="error-right" *ngIf="memberForm.invalid">
+                    Please fill all required fields.
+                </mat-error>
             </mat-card-content>
         </mat-card>
     </div>

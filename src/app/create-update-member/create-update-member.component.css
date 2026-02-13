@@ -183,3 +183,11 @@
     border-radius: 4px;
     margin-bottom: 10px;
   }
+
+  .error-right {
+    display: block;
+    text-align: right;
+    width: 100%;
+    color: red; /* optional */
+    font-weight: 400;
+  }
