@@ -66,19 +66,41 @@
                 <mat-error *ngIf="lastName.invalid && lastName.touched">Last Name is required</mat-error>
             </mat-form-field>
             <mat-form-field class="search-elments-style">
-                <mat-label>Father's Name</mat-label>
+                <mat-label>Father/Husband's Name</mat-label>
                 <input name="fatherName" id="fatherName" matInput placeholder="Father's Name" [(ngModel)]="familyMember.fatherName" #fatherName="ngModel" required>
-                <mat-error *ngIf="fatherName.invalid && fatherName.touched">Father's Name is required</mat-error>
+                <mat-error *ngIf="fatherName.invalid && fatherName.touched">Father/Husband's Name is required</mat-error>
             </mat-form-field>
             <br>
-            <mat-form-field class="search-elments-style">
+            <!-- <mat-form-field class="search-elments-style">
                 <mat-label>Date Of Birth</mat-label>
                 <input name="dateOfBirth" matInput [matDatepicker]="picker" [(ngModel)]="familyMember.dateOfBirth" #dateOfBirth="ngModel" required>
-                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="dateOfBirth.invalid && dateOfBirth.touched">Date of Birth is required</mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="fill" class="search-elments-style">
+                <mat-label>Date of Birth</mat-label>
+              
+                <input 
+                  matInput 
+                  [matDatepicker]="dobPicker"
+                  [(ngModel)]="familyMember.dateOfBirth"
+                  #dateOfBirth="ngModel"
+                  name="dateOfBirth"
+                  placeholder="DD/MM/YYYY"
+                  [readonly]="true"        
+                  (click)="dobPicker.open()"
+                  [max]="today"
+                />
+              
+                <mat-datepicker #dobPicker></mat-datepicker>
+              
+                <mat-error *ngIf="dateOfBirth.invalid && dateOfBirth.touched">
+                  Date of Birth is required
+                </mat-error>
             </mat-form-field>
+            
             <mat-form-field class="search-elments-style">
                 <mat-label>Marital Status</mat-label>
                 <mat-select [(ngModel)]="familyMember.maritalStatus" name="maritalStatus" #maritalStatus="ngModel" required>
@@ -210,7 +232,7 @@
                 <mat-option value="Job" ngDefaultControl>Job</mat-option>
                 <mat-option value="Retired" ngDefaultControl>Retired</mat-option>
                 <mat-option value="Student" ngDefaultControl>Student</mat-option>
-                <mat-option value="Housewife" ngDefaultControl>Housewife</mat-option>
+                <mat-option value="Home Maker" ngDefaultControl>Home Maker</mat-option>
                 <mat-option value="Others" ngDefaultControl>Others</mat-option>
                 </mat-select>
                 <mat-error *ngIf="professiondd.invalid && professiondd.touched">Profession is required</mat-error>
@@ -432,7 +454,7 @@
                 </div>
                 <br>
                 <br>
-                <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>मैं आचार्य श्री रामलाल जी म.सा. के प्रति श्रद्धावान हूँ एवं मैं साधुमार्गी परिवार का सदस्य हूँ।</mat-checkbox> 
+                <mat-checkbox class="affirm-check example-margin" name="affirmCheck" [(ngModel)]="familyMember.checkIAffirm" #checkIAffirm="ngModel" required>मैं परम पूज्य आचार्य प्रवर 1008 श्री रामलाल जी म.सा. के प्रति श्रद्धावान हूँ एवं मैं साधुमार्गी परिवार का/की सदस्य हूँ।</mat-checkbox> 
                 <mat-error class="affirm-padding" *ngIf="checkIAffirm.invalid && (checkIAffirm.touched || isFormSubmitted)">Please Affirm</mat-error> 
                 <br>
                 <div class="search-elments-button-style">

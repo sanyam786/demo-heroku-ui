@@ -133,7 +133,7 @@ export class CreateUpdateMemberComponent  implements OnInit{
 
   areas: string[] = Object.keys(this.areaSubAreaMap);
   subAreas: string[] = [];
-
+  today: Date = new Date();
   submitted!: Boolean;
   familyId: any = 0;
   memeberId: any;

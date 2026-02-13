@@ -1,32 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule}  from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
-import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-//import { CarouselModule } from 'ngx-owl-carousel-o';
-// import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,7 +39,6 @@ import { ViewComponent } from './view/view.component';
 import { FamilyComponent } from './family/family.component';
 import { CreateUpdateMemberComponent } from './create-update-member/create-update-member.component';
 import { LoginComponent } from './login/login.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AllsearchComponent } from './allsearch/allsearch.component';
 import { AiboxComponent } from './aibox/aibox.component';
@@ -50,6 +48,8 @@ import { EventsComponent } from './events/events.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { IdCardComponent } from './id-card/id-card.component';
 
+// ✅ Import custom date format
+import { AppDateAdapter, APP_DATE_FORMATS } from './date-format';
 
 @NgModule({
   declarations: [
@@ -74,14 +74,15 @@ import { IdCardComponent } from './id-card/id-card.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
+    // Material modules
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     MatCardModule,
-    ReactiveFormsModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
@@ -100,9 +101,17 @@ import { IdCardComponent } from './id-card/id-card.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
-    GoogleMapsModule
+
+    GoogleMapsModule,
+    AppRoutingModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+
+    // ✅ Apply DD/MM/YYYY format globally
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
